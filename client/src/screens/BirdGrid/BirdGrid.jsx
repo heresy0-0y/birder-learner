@@ -1,41 +1,44 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, GridItem } from "@chakra-ui/react";
 import { Bird } from "../../common/components/Bird/Bird.js";
-import {fetchBirds, fetchLocation} from "../../common/services";
+import { fetchBirds, fetchLocation } from "../../common/services";
 
 export const BirdGrid = (props) => {
   const [data, setData] = useState([]);
   const [isLoading, setLoading] = useState(false);
-  const [country, setCountry] = useState('')
+  const [country, setCountry] = useState("");
+  const [birds, setBirds] = useState();
 
   useEffect(() => {
     const fetchCountry = async () => {
-      const countryCode = await fetchLocation()
-      setCountry(countryCode)
-    }
-    fetchCountry()
-    console.log(country)
+      const countryCode = await fetchLocation();
+      setCountry(countryCode);
+      setLoading(true)
+    };
+    fetchCountry();
   }, [])
+
   useEffect(() => {
     const fetchBirdsData = async () => {
-      setLoading(true);
-      const birds = await fetchBirds();
+      const birds = await fetchBirds(country);
       setData(birds);
-      setLoading(false);
     };
     fetchBirdsData();
   }, [country]);
 
-  const birdsView = data.map((bird) => (
-    <GridItem>
-      {" "}
-      <Bird
-        name={bird.scientificName}
-        img={bird.media[0].identifier}
-        isLoading={isLoading}
-      />{" "}
-    </GridItem>
-  ));
+  useEffect(() => {
+
+      const birdsView = data.map((bird) => (
+        <GridItem>
+          <Bird
+            name={bird.scientificName}
+            img={bird.media[0].identifier}
+          />
+        </GridItem>
+      ));
+      setBirds(birdsView);
+
+  }, [data]);
 
   return (
     <Grid
@@ -51,7 +54,7 @@ export const BirdGrid = (props) => {
       ]}
       gap={5}
     >
-      {birdsView}
+      {birds}
     </Grid>
   );
 };
