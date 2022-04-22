@@ -1,7 +1,16 @@
+import axios from 'axios'
+
 async function getCountryFromIP () {
-    const response = await fetch('https://http://ip-api.com/json/')
-    const data = await response.json()
-    return data.countryCode
+ try {
+
+     const response = await axios.get('https://ip-api.com/json/', {
+        headers: {"Access-Control-Allow-Origin": "*"}
+     })
+     const data = response.data
+     return data.countryCode
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 export default getCountryFromIP
