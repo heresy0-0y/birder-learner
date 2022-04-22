@@ -12,7 +12,7 @@ export const Bird = (props) => {
   const fallbackFilter = useColorModeValue("none", "invert(90%)");
   const { img, name } = props;
   const fallback = (
-    <Image fallbackSrc="/bird-placeholder.png" filter={fallbackFilter} />
+    <Image align="center" fallbackSrc="/bird-placeholder.png" filter={fallbackFilter} />
   );
 
   return (
@@ -20,30 +20,24 @@ export const Bird = (props) => {
       borderWidth="2px"
       borderRadius="xl"
       padding="xl"
-      minH="fit-content"
+      // h="3xs"
       h="xs"
       overflow="clip"
     >
-      <Flex
-        direction="column"
-        alignItems="center"
-        justifyContent="space-between"
-      >
+      
         <Image
-          align="center"
-          borderRadius="full"
-          h="2xs"
-          w="90%"
-          fit="cover"
-          padding="1rem"
-          fallback={fallback}
+          // minH="100%"
           src={img}
+          h="100%"
+          w='100%'
+          fit="cover"
+          align="75% 45%"
+          // padding="1rem"
+          alt={`image of ${name}`}
+          fallback={fallback}
+          borderRadius="4%"
         />
-        <Box w="80%" fontSize="1rem" textAlign="center">
-          {name}
-        </Box>
-        <audio controls src=''/>
-      </Flex>
+        
     </Box>
   );
 };
