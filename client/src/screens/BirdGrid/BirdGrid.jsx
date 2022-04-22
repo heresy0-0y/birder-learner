@@ -6,38 +6,36 @@ import { fetchBirds, fetchLocation } from "../../common/services";
 export const BirdGrid = (props) => {
   const [data, setData] = useState([]);
   const [isLoading, setLoading] = useState(false);
-  const [country, setCountry] = useState("");
+  const [country, setCountry] = useState(false);
   const [birds, setBirds] = useState();
 
   useEffect(() => {
+    setLoading(true);
     const fetchCountry = async () => {
       const countryCode = await fetchLocation();
       setCountry(countryCode);
-      setLoading(true)
     };
     fetchCountry();
-  }, [])
+    setLoading(false);
+  }, []);
 
   useEffect(() => {
     const fetchBirdsData = async () => {
       const birds = await fetchBirds(country);
       setData(birds);
     };
-    fetchBirdsData();
+    if (country) {
+      fetchBirdsData();
+    }
   }, [country]);
 
   useEffect(() => {
-
-      const birdsView = data.map((bird) => (
-        <GridItem>
-          <Bird
-            name={bird.scientificName}
-            img={bird.media[0].identifier}
-          />
-        </GridItem>
-      ));
-      setBirds(birdsView);
-
+    const birdsView = data.map((bird) => (
+      <GridItem>
+        <Bird name={bird.scientificName} img={bird.media[0].identifier} />
+      </GridItem>
+    ));
+    setBirds(birdsView);
   }, [data]);
 
   return (
