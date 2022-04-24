@@ -5,8 +5,8 @@ export const Link = (props) => {
     const {external, wrapper, url} = props
 
 return (
-        <NextLink href={url} passHref>
-            <ChakraLink isExternal={external}>
+        <NextLink text-decoration='none' href={url} passHref>
+            <ChakraLink isExternal={external} text-decoration='none'>
                 {props.children}
             </ChakraLink>
         </NextLink>

@@ -1,10 +1,13 @@
+
 import {Nav} from '../../../common/components/Nav'
 
-export const CoreNav = (props) => {
+const CoreNav = (props) => {
     
 
     return (
-        <>
-        </>
+        <Nav>
+        </Nav>
     )
 }
+
+export default CoreNav
