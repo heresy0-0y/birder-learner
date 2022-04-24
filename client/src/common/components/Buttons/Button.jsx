@@ -1,14 +1,12 @@
 import { Button as CButton, IconButton, HStack, Text } from "@chakra-ui/react";
-import { Link } from "../Link/Link.js";
+import { Link } from "../Link/Link.jsx";
 
 export const Button = (props) => {
-  const { link, icon, text, url } = props;
+  const { text, url } = props;
 
   return (
-    <Link url={url} text-decoration='none'>
-      <CButton variant='ghost' decoration='none'>
-  {text}
-      </CButton>
+    <Link url={url}>
+      <CButton variant="ghost">{text}</CButton>
     </Link>
   );
 };

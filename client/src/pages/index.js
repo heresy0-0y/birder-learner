@@ -4,9 +4,6 @@ import { Layout } from "../layouts/core";
 
 const Index = () => (
   <Layout>
-    <Text>
-      <Code>bird</Code>
-    </Text>
     <BirdGrid/>
   </Layout>
 );

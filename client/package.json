@@ -2,11 +2,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "auto": "next dev & open http://localhost:3000",
     "build": "next build",
     "start": "next start",
     "export": "npm run build && next export -o _static"
   },
   "dependencies": {
+    "@arcgis/core": "^4.23.7",
     "@chakra-ui/icons": "^1.0.0",
     "@chakra-ui/react": "^1.4.2",
     "@emotion/react": "^11.0.0",
@@ -17,7 +19,6 @@
     "next": "latest",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-query": "^3.38.0",
     "react-redux": "^8.0.0",
     "redux": "^4.1.2",
     "uninstall": "^0.0.0",

@@ -11,7 +11,8 @@ const CoreContainer = (props) => {
       direction="column"
       alignItems="center"
       justifyContent="space-between"
-      bg={bgColor[colorMode]}
+      // bg={bgColor[colorMode]}
+      bgImage="url('/background.JPG')"
       color={color[colorMode]}
       {...props}
     />
