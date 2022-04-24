@@ -3,7 +3,7 @@ import { Container, DarkModeSwitch, Nav } from "./components";
 
 const CoreLayout = (props) => {
   return (
-    <Container >
+    <Container minH='100vh'>
     <Nav/>
       <VStack>{props.children}</VStack>
       <DarkModeSwitch />
