@@ -1,4 +1,4 @@
-import { Box, Portal, Flex } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 
 export const Nav = (props) => {
   return (
