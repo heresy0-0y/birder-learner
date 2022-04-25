@@ -31,7 +31,8 @@ export const BirdGrid = (props) => {
 
   useEffect(() => {
     const birdsView = data.map((bird) => (
-      <GridItem>
+
+      <GridItem key={bird.key}>
         <Bird name={bird.scientificName} img={bird.media[0].identifier} />
       </GridItem>
     ));

@@ -26,9 +26,9 @@ const Nav = (props) => {
         )}
       </Menu>
       <Flex mt="0.5rem" direction="row" w="100%" display={{base: 'none', md: 'flex'}}>
-        <Button text="Show Me Birds!" url="" />
-        <Button text="Sign Up" url="" />
-        <Button text="Sign In" url="" />
+        <Button text="Show Me Birds!" url="/" />
+        <Button text="Sign Up" url="/" />
+        <Button text="Sign In" url="/" />
         <Input w="60%" />
       </Flex>
     </Box>
