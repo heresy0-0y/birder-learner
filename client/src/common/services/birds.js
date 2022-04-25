@@ -21,5 +21,4 @@ export const birdApi = createApi({
     }),
   }),
 })
-
 */
