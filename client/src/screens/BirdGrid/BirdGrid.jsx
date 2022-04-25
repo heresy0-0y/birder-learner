@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Grid, GridItem } from "@chakra-ui/react";
-import { Bird } from "../../common/components/Bird/Bird.js";
+import { Bird } from "../../common/components";
 import { fetchBirds, fetchLocation } from "../../common/services";
 
 export const BirdGrid = (props) => {

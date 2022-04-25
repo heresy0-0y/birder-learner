@@ -1,11 +1,6 @@
-import {
-  Box,
-  Image,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react";
+import { Box, Image, Text, useColorModeValue } from "@chakra-ui/react";
 
-export const Bird = (props) => {
+const Bird = (props) => {
   const fallbackFilter = useColorModeValue("none", "invert(90%)");
   const { img, name } = props;
   const fallback = (
@@ -41,3 +36,5 @@ export const Bird = (props) => {
     </Box>
   );
 };
+
+export default Bird;
