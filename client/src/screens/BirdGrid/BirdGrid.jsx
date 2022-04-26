@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {useSelector} from 'react-redux'
 import { Box, GridItem } from "@chakra-ui/react";
 import { Bird } from "../../common/components";
 import { fetchBirds, fetchLocation } from "../../common/services";
@@ -31,7 +32,7 @@ export const BirdGrid = (props) => {
 
   useEffect(() => {
     const birdsView = data.map((bird) => (
-      <GridItem   mb="0.5rem" key={bird.key}>
+      <GridItem mb="0.5rem" key={bird.key}>
         <Bird name={bird.scientificName} img={bird.media[0].identifier} />
       </GridItem>
     ));
@@ -43,17 +44,7 @@ export const BirdGrid = (props) => {
       h="90%"
       py="2rem"
       mx="2%"
-      // w="95%"
-      // templateColumns={[
-      //   "repeat(1, 1fr)",
-      //   "repeat(2, 1fr)",
-      //   "repeat(2, 1fr)",
-      //   "repeat(2, 1fr)",
-      //   "repeat(3, 1fr)",
-      //   "repeat(3, 1fr)"
-      // ]}
-      // gridAutoFlow='row dense'
-      sx={{ columnCount: [1, 2, 3], columnGap:'0.5rem' }}
+      sx={{ columnCount: [1, 2, 3], columnGap: "0.5rem" }}
     >
       {birds}
     </Box>
