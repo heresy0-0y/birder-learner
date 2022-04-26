@@ -1,5 +1,6 @@
-import { ChakraProvider, ColorModeProvider } from "@chakra-ui/react";
+import React from "react";
 import { Provider } from "react-redux";
+import { ChakraProvider, ColorModeProvider } from "@chakra-ui/react";
 import theme from "../theme";
 import { store } from "../store";
 function MyApp({ Component, pageProps }) {
@@ -9,8 +10,7 @@ function MyApp({ Component, pageProps }) {
         <ColorModeProvider
           options={{
             useSystemColorMode: true,
-          }}
-        >
+          }}>
           <Component {...pageProps} />
         </ColorModeProvider>
       </ChakraProvider>

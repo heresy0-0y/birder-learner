@@ -1,5 +1,9 @@
 import {configureStore} from '@reduxjs/toolkit'
 import {setupListeners} from '@reduxjs/toolkit/query'
-import {allBirdsReducer} from './features/allBirds/allBirdsSlice.js'
+import allBirdsReducer from './features/allBirds/allBirdsSlice.js'
 
-// const store = 
+export default configureStore({
+    reducer: {
+        allBirds: allBirdsReducer
+    }
+})

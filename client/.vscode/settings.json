@@ -8,5 +8,6 @@
     "bracket-pair-colorizer-2.forceUniqueOpeningColor": true,
     "bracket-pair-colorizer-2.unmatchedScopeColor": "#ff5370",
     "bracket-pair-colorizer-2.highlightActiveScope": true,
-    "editor.matchBrackets": "always"
+    "editor.matchBrackets": "always",
+    "gitlens.heatmap.hotColor": "#d25279"
 }
