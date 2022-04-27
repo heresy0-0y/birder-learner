@@ -4,4 +4,4 @@ const SignUp = () => (
     <Layout/>
 )
 
-export default Help
+export default SignUp

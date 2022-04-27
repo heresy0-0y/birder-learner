@@ -1,24 +1,28 @@
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-async function fetchBirds (country) {
-
-      const response = await fetch(`https://api.gbif.org/v1/occurrence/search?limit=30&mediaType=StillImage&taxonKey=212&limit=300&basisOfRecord=HUMAN_OBSERVATION&datasetKey=50c9509d-22c7-4a22-a47d-8c48425ef4a7&country=${country}`)
-      const data = await response.json()
-      return data.results
-    
-    }
-
-
-export default fetchBirds
-
-/* 
-export const birdApi = createApi({
+export const api = createApi({
+  baseQuery: fetchBaseQuery({
+    baseUrl: `https://api.gbif.org/v1/occurrence/search?&mediaType=StillImage&taxonKey=212&limit=50&basisOfRecord=HUMAN_OBSERVATION&datasetKey=50c9509d-22c7-4a22-a47d-8c48425ef4a7&country=US`,
+  }),
   reducerPath: 'birdApi',
-  baseQuery: fetchBaseQuery({baseUrl: 'https://api.gbif.org/v1/occurrence/'}), 
   endpoints: (builder) => ({
     getBirdsByIPCountryCode: builder.query({
-      query: (countryCode) => `bird/${countryCode}`,
+      query: () => ``,
+      // async queryFn(_arg, _queryApi, _extraOptions, fetchWithBQ) {
+      //   const countryFromIP = await fetchWithBQ(`ipapi.co/json/`);
+      //   if (countryFromIP.error) throw countryFromIP.error;
+      //   const countryCode = countryFromIP;
+      //   const response = await fetchWithBQ(
+      //     `api.gbif.org/v1/occurrence/search?&mediaType=StillImage&taxonKey=212&limit=50&basisOfRecord=HUMAN_OBSERVATION&datasetKey=50c9509d-22c7-4a22-a47d-8c48425ef4a7&country=${countryCode}`
+      //   );
+      //   if (response.error) throw response.error
+      //   const result =  await response.json();
+      //   return result.results
+      //     ? { data: result.results }
+      //     : { error: result.error };
+      // },
     }),
   }),
-})
-*/
+});
+
+export const { useGetBirdsByIPCountryCodeQuery } = api;

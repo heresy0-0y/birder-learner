@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+// import { useSelector, useDispatch } from "react-redux";
 import { Box, GridItem } from "@chakra-ui/react";
 import { Bird } from "../../common/components";
-import { fetchBirds, fetchLocation } from "../../common/services";
+// import { fetchBirds, fetchLocation } from "../../common/services";
 import {
   selectAllBirds,
   loadBirds,
 } from "../../store/features/allBirds/allBirdsSlice.js";
+import {useGetBirdsByIPCountryCodeQuery} from '../../common/services/birds.js'
 
 export const BirdGrid = (props) => {
-  const { isLoading } = useSelector((state) => state.allBirds);
-  const dispatch = useDispatch();
+  const {data, error, isLoading} = useGetBirdsByIPCountryCodeQuery(`AU`)
 
-  const birdies = useSelector(selectAllBirds);
   if (isLoading) {
     return <Box />;
   }
-
+  const birdies = data.results
   const birds = birdies.map((bird) => (
     <GridItem mb="0.5rem" key={bird.key}>
       <Bird name={bird.scientificName} img={bird.media[0].identifier} />
