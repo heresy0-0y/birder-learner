@@ -3,7 +3,6 @@ import {store} from '../../store/store.js'
 import {Provider} from 'react-redux'
 import { VStack } from "@chakra-ui/react";
 import { Container, DarkModeSwitch, Nav } from "./components";
-import {selectAllBirds, loadBirds } from '../../store/features/allBirds/allBirdsSlice.js'
 import {fetchLocation} from '../../common/services'
 import { useSelector, useDispatch } from "react-redux";
 

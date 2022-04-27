@@ -3,10 +3,6 @@ import React, { useState, useEffect } from "react";
 import { Box, GridItem } from "@chakra-ui/react";
 import { Bird } from "../../common/components";
 // import { fetchBirds, fetchLocation } from "../../common/services";
-import {
-  selectAllBirds,
-  loadBirds,
-} from "../../store/features/allBirds/allBirdsSlice.js";
 import {useGetBirdsByIPCountryCodeQuery} from '../../common/services/birds.js'
 
 export const BirdGrid = (props) => {
