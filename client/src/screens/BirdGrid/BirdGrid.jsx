@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-// import { useSelector, useDispatch } from "react-redux";
 import { Box, GridItem } from "@chakra-ui/react";
 import { Bird } from "../../common/components";
-// import { fetchBirds, fetchLocation } from "../../common/services";
 import {useGetBirdsByIPCountryCodeQuery} from '../../common/services/birds.js'
 
 export const BirdGrid = (props) => {
-  const {data, error, isLoading} = useGetBirdsByIPCountryCodeQuery(`AU`)
+  const {data, error, isLoading} = useGetBirdsByIPCountryCodeQuery()
 
   if (isLoading) {
     return <Box />;
