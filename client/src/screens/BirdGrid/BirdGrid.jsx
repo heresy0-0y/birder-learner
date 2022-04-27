@@ -11,16 +11,16 @@ export const BirdGrid = (props) => {
   }
   const birdies = data.results
   const birds = birdies.map((bird) => (
-    <GridItem mb="0.5rem" key={bird.key}>
+    <GridItem  key={bird.key}  >
       <Bird name={bird.scientificName} img={bird.media[0].identifier} />
     </GridItem>
   ));
   return (
     <Box
-      h="90%"
+      h="100%"
       py="2rem"
       mx="2%"
-      sx={{ columnCount: [1, 2, 3], columnGap: "0.5rem" }}>
+      sx={{ columnCount: [1, 2, 2, 2, 2, 3], columnGap: "0.75rem" }}>
       {birds}
     </Box>
   );

@@ -1,3 +1,4 @@
+import React from "react";
 import { Box, Image, useColorModeValue } from "@chakra-ui/react";
 
 const Bird = (props) => {
@@ -14,14 +15,14 @@ const Bird = (props) => {
   );
 
   return (
-    <Box borderWidth="2px" borderRadius="xl" overflow="clip">
+    <Box mb="0.75rem" borderRadius="xl" overflow="hidden">
       <Image
         src={img}
-        w="100%"
         fit="cover"
-        maxH="md"
-        alt={`image of ${name}`}
+        maxH="100%"
+        w="100%"
         fallback={fallback}
+        alt={`image of ${name}`}
       />
     </Box>
   );
