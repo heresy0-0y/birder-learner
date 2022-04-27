@@ -1,7 +1,7 @@
 import { default as NextLink } from "next/link";
 import { Link as ChakraLink } from "@chakra-ui/react";
 
-export const Link = (props) => {
+const Link = (props) => {
   const { external, wrapper, url } = props;
 
   return (
@@ -14,3 +14,5 @@ export const Link = (props) => {
 Link.defaultProps = {
   external: false,
 };
+
+export default Link;
