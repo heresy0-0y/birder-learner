@@ -1,7 +1,5 @@
-import {Layout} from '../layouts/core/'
+import { Layout } from "../layouts/core/";
 
-const Help = () => (
-    <Layout/>
-)
+const Help = () => <Layout />;
 
-export default Help
+export default Help;

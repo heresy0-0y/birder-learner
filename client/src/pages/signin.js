@@ -1,7 +1,5 @@
-import {Layout} from '../layouts/core/'
+import { Layout } from "../layouts/core/";
 
-const SignIn = () => (
-    <Layout/>
-)
+const SignIn = () => <Layout />;
 
-export default SignIn
+export default SignIn;
