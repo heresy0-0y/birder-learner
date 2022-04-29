@@ -23,7 +23,7 @@ const Bird = (props) => {
   return (
     <Box
       borderRadius="xl"
-      overflow="clip"
+      overflow="hidden"
       h="100%"
       w="100%"
       marginBottom="0.75rem">
