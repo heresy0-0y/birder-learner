@@ -1,6 +1,5 @@
-import { Link as ChakraLink, Text, Code } from "@chakra-ui/react";
-import { BirdGrid } from "../screens/BirdGrid/BirdGrid.jsx";
 import { Layout } from "../layouts/core";
+import { BirdGrid } from "../screens/BirdGrid/BirdGrid.jsx";
 
 const Index = () => (
   <Layout>
