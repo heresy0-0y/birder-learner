@@ -1,3 +1,4 @@
+import WaveSurfer from 'wavesurfer.js'
 
 const BirdSongs = () => {
   return (
