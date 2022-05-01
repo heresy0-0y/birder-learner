@@ -6,7 +6,8 @@ import dynamic from 'next/dynamic'
 
 const Waveform = dynamic(() => import('./Waveform'), {ssr: false})
 
-
+// const testUrl='https://static.inaturalist.org/sounds/342100.m4a?1641022559'
+const testUrl='/342100.mp4'
 
 const Songs = () => {
 const {data} = useGetSongsByBirdQuery()
@@ -14,7 +15,7 @@ const {data} = useGetSongsByBirdQuery()
   return (
     <>
       <Box w='100%' >
-        <Waveform  url ="/342100.mp4"/>
+        <Waveform  url={testUrl}/>
       </Box>
     </>
   );

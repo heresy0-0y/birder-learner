@@ -8,7 +8,7 @@ const CoreContainer = (props) => {
   const color = { light: "black", dark: "white" };
   return (
     <VStack
-      w='100%'
+      minW='100vw'
       minH='100vh'
       // align='center'
       // justify='center'

@@ -16,23 +16,23 @@ const Waveform = ({ url }) => {
   const waveform = useRef(null);
   const [play, setPlay] = useState(false);
   const [volume, setVolume] = useState(0.1);
+
   useEffect(() => {
     setPlay(false);
     waveform.current = WaveSurfer.create({
       container: "#waveform",
-      backend: 'MediaElement',
+
       waveColor: "#8D86C9",
       progressColor: "#242038",
-      barMinHeight: 200,
+
       normalize: true,
       hideScrollbar: true,
-
     });
 
     waveform.current.load(url);
     waveform.current.on("waveform-ready", function () {
       if (waveform.current) {
-        waveform.current.load(url);
+        set;
 
         setVolume(volume);
         waveform.current.setVolume(volume);
@@ -40,6 +40,11 @@ const Waveform = ({ url }) => {
     });
     return () => waveform.current.destroy();
   }, []);
+  useEffect(() => {
+    waveform.current.on("finish", function () {
+      setPlay(false);
+    });
+  });
 
   const handlePlayPause = () => {
     if (waveform.current.isPlaying()) {
@@ -49,7 +54,6 @@ const Waveform = ({ url }) => {
     }
     setPlay(!play);
   };
-
   const handleVolume = (e) => {
     const newVolume = +e;
 
