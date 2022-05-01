@@ -1,16 +1,18 @@
 import React from "react";
-import Songs from "./Songs";
+import Songs from "./Songs/Songs";
 import { useRouter } from "next/router";
 import {
   Box,
   useColorModeValue,
+  useBreakpointValue,
   Image,
   SkeletonCircle,
 } from "@chakra-ui/react";
 
 const Bird = (props) => {
   const fallbackFilter = useColorModeValue("none", "invert(90%)");
-  const { img, name } = props;
+
+  const { img, name, taxonKey, w, h } = props;
   const fallback = <SkeletonCircle w="100%" h="100%" />;
   let songs = false;
 
@@ -21,12 +23,8 @@ const Bird = (props) => {
   }
 
   return (
-    <Box
-      borderRadius="xl"
-      overflow="hidden"
-      h="100%"
-      w="100%"
-      marginBottom="0.75rem">
+    <>
+    <Box borderRadius="xl" overflow="hidden" w={w} h={h}>
       <Image
         src={img}
         loading="eager"
@@ -36,8 +34,9 @@ const Bird = (props) => {
         fallback={fallback}
         alt={`image of ${name}`}
       />
-      {songs ? <Songs /> : null}
     </Box>
+     {songs? <Songs/> : null}
+     </>
   );
 };
 

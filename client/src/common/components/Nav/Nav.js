@@ -6,12 +6,14 @@ import {
   MenuList,
   MenuButton,
   MenuItem,
-  Button as CButton 
+  Button as CButton,
+  useBreakpointValue
 } from "@chakra-ui/react";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { Button } from "../Buttons/Button.jsx";
 
 const Nav = (props) => {
+  const searchWidth = useBreakpointValue({base: '10%', sm: '20%'})
   const { links } = props;
   return (
     <Box mt="0" w="100vw">
@@ -26,10 +28,12 @@ const Nav = (props) => {
         )}
       </Menu>
       <Flex mt="0.5rem" direction="row" w="100%" display={{base: 'none', md: 'flex'}}>
-        <Button text="Show Me Birds!" url="/" />
-        <Button text="Sign Up" url="/" />
-        <Button text="Sign In" url="/" />
-        <Input w="60%" />
+        <Button text="Home" url="/" />
+        <Button text="Sign Up" url="/signup" />
+        <Button text="Sign In" url="/signin" />
+        <Box w='10%'/>
+        <Input />
+        <Box w='15%'/>
       </Flex>
     </Box>
   );

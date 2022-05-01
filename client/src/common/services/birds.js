@@ -16,7 +16,10 @@ export const api = createApi({
         return result.data ? { data: result.data } : { error: result.error };
       },
     }),
+    getSongsByBird: builder.query({
+      query: (taxonKey) => `search?&mediaType=Sound&taxonKey=${taxonKey}`,
+    }),
   }),
 });
 
-export const { useGetBirdsByIPCountryCodeQuery } = api;
+export const { useGetBirdsByIPCountryCodeQuery, useGetSongsByBirdQuery } = api;

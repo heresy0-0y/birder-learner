@@ -11,6 +11,7 @@
     "@arcgis/core": "^4.23.7",
     "@chakra-ui/icons": "^1.0.0",
     "@chakra-ui/react": "^1.4.2",
+    "@egjs/react-infinitegrid": "^4.2.1",
     "@emotion/react": "^11.0.0",
     "@emotion/styled": "^11.0.0",
     "@reduxjs/toolkit": "^1.8.1",
@@ -22,6 +23,9 @@
     "react-redux": "^8.0.0",
     "redux": "^4.1.2",
     "uninstall": "^0.0.0",
+    "wavesurfer.js": "^6.1.0"
+  },
+  "devDependencies": {
     "wavesurfer.js": "^6.1.0"
   }
 }

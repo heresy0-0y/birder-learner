@@ -1,4 +1,4 @@
-import { Flex, useColorMode } from "@chakra-ui/react";
+import { Flex, useColorMode, VStack } from "@chakra-ui/react";
 
 const CoreContainer = (props) => {
   const { colorMode } = useColorMode();
@@ -7,10 +7,14 @@ const CoreContainer = (props) => {
 
   const color = { light: "black", dark: "white" };
   return (
-    <Flex
-      direction="column"
-      alignItems="center"
-      justifyContent="space-between"
+    <VStack
+      w='100%'
+      minH='100vh'
+      // align='center'
+      // justify='center'
+      // direction="column"
+      // alignItems="center"
+      // justifyContent="space-between"
       // bg={bgColor[colorMode]}
       bgImage="url('/background.JPG')"
       color={color[colorMode]}
