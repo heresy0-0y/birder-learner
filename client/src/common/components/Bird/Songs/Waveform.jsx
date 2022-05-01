@@ -21,14 +21,13 @@ const Waveform = ({ url }) => {
     setPlay(false);
     waveform.current = WaveSurfer.create({
       container: "#waveform",
-
       waveColor: "#8D86C9",
       progressColor: "#242038",
 
       normalize: true,
       hideScrollbar: true,
     });
-
+    console.log(url)
     waveform.current.load(url);
     waveform.current.on("waveform-ready", function () {
       if (waveform.current) {
@@ -40,11 +39,12 @@ const Waveform = ({ url }) => {
     });
     return () => waveform.current.destroy();
   }, []);
+
   useEffect(() => {
     waveform.current.on("finish", function () {
       setPlay(false);
     });
-  });
+  },[]);
 
   const handlePlayPause = () => {
     if (waveform.current.isPlaying()) {
