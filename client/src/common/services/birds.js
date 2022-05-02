@@ -17,7 +17,7 @@ export const api = createApi({
       },
     }),
     getSongsByBird: builder.query({
-      query: (taxonKey) => `search?&mediaType=Sound&taxonKey=${taxonKey}`,
+      query: (taxonKey) => `search?&mediaType=Sound&taxonKey=${taxonKey}&limit=200`,
     }),
   }),
 });

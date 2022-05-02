@@ -35,7 +35,7 @@ const Bird = (props) => {
         alt={`image of ${name}`}
       />
     </Box>
-     {songs? <Songs/> : null}
+     {songs? <Songs taxonKey={taxonKey}/> : null}
      </>
   );
 };

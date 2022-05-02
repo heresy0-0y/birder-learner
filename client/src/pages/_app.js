@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { Provider } from "react-redux";
 import { ChakraProvider, ColorModeProvider } from "@chakra-ui/react";
 import theme from "../theme";
@@ -11,6 +12,9 @@ function MyApp({ Component, pageProps }) {
           options={{
             useSystemColorMode: true,
           }}>
+          <Head>
+            <meta name="viewport" content="viewport-fit=cover"/>
+          </Head>
           <Component {...pageProps} />
         </ColorModeProvider>
       </ChakraProvider>

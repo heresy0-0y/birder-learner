@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import WaveSurfer from "wavesurfer.js";
+import WebAudioAnalyser from 'web-audio-analyser'
 import {
   Box,
   Flex,
@@ -13,32 +14,42 @@ import {
 } from "@chakra-ui/react";
 
 const Waveform = ({ url }) => {
+  var audio = new Audio();
+  audio.crossOrigin='Anonymous'
+  audio.src = url
+
+  const analyser = WebAudioAnalyser(audio)
   const waveform = useRef(null);
   const [play, setPlay] = useState(false);
   const [volume, setVolume] = useState(0.1);
 
+console.log(audio)
   useEffect(() => {
     setPlay(false);
     waveform.current = WaveSurfer.create({
       container: "#waveform",
       waveColor: "#8D86C9",
       progressColor: "#242038",
-
+      xhr: {responseType: 'arraybuffer', mode: 'no-cors', dest: 'audio', redirect: 'follow'},
+      backend: 'MediaElement',
       normalize: true,
+      preload: 'auto',
       hideScrollbar: true,
     });
-    console.log(url)
-    waveform.current.load(url);
+
+    const waveForm = async () => await analyser.waveform()
+    const form = waveForm()
+    console.log(form)
+    waveform.current.load(url, form, 2);
     waveform.current.on("waveform-ready", function () {
       if (waveform.current) {
-        set;
 
         setVolume(volume);
         waveform.current.setVolume(volume);
       }
+      return () => waveform.current.destroy();
     });
-    return () => waveform.current.destroy();
-  }, []);
+  }, [url]);
 
   useEffect(() => {
     waveform.current.on("finish", function () {
