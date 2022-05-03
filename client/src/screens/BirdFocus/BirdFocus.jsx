@@ -15,8 +15,8 @@ export const BirdFocus = (props) => {
   const bird = data.results.filter((bird) => Number(bird.key) == id)[0];
 
   return (
-    <VStack h="100vh">
-      <Bird img={bird.media[0].identifier} name={bird.scientificName} taxonKey={bird.taxonKey} h="50%" />
+    <VStack >
+      <Bird img={bird.media[0].identifier} name={bird.scientificName} taxonKey={bird.taxonKey} h="md" />
     </VStack>
   );
 };
