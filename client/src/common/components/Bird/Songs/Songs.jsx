@@ -19,7 +19,7 @@ const Songs = ({ taxonKey }) => {
       setSongs(media);
     }
   }, [data]);
-
+  console.log(taxonKey)
   useEffect(() => {
     if (songs) {
       setSelected(songs[0].identifier)

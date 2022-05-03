@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {AiOutlinePlayCircle} from 'react-icons/ai'
-import {List, Text, VStack, Container} from '@chakra-ui/react'
+import {List, Text, ListIcon, ListItem} from '@chakra-ui/react'
 export const Playlist = ({songs, selectedTrack, setSelected}) => {
 
       const [list, setList] = useState(null)
@@ -15,15 +15,15 @@ export const Playlist = ({songs, selectedTrack, setSelected}) => {
   }
 
   return (
-    <VStack>
 
-          {songs.map((song) => (
-            <Text>
-
+        <List>
+          {songs.map((song, index) => (
+            <ListItem key={index} onClick={() => setSelected(song.identifier)}>
+              {song.creator}
               {song.publisher}
-            </Text>
+            </ListItem>
           ))}
+  </List>
 
-    </VStack>
   );
 };

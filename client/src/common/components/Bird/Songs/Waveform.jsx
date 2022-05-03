@@ -17,17 +17,19 @@ const Waveform = ({ url }) => {
   const waveform = useRef(null);
   const [play, setPlay] = useState(false);
   const [volume, setVolume] = useState(0.1);
-
+  
   useEffect(() => {
     setPlay(false);
-    waveform.current = WaveSurfer.create({
-      container: "#waveform",
+
+    
+    waveform.current = WaveSurfer.create( {
+      container: waveform.current,
       waveColor: "#8D86C9",
       progressColor: "#242038",
       barWidth: 3,
       normalize: true,
       partialRender: true,
-
+      
       hideScrollbar: true,
     });
 
@@ -35,8 +37,10 @@ const Waveform = ({ url }) => {
     waveform.current.on("ready", function () {
       waveform.current.setVolume(0.1);
 
-      return () => waveform.current.destroy();
-    });
+
+        waveform.current.pause()
+        return () => waveform.current.destroy();
+      });
   }, [url]);
 
   useEffect(() => {

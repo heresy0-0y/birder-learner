@@ -20,12 +20,12 @@ export const BirdGrid = (props) => {
     
     const birdies = data.results;
     const birds = birdies.map((bird) => (
-      <Link url={`songs/${bird.key}`} className={"item"}>
+      <Link url={`songs/${bird.taxonKey}`} className={"item"}>
       <Bird
         w={width}
         name={bird.scientificName}
         img={bird.media[0].identifier}
-        key={bird.key}
+        key={bird.taxonKey}
         />
     </Link>
   ));
