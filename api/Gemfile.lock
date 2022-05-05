@@ -1,5 +1,4 @@
 GEM
-  remote: https://rubygems.org/
   specs:
     actioncable (7.0.2.4)
       actionpack (= 7.0.2.4)
@@ -120,6 +119,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.3)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (7.0.2.4)
@@ -172,6 +173,7 @@ DEPENDENCIES
   jwt
   pg (~> 1.1)
   puma (~> 5.0)
+  rack-cors
   rails (~> 7.0.2, >= 7.0.2.4)
   tzinfo-data
 
