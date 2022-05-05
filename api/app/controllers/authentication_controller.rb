@@ -12,12 +12,12 @@ class AuthenticationController < ApplicationController
         else 
             render json: {errors: 'unauthorized'}, status: :unauthorized
         end
+    end
 
         def verify
             render json: @current_user.attributes.except("password_digest"), status: :ok
         end
 
-        
         private
 
         def login_params
