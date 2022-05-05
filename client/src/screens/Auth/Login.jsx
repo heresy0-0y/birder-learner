@@ -13,8 +13,25 @@ export default function(props) {
         password: ''
     })
 
+    const [login, {isLoading} ] = useLoginMutation()
+
     const handleChange = ({target: {name, value}}) => {
         setForm((prev) => ({...prev, [name]: value}))
+    }
+
+    const handleSubmit = async () => {
+        try {
+            const user = await login(form).unwrap()
+            dispatch(setCredentials(user))
+            router.push('/search')
+        } catch(err) {
+            toast({
+                status:"error",
+                title: "Error",
+                description: "Whoops! Something went wrong",
+                isCloseable: true,
+            })
+        }
     }
 
     return (
@@ -27,6 +44,7 @@ export default function(props) {
                 <FormLabel>Password</FormLabel>
                 <Input name="password" onChange={handleChange}/>
             </FormControl>
+                <Button onClick={handleSubmit} >Submit</Button>
         </Container>
     )
 }
