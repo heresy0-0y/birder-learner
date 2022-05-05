@@ -28,7 +28,7 @@ const Songs = ({ taxonKey }) => {
 
   return (
     <>
-      <VStack w="100%" h="100%">
+      <VStack minW="100%" h="100%">
         <Waveform url={selectedTrack} />
         <Playlist songs={songs} selectedTrack={selectedTrack} setSelected={setSelected} />
       </VStack>

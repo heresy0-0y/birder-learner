@@ -16,7 +16,7 @@ export const BirdFocus = (props) => {
 
   return (
     <VStack >
-      <Bird img={bird.media[0].identifier} name={bird.scientificName} taxonKey={bird.taxonKey} h="md" />
+      <Bird img={bird.media[0].identifier} name={bird.scientificName} taxonKey={bird.taxonKey} w="md"  />
     </VStack>
   );
 };

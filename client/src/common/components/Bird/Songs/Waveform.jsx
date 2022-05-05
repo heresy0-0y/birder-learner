@@ -33,7 +33,7 @@ const Waveform = ({ url }) => {
       hideScrollbar: true,
     });
 
-    waveform.current.load(`https://cors-anywhere.herokuapp.com/${url}`);
+    waveform.current.load(`https://corsanyblah.herokuapp.com/${url}`);
     waveform.current.on("ready", function () {
       waveform.current.setVolume(0.1);
 
@@ -67,7 +67,7 @@ const Waveform = ({ url }) => {
   };
 
   return (
-    <Flex direction="column" w="100%" mt="2rem">
+    <Flex direction="column" minW="100%" mt="2rem">
       <div id="waveform" ref={waveform} />
       <Flex direction="column" justify="center" mt="1rem">
         <Button m="4" onClick={handlePlayPause}>
