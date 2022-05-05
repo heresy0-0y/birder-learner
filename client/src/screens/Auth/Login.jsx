@@ -8,6 +8,7 @@ import {useLoginMutation} from '../../common/services/auth'
 export default function(props) {
     const router = useRouter()
     const dispatch = useDispatch()
+    const toast = useToast()
     const [form, setForm] = useState({
         username: '',
         password: ''

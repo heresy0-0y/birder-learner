@@ -2,7 +2,7 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 
 export const authApi = createApi({
     reducerPath: 'authApi',
-    baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:3000/', prepareHeaders: (headers, {getState}) => {
+    baseQuery: fetchBaseQuery({baseUrl: 'https://birder-learner-api.herokuapp.com/', prepareHeaders: (headers, {getState}) => {
         const token = getState().auth.token
         if (token) {
             headers.set('authorization', `Bearer ${token}`)
@@ -21,7 +21,7 @@ export const authApi = createApi({
             })
         }),
         addUser: builder.mutation({
-            query: ({user}) => ({
+            query: (user) => ({
                 url: 'users',
                 method: 'POST',
                 body: user,
