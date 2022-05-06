@@ -1,14 +1,30 @@
 import Head from "next/head";
-import { Provider } from "react-redux";
-import React from "react";
+import {useDispatch} from 'react-redux'
+import React, {useState, useEffect} from "react";
 import { ChakraProvider, ColorModeProvider, Wrap } from "@chakra-ui/react";
 import theme from "../theme";
 import Image from "next/image";
 import { wrapper } from "../store/store.js";
+import {setCredentials} from '../store/features/authSlice'
 
 function MyApp({ Component, pageProps }) {
+  const [user, setUser] = useState({user: null, token: null});
+  const dispatch = useDispatch()
+  useEffect(() => {
+    const checkForSession = async () => { 
+      const localUserString = localStorage.getItem('user')
+      const localUser = JSON.parse(localUserString)
+      setUser(localUser)
+    }
+    checkForSession();
+  },[])
+  useEffect(() => {
+    dispatch(setCredentials(user))
+
+  },[user])
+
   return (
-    // <Provider store={store}>
+
       <ChakraProvider resetCSS theme={theme}>
         <ColorModeProvider
           options={{
@@ -25,10 +41,10 @@ function MyApp({ Component, pageProps }) {
               objectFit="cover"
             />
           </Wrap>
-          <Component {...pageProps} />
+          <Component {...pageProps} user={user} />
         </ColorModeProvider>
       </ChakraProvider>
-    // </Provider>
+
   );
 }
 

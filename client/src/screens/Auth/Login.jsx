@@ -25,9 +25,7 @@ export default function(props) {
         try {
             const user = await login(form).unwrap()
             dispatch(setCredentials(user))
-            console.log(user)
-            console.log(logged)
-
+            localStorage.setItem('user', JSON.stringify(user))
             router.push('/search')
         } catch(err) {
             toast({
