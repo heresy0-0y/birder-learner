@@ -16,7 +16,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     const code = context.params?.code
     if (typeof code === "string") {
 
-      store.dispatch(getBirdsByIPCountryCode.initiate(code))
+      store.dispatch(getBirdsByIPCountryCode.initiate())
     }
     await Promise.all(getRunningOperationPromises())
     return {
