@@ -11,7 +11,7 @@ const Index = () => (
 );
 
 
-export const getServerSideProps = wrapper.getServerSideProps(
+export const getStaticProps = wrapper.getStaticProps(
   (store) => async () => {
     store.dispatch(getBirdsByIPCountryCode.initiate())
     await Promise.all(getRunningOperationPromises())
