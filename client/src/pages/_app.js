@@ -4,11 +4,11 @@ import React from "react";
 import { ChakraProvider, ColorModeProvider, Wrap } from "@chakra-ui/react";
 import theme from "../theme";
 import Image from "next/image";
-import { store } from "../store/store.js";
+import { wrapper } from "../store/store.js";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Provider store={store}>
+    // <Provider store={store}>
       <ChakraProvider resetCSS theme={theme}>
         <ColorModeProvider
           options={{
@@ -28,8 +28,8 @@ function MyApp({ Component, pageProps }) {
           <Component {...pageProps} />
         </ColorModeProvider>
       </ChakraProvider>
-    </Provider>
+    // </Provider>
   );
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);
