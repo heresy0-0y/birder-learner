@@ -2,13 +2,13 @@ import React from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { Provider } from "react-redux";
-import { store } from "../store/store.js";
+import { store, wrapper } from "../store/store.js";
 import { ChakraProvider, ColorModeProvider, Wrap } from "@chakra-ui/react";
 import theme from "../theme";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Provider store={store}>
+
       <ChakraProvider resetCSS theme={theme}>
         <ColorModeProvider
           options={{
@@ -28,8 +28,8 @@ function MyApp({ Component, pageProps }) {
           <Component {...pageProps} />
         </ColorModeProvider>
       </ChakraProvider>
-    </Provider>
+
   );
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);
