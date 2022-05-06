@@ -53,12 +53,12 @@ const Nav = () => {
             </MenuButton>
             
             <MenuList>
-              {links.map((link) => (
-                <>
-                  <MenuItem onClick={() => router.push(link.url)}>
+              {links.map((link, index) => (
+                
+                  <MenuItem onClick={() => router.push(link.url)} key={index}>
                     {link.text}
                   </MenuItem>
-                </>
+                
               ))}
             </MenuList>
           </>
@@ -71,10 +71,10 @@ const Nav = () => {
         w="100%"
         display={{ base: "none", lg: "flex" }}>
         <Heading>{userGreeting}</Heading>
-        {links.map((link) => (
-          <>
-            <Button text={link.text} url={link.url} />
-          </>
+        {links.map((link, index) => (
+
+            <Button text={link.text} url={link.url} key={index} />
+
         ))}
         <Box w="10%" />
         <Input />
