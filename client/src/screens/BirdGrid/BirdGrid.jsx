@@ -17,7 +17,7 @@ export const BirdGrid = (props) => {
     return <Box />;
   }
 
-    
+   
     const birdies = data.results;
     const birds = birdies.map((bird) => (
       <Link url={`songs/${bird.taxonKey}`} className={"item"}>

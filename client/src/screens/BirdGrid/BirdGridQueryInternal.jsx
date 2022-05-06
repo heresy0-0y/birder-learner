@@ -18,8 +18,7 @@ export const BirdGrid = (props) => {
   if (isLoading) {
     return <Box />;
   }
-
-
+  
 
     
     const birdies = data.results;
