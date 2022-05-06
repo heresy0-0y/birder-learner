@@ -7,12 +7,10 @@ const CoreLayout = (props) => {
   const [user, setUser] = useState({ user: null, token: null });
   const dispatch = useDispatch();
   useEffect(() => {
-    const checkForSession = () => {
+    const checkForSession = async () => {
       const localUserString = localStorage.getItem("user");
       const localUser = JSON.parse(localUserString);
-      if (
-        typeof localUser === "object"
-      ) {
+      if (localUser !== null) {
         if ( Object.keys(localUser).includes("user")) {
 
           setUser(localUser);
