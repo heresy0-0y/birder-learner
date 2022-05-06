@@ -1,1 +1,1 @@
-export {default as Layout} from './CoreLayout.js'
+export {default as Layout} from './CoreLayout.jsx'

@@ -49,7 +49,7 @@ export default function(props) {
                 <FormLabel>Password</FormLabel>
                 <Input name="password" onChange={handleChange}/>
             </FormControl>
-                <Button onClick={handleSubmit} >Submit</Button>
+                <Button onClick={handleSubmit} isLoading={isLoading}>Submit</Button>
         </Container>
     )
 }
