@@ -8,7 +8,7 @@ import {
 } from "next-redux-cookie-wrapper";
 
 import { authApi } from "../common/services/auth.js";
-import authReducer, { slice as authSlice } from "./features/authSlice";
+import { slice as authSlice } from "./features/authSlice";
 // import allBirdsReducer from './features/allBirds/allBirdsSlice.js'
 
 export const store = wrapMakeStore(() =>
@@ -23,7 +23,6 @@ export const store = wrapMakeStore(() =>
         .prepend(nextReduxCookieMiddleware({ subtrees: [`${authSlice}`] }))
         .concat(api.middleware)
         .concat(authApi.middleware),
-    devTools: true,
   })
 );
 
