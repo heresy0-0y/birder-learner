@@ -29,4 +29,4 @@ export const birdsInitApi = createApi({
 });
 
 export const {getBirdsByIPCountryCode} = birdsInitApi.endpoints
-export const { useGetBirdsByIPCountryCodeQuery, useGetSongsByBirdQuery, util: { getRunningOperationsPromises},} = birdsInitApi;
+export const { useGetBirdsByIPCountryCodeQuery, useGetSongsByBirdQuery, util: { getRunningOperationPromises},} = birdsInitApi;
