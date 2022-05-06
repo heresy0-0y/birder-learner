@@ -11,10 +11,12 @@ const CoreLayout = (props) => {
       const localUserString = localStorage.getItem("user");
       const localUser = JSON.parse(localUserString);
       if (
-        typeof localUser === "object" &&
-        Object.keys(localUser).includes("user")
+        typeof localUser === "object"
       ) {
-        setUser(localUser);
+        if ( Object.keys(localUser).includes("user")) {
+
+          setUser(localUser);
+        }
       }
     };
     checkForSession();
