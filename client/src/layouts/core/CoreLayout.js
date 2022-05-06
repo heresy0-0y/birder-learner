@@ -6,7 +6,7 @@ const CoreLayout = (props) => {
   return (
     <Container>
       <Nav />
-      <DarkModeSwitch />
+
       {props.children}
     </Container>
   );

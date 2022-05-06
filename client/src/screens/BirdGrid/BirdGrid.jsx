@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { MasonryInfiniteGrid as MasonryGrid } from "@egjs/react-infinitegrid";
 import { Box, useBreakpointValue, VStack } from "@chakra-ui/react";
 import { Bird, Link } from "../../common/components";
+import {useSelector} from 'react-redux'
+import {selectCurrentUser} from '../../store/features/authSlice'
 import { useGetBirdsByIPCountryCodeQuery } from "../../common/services/birds.js";
 import {useRouter} from 'next/router'
 export const BirdGrid = (props) => {
-
+  let  logged = useSelector(selectCurrentUser)
    const {data, isLoading} = props
   
   const column = useBreakpointValue({base: '1', sm: 2, lg: '3', '2xl': 4})
@@ -14,8 +16,6 @@ export const BirdGrid = (props) => {
   if (isLoading) {
     return <Box />;
   }
-
-
 
     
     const birdies = data.results;

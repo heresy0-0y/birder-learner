@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import {useRouter} from 'next/router'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {Container, FormControl, FormLabel, Input, Button, useToast} from '@chakra-ui/react'
-import {setCredentials} from '../../store/features/authSlice'
+import {setCredentials, selectCurrentUser} from '../../store/features/authSlice'
 import {useLoginMutation} from '../../common/services/auth'
 
 export default function(props) {
@@ -13,17 +13,21 @@ export default function(props) {
         username: '',
         password: ''
     })
-
+    let logged = useSelector(selectCurrentUser)
+    
     const [login, {isLoading} ] = useLoginMutation()
-
+    
     const handleChange = ({target: {name, value}}) => {
         setForm((prev) => ({...prev, [name]: value}))
     }
-
+    
     const handleSubmit = async () => {
         try {
             const user = await login(form).unwrap()
             dispatch(setCredentials(user))
+            console.log(user)
+            console.log(logged)
+
             router.push('/search')
         } catch(err) {
             toast({
