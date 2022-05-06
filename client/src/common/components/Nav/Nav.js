@@ -4,8 +4,9 @@ import {
   Flex,
   Input,
   Menu,
-  Text,
-  Heading,
+  InputGroup,
+  InputRightElement,
+  Center,
   MenuList,
   MenuButton,
   MenuItem,
@@ -19,6 +20,11 @@ import { Button } from "../Buttons/Button.jsx";
 import { selectCurrentUser } from "../../../store/features/authSlice";
 
 const Nav = () => {
+  const inputMargin = useBreakpointValue({
+    base: "0.5rem",
+    sm: "4rem",
+    md: "7rem",
+  });
   const router = useRouter();
   const user = useSelector(selectCurrentUser);
   const [userGreeting, setGreeting] = useState(null);
@@ -27,58 +33,83 @@ const Nav = () => {
     { text: "Sign Up", url: "/signup" },
     { text: "Log In", url: "/login" },
   ]);
-  
+
   useEffect(() => {
     if (typeof user !== "string" && user) {
-      const favorites = {text: "Favorites", url: `/${user.username}/favorites`}
-      setGreeting(`Hello ${user.first_name}!`);
-      setLinks((prev) => [...prev].filter((link) => link.text === "Home"))
+      const favorites = {
+        text: "Favorites",
+        url: `/${user.username}/favorites`,
+      };
+      setGreeting(`Hello, ${user.first_name}!`);
+      setLinks((prev) => [...prev].filter((link) => link.text === "Home"));
       setLinks((prev) => [...prev, favorites]);
     }
   }, [user]);
 
   return (
-    <Box mt="0" w="100%">
+    <Box mt="0" w="100%" display="flex">
       <Menu>
         {({ isOpen }) => (
           <>
             <MenuButton
               display={{ base: "flex", lg: "none" }}
               isActive={isOpen}
-              direction='row'
+              direction="row"
+              mt="0.5rem"
+              ml="0.5rem"
               as={CButton}
               rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}>
               {" "}
-              Menu {userGreeting}{" "}
+              Menu{" "}
             </MenuButton>
-            
+            <Center
+              w="50%"
+              ml={inputMargin}
+              mt="0.5rem"
+              display={{ base: "flex", lg: "none" }}>
+              <InputGroup size="md" w="100%">
+                <Input pr=".5rem" />
+                <InputRightElement width="4.5rem">
+                  <CButton variant="outline" borderLeftRadius="0px">
+                    Search
+                  </CButton>
+                </InputRightElement>
+              </InputGroup>
+            </Center>
+
             <MenuList>
               {links.map((link, index) => (
-                
-                  <MenuItem onClick={() => router.push(link.url)} key={index}>
-                    {link.text}
-                  </MenuItem>
-                
+                <MenuItem onClick={() => router.push(link.url)} key={index}>
+                  {link.text}
+                </MenuItem>
               ))}
             </MenuList>
           </>
         )}
       </Menu>
-        <Box right={0} top="0" position="absolute"> {userGreeting}</Box>
+      <Box pt="0.5rem" right={0} top="0.5rem" right="4%" position="absolute">
+        {" "}
+        {userGreeting}
+      </Box>
       <Flex
         mt="0.5rem"
         direction="row"
         w="100%"
         display={{ base: "none", lg: "flex" }}>
-        <Heading>{userGreeting}</Heading>
         {links.map((link, index) => (
-
-            <Button text={link.text} url={link.url} key={index} />
-
+          <Button text={link.text} url={link.url} key={index} />
         ))}
-        <Box w="10%" />
-        <Input />
-        <Box w="15%" />
+
+        <Box w="5%" />
+        <InputGroup size="md">
+          <Input pr=".5rem" />
+          <InputRightElement width="4.5rem">
+            <CButton variant="outline" borderLeftRadius="0px">
+              Search
+            </CButton>
+          </InputRightElement>
+        </InputGroup>
+        <Box w="30%" />
       </Flex>
     </Box>
   );
