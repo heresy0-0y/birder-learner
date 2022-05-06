@@ -1,4 +1,4 @@
-import { Button as CButton, IconButton, HStack, Text } from "@chakra-ui/react";
+import { Button as CButton } from "@chakra-ui/react";
 import { default as Link } from "../Link/Link";
 
 export const Button = (props) => {
@@ -6,9 +6,11 @@ export const Button = (props) => {
 
   return (
     <>
-    <Link url={url}>
-      <CButton w={w} variant="ghost" rightIcon={icon}>{text}</CButton>
-    </Link>
+      <Link url={url}>
+        <CButton w={w} variant="ghost" rightIcon={icon}>
+          {text}
+        </CButton>
+      </Link>
     </>
   );
 };

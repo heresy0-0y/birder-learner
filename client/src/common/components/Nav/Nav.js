@@ -27,11 +27,13 @@ const Nav = () => {
     { text: "Sign Up", url: "/signup" },
     { text: "Log In", url: "/login" },
   ]);
-
+  
   useEffect(() => {
     if (typeof user !== "string" && user) {
+      const favorites = {text: "Favorites", url: `/${user.username}/favorites`}
       setGreeting(`Hello ${user.first_name}!`);
-      setLinks((prev) => [...prev].filter((link) => link.text === "Home"));
+      setLinks((prev) => [...prev].filter((link) => link.text === "Home"))
+      setLinks((prev) => [...prev, favorites]);
     }
   }, [user]);
 

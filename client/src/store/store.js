@@ -68,7 +68,7 @@ export const store = wrapMakeStore(() =>
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware()
-      .prepend(nextReduxCookieMiddleware({ subtrees: [`${authSlice.name}`] }))
+        .prepend(nextReduxCookieMiddleware({ subtrees: [`${authSlice.name}`] }))
         .concat(api.middleware)
         .concat(authApi.middleware),
     devTools: true,
