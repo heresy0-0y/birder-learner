@@ -38,6 +38,7 @@ function MyApp({ Component, pageProps }) {
         </Head>
         <Wrap zIndex="-2" position="fixed" h="100vh" w="100vw">
           <Image
+            priority
             src={"/background.JPG"}
             layout="fill"
             quality="100"
