@@ -13,6 +13,11 @@ export const authApi = createApi({
       return headers;
     },
   }),
+  extractRehydrationInfo(action, {reducerPath}) {
+    if (action.type === HYDRATE) {
+      return action.payload[reducerPath]
+    }
+  },
   endpoints: (builder) => ({
     getUsers: builder.query({
       query: () => "users",
