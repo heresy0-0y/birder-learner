@@ -1,8 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { fetchLocation } from "./";
+import {HYDRATE} from 'next-redux-wrapper'
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "https://api.gbif.org/v1/occurrence/" }),
+  extractRehydrationInfo(action, {reducerPath}) {
+    if (action.type === HYDRATE) {
+      return action.payload[reducerPath]
+    }
+  },
   endpoints: (builder) => ({
     getBirdsByIPCountryCode: builder.query({
       async queryFn(_arg, _queryApi, _extraOptions, fetchWithBQ) {
@@ -22,4 +28,5 @@ export const api = createApi({
   }),
 });
 
-export const { useGetBirdsByIPCountryCodeQuery, useGetSongsByBirdQuery } = api;
+export const {getBirdsByIPCountryCode} = api.endpoints
+export const { useGetBirdsByIPCountryCodeQuery, useGetSongsByBirdQuery, util: {getRunningOperationPromises} } = api;
