@@ -6,6 +6,7 @@ import Image from "next/image";
 import { wrapper } from "../store/store.js";
 import { ChakraProvider, ColorModeProvider, Wrap } from "@chakra-ui/react";
 import theme from "../theme";
+import backgroundImage from '../../public/background.jpeg'
 
 function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState({ user: null, token: null });
@@ -39,8 +40,11 @@ function MyApp({ Component, pageProps }) {
         <Wrap zIndex="-2" position="fixed" h="100vh" w="100vw">
           <Image
             priority
-            src={"/background.JPG"}
+
+            loading="eager"
+            src={backgroundImage}
             layout="fill"
+            placeholder="blur"
             quality="100"
             objectFit="cover"
           />

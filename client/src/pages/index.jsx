@@ -16,16 +16,5 @@ const Index = () => {
 );
 }
 
-export const getStatic = wrapper.getStaticProps(
-  (store) => async () => {
-    store.dispatch(getBirdsByIPCountryCode.initiate)
-
-
-    await Promise.all(getRunningOperationPromises())
-    return {
-      props: {},
-    }
-  }
-)
 
 export default Index;

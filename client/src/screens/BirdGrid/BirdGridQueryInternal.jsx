@@ -5,11 +5,7 @@ import { Bird, Link } from "../../common/components";
 import { useGetBirdsByIPCountryCodeQuery } from "../../common/services/birds.js";
 import {useRouter} from 'next/router'
 export const BirdGrid = (props) => {
-
-
-
- 
-    const { data, error, isLoading } = useGetBirdsByIPCountryCodeQuery();
+  const { data, error, isLoading } = useGetBirdsByIPCountryCodeQuery();
 
   
   const column = useBreakpointValue({base: '1', sm: 2, lg: '3', '2xl': 4})
