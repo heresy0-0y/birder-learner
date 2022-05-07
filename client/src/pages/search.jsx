@@ -1,12 +1,14 @@
 import { Layout } from "../layouts/core";
-import { BirdGrid } from "../screens/BirdGrid/BirdGridQueryInternal";
+import { BirdGrid } from "../screens/BirdGrid/BirdGrid";
 import { useGetBirdsByIPCountryCodeQuery } from "../common/services/birds.js";
+import {wrapper} from '../store/store'
+import {getRunningOperationPromises, getBirdsByIPCountryCode, useGetBirdsByIPCountryCodeQuery} from '../common/services/birds'
 
 
 const Search = () =>  {
 
     return (<Layout>
-    <BirdGrid />
+    <BirdGrid/>
   </Layout>
 )};
 

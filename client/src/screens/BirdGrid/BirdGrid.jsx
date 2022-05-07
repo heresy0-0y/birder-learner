@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import { MasonryInfiniteGrid as MasonryGrid } from "@egjs/react-infinitegrid";
 import { Box, useBreakpointValue, VStack } from "@chakra-ui/react";
 import { Bird, Link } from "../../common/components";
-import {useSelector} from 'react-redux'
-import {selectCurrentUser} from '../../store/features/authSlice'
 import { useGetBirdsByIPCountryCodeQuery } from "../../common/services/birds.js";
 import {useRouter} from 'next/router'
 export const BirdGrid = (props) => {
-  let  logged = useSelector(selectCurrentUser)
-   const {data, isLoading} = props
+  const { data, error, isLoading } = useGetBirdsByIPCountryCodeQuery();
+
   
   const column = useBreakpointValue({base: '1', sm: 2, lg: '3', '2xl': 4})
   const width = useBreakpointValue({base: 'xs', xs: 'sm', sm: 'xs', md: 'sm', lg: 'xs', xl: 'sm', '2xl': 'md'})
@@ -16,8 +14,9 @@ export const BirdGrid = (props) => {
   if (isLoading) {
     return <Box />;
   }
+  
 
-   
+    
     const birdies = data.results;
     const birds = birdies.map((bird) => (
       <Link url={`songs/${bird.taxonKey}`} className={"item"}>
