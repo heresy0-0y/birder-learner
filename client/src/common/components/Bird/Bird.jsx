@@ -1,46 +1,73 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import Songs from "./Songs/Songs";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import {
   Box,
+  Spinner,
   useColorModeValue,
   useBreakpointValue,
-
-  Image,
+  Container,
+  VisuallyHidden,
   HStack,
   SkeletonCircle,
 } from "@chakra-ui/react";
 
-export default function(props) {
+export default function (props) {
+  const image = useRef(null);
   const fallbackFilter = useColorModeValue("none", "invert(90%)");
   let songs = false;
-  let boxWidth = null
-  const { img, name, taxonKey, w, h, left, top, pos } = props;
-  const fallback = <SkeletonCircle w="100%" h="100%" />;
+  let boxWidth = null;
+  const [padding, setPadding] = useState("100%");
+  const [height, setHeight] = useState("unset");
+  const { img, name, w, left, top, pos, h, taxonKey } = props;
 
+  const fallback = <SkeletonCircle w="100%" h="100%" />;
 
   const router = useRouter().asPath;
   if (router.includes("songs")) {
     songs = true;
-    boxWidth = '100%'
+    boxWidth = "100%";
   }
+  if (h === 0) {
+    return <Spinner />;
+  } else {
+    return (
+      <>
 
+        <Box
+          w={w}
+          h={height}
+          left={left}
+          pb={height}
+          top={top}
+          display={height === "" ? "none" : null}
+          borderRadius="xl"
+          overflow="hidden"
+          position="relative">
+          <Image
+            src={img}
+            layout="fill"
+            objectFit="cover"
+            loading="eager"
 
-  return (
-    <Box w={boxWidth}>
-      <Box borderRadius="xl" overflow="hidden" w={w} h={h} left={left} top={top} position={pos}>
-        <Image
-          src={img}
-          loading="eager"
-          height="100%"
-          width="100%"
-          objectFit="cover"
-          fallback={fallback}
-          alt={`image of ${name}`} />
-      </Box>
-      {songs ? <Songs taxonKey={taxonKey} /> : null}
-    </Box>
-  );
+            onLoad={({ target }) => {
+              const { naturalWidth, naturalHeight, width } = target;
+              if (naturalWidth > naturalHeight) {
+                setHeight(w);
+
+              } else {
+                setHeight(naturalHeight*(width/naturalWidth));
+              }
+              setPadding(`calc(100% / (${naturalWidth} / ${naturalHeight})`);
+            }}
+            fallback={fallback}
+            alt={`image of ${name}`}
+          />
+        </Box>
+
+        {songs ? <Songs taxonKey={taxonKey} /> : null}
+      </>
+    );
+  }
 }
-
-

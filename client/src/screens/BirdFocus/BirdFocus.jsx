@@ -12,7 +12,7 @@ export const BirdFocus = (props) => {
     return null;
   }
 
-  const bird = data.results.filter((bird) => Number(bird.taxonKey) == id)[0];
+  const bird = data.results.filter((bird) => bird.key == id)[0];
 
   return (
     <VStack >

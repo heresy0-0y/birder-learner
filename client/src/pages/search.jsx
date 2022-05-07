@@ -1,5 +1,5 @@
 import { Layout } from "../layouts/core";
-import { BirdGrid } from "../screens/BirdGrid/BirdGrid";
+import BirdGrid  from "../screens/BirdGrid/BirdGrid";
 
 import {wrapper} from '../store/store'
 import {getRunningOperationPromises, getBirdsByIPCountryCode, useGetBirdsByIPCountryCodeQuery} from '../common/services/birds'
