@@ -51,11 +51,9 @@ export default function (props) {
             loading="eager"
             onLoad={({ target }) => {
               const { naturalWidth, naturalHeight, width } = target;
-              if (naturalWidth > naturalHeight) {
-                setHeight(w);
-              } else {
+             
                 setHeight(naturalHeight * (width / naturalWidth));
-              }
+              
               setPadding(`calc(100% / (${naturalWidth} / ${naturalHeight})`);
             }}
             fallback={fallback}

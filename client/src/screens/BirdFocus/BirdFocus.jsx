@@ -16,7 +16,7 @@ export const BirdFocus = (props) => {
 
   return (
     <VStack>
-      <Heading>{bird.scientificName}</Heading>
+      <Heading>{bird.vernacularName ? bird.vernacularName : bird.scientificName}</Heading>
       <Bird
         img={bird.media[0].identifier}
         bird={bird}
