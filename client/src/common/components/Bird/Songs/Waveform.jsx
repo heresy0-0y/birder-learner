@@ -2,43 +2,44 @@ import React, { useEffect, useRef, useState } from "react";
 import WaveSurfer from "wavesurfer.js";
 
 import {
-  Box,
   Flex,
   Button,
   Slider,
   SliderTrack,
   SliderFilledTrack,
+  Skeleton,
   FormLabel,
   SliderThumb,
-  Progress,
 } from "@chakra-ui/react";
 
 const Waveform = ({ url }) => {
   const waveform = useRef(null);
   const [play, setPlay] = useState(false);
   const [volume, setVolume] = useState(0.1);
+  const [loading, setLoading] = useState(true)
   
   useEffect(() => {
     setPlay(false);
-
+    setLoading(true)
     
     waveform.current = WaveSurfer.create( {
       container: waveform.current,
-      waveColor: "#8D86C9",
-      progressColor: "#242038",
+      waveColor: "#00A877",
+      progressColor: "#acbf60",
       barWidth: 3,
+      responsive: true,
+      barRadius: 2,
       normalize: true,
       partialRender: true,
-      
+      cursorColor: 'seafoam-green',
       hideScrollbar: true,
+      // closeeAudioContext: true,
     });
 
     waveform.current.load(`https://corsanyblah.herokuapp.com/${url}`);
     waveform.current.on("ready", function () {
       waveform.current.setVolume(0.1);
-
-
-        waveform.current.pause()
+      waveform.current.pause()
         return () => waveform.current.destroy();
       });
   }, [url]);
@@ -68,7 +69,9 @@ const Waveform = ({ url }) => {
 
   return (
     <Flex direction="column" minW="100%" mt="2rem">
+      <Skeleton isLoaded={loading}>
       <div id="waveform" ref={waveform} />
+      </Skeleton>
       <Flex direction="column" justify="center" mt="1rem">
         <Button m="4" onClick={handlePlayPause}>
           {play ? "pause" : "play"}

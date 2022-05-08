@@ -28,6 +28,6 @@ export const birdsInitApi = createApi({
     }),
   }),
 });
-
+export const selectGetBirdsByIPCountryCode = birdsInitApi.endpoints.getBirdsByIPCountryCode.select()
 export const {getBirdsByIPCountryCode} = birdsInitApi.endpoints
 export const { useGetBirdsByIPCountryCodeQuery, useGetSongsByBirdQuery, util: { getRunningOperationPromises},} = birdsInitApi;

@@ -1,42 +1,86 @@
 import React, { useEffect, useState } from "react";
-import { VStack, Skeleton, Spinner } from "@chakra-ui/react";
-import {Playlist} from './Playlist.jsx'
+import { VStack, Skeleton, Spinner, Box } from "@chakra-ui/react";
+import { Playlist } from "./Playlist.jsx";
+import { ApiKeyManager } from "@esri/arcgis-rest-request";
+import { reverseGeocode } from "@esri/arcgis-rest-geocoding";
 import { useGetSongsByBirdQuery } from "../../../services/birds";
 import dynamic from "next/dynamic";
 
 const Songs = ({ taxonKey }) => {
   const Waveform = dynamic(() => import("./Waveform"), { ssr: false });
   const { data, isLoading } = useGetSongsByBirdQuery(taxonKey);
-  const [songs, setSongs] = useState(false);
-  const [selectedTrack, setSelected] = useState(songs[0])
+  const [songs, setSongs] = useState();
+  const [selectedTrack, setSelected] = useState();
+  const apiKey = process.env.NEXT_PUBLIC_ARCGIS_API_KEY;
 
+  const fetchLocation = async (lat, long) => {
+    const location = await fetch(
+      `https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=json&token=${apiKey}&location=${long}%2C${lat}`
+    );
+    return location.address;
+  };
+
+  const authentication = ApiKeyManager.fromKey(apiKey);
+  console.log(typeof apiKey, apiKey);
   useEffect(() => {
     if (data) {
-      const media = data.results.map(
-        (bird) =>
-          bird.media.filter((media) => media.type === "Sound")[0]
-      );
-      setSongs(media);
+      const media = data.results;
+      async function makeTheTracks() {
+        const tracksWithDateAndLocation = media.map(async (bird) => {
+          const lat = bird.decimalLatitude;
+          const long = bird.decimalLongitude;
+          const tracks = bird.media.filter((index) => index.type === "Sound");
+          const response = await fetch(
+            `https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=json&token=${apiKey}&location=${long}%2C${lat}`
+          );
+          const address = await response.json();
+          if (address?.error) {
+            return null;
+          }
+          return {
+            location: `${address.address.City}, ${address.address.Region}, ${address.address.CntryName}`,
+            tracks: tracks,
+            date: bird.eventDate,
+          };
+        });
+        const resolved = await Promise.all(tracksWithDateAndLocation).then(
+          (tracks) => {
+            const list = tracks.filter((track) => track !== null);
+            setSongs(list);
+          }
+        );
+      }
+      makeTheTracks();
     }
   }, [data]);
-  console.log(taxonKey)
+  console.log(taxonKey);
   useEffect(() => {
     if (songs) {
-      setSelected(songs[0].identifier)
+      setSelected(songs[0].tracks[0].identifier);
     }
-  },[songs])
+  }, [songs]);
 
   if (isLoading) {
-    return <VStack w="100%" h="100%" mt="10%" alignItems="center"><Spinner size="xl" isIndeterminate/></VStack>
+    return (
+      <VStack w="100%" h="100%" mt="10%" alignItems="center">
+        <Spinner size="xl" isIndeterminate />
+      </VStack>
+    );
   }
 
   return (
     <>
       <VStack minW="100%" h="100%">
+        <Box h="300" w="100%">
+          <Waveform url={selectedTrack} />
+        </Box>
         <Skeleton isLoaded={!isLoading} w="100%">
-        <Waveform url={selectedTrack} />
+          <Playlist
+            songs={songs}
+            selectedTrack={selectedTrack}
+            setSelected={setSelected}
+          />
         </Skeleton>
-        <Playlist songs={songs} selectedTrack={selectedTrack} setSelected={setSelected} />
       </VStack>
     </>
   );

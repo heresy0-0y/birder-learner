@@ -14,6 +14,8 @@
     "@egjs/react-infinitegrid": "^4.2.1",
     "@emotion/react": "^11.0.0",
     "@emotion/styled": "^11.0.0",
+    "@esri/arcgis-rest-geocoding": "^4.0.1",
+    "@esri/arcgis-rest-request": "^4.0.2",
     "@reduxjs/toolkit": "^1.8.1",
     "framer-motion": "^4.0.3",
     "next": "latest",

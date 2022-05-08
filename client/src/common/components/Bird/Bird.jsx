@@ -20,7 +20,7 @@ export default function (props) {
   let boxWidth = null;
   const [padding, setPadding] = useState("100%");
   const [height, setHeight] = useState("unset");
-  const { img, name, w, left, top, pos, h, taxonKey } = props;
+  const { img, name, w, left, top, pos, h, taxonKey, auth } = props;
 
   const fallback = <SkeletonCircle w="100%" h="100%" />;
 
@@ -34,7 +34,6 @@ export default function (props) {
   } else {
     return (
       <>
-
         <Box
           w={w}
           h={height}
@@ -50,14 +49,12 @@ export default function (props) {
             layout="fill"
             objectFit="cover"
             loading="eager"
-
             onLoad={({ target }) => {
               const { naturalWidth, naturalHeight, width } = target;
               if (naturalWidth > naturalHeight) {
                 setHeight(w);
-
               } else {
-                setHeight(naturalHeight*(width/naturalWidth));
+                setHeight(naturalHeight * (width / naturalWidth));
               }
               setPadding(`calc(100% / (${naturalWidth} / ${naturalHeight})`);
             }}
@@ -66,7 +63,7 @@ export default function (props) {
           />
         </Box>
 
-        {songs ? <Songs taxonKey={taxonKey} /> : null}
+        {songs ? <Songs auth={auth} taxonKey={taxonKey} /> : null}
       </>
     );
   }

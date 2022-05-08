@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import {AiOutlinePlayCircle} from 'react-icons/ai'
-import {List, Text, ListIcon, ListItem} from '@chakra-ui/react'
-export const Playlist = ({songs, selectedTrack, setSelected}) => {
+import {List, Text, ListIcon, ListItem, TableContainer, Table, Thead, Tr, Th, Td, Tbody} from '@chakra-ui/react'
+export const Playlist = (props) => {
+    const {songs, selectedTrack, setSelected} = props
+      const [initialTracks, setInitial] = useState([])
+      const [remaining, setRemaining] = useState([])
+   
 
-      const [list, setList] = useState(null)
-     
 
-
-
+ 
 
 
   if (!songs) {
@@ -16,14 +17,28 @@ export const Playlist = ({songs, selectedTrack, setSelected}) => {
 
   return (
 
-        <List>
-          {songs.map((song, index) => (
-            <ListItem key={index} onClick={() => setSelected(song.identifier)}>
-              {song.creator}
-              {song.publisher}
-            </ListItem>
-          ))}
-  </List>
+        <TableContainer>
+          <Table>
+            <Thead>
+              <Tr>
+                <Th>Recorded by</Th>
+                <Th>Location</Th>
+                <Th>Date</Th>
+                <Th>Published by</Th>
+              </Tr>
+              </Thead>
+              <Tbody>
+                {songs.map(song => (
+                  <Tr onClick={() => setSelected(song.tracks[0].identifier)}>
+                    <Td>{song.tracks[0].creator}</Td>
+                    <Td>{song.location}</Td>
+                    <Td>{ new Date(song.date).toDateString()} </Td>
+                    <Td>{song.tracks[0].publisher}</Td>
+                  </Tr>
+                ))}
+          </Tbody>
+          </Table>
+  </TableContainer>
 
   );
 };

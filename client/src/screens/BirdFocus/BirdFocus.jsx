@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { Bird } from "../../common/components";
-import { VStack } from "@chakra-ui/react";
+import { VStack, Heading } from "@chakra-ui/react";
 import { useGetBirdsByIPCountryCodeQuery } from "../../common/services/birds.js";
 
 export const BirdFocus = (props) => {
@@ -15,8 +15,15 @@ export const BirdFocus = (props) => {
   const bird = data.results.filter((bird) => bird.key == id)[0];
 
   return (
-    <VStack >
-      <Bird img={bird.media[0].identifier} name={bird.scientificName} taxonKey={bird.taxonKey} w="md"  />
+    <VStack>
+      <Heading>{bird.scientificName}</Heading>
+      <Bird
+        img={bird.media[0].identifier}
+        bird={bird}
+        name={bird.scientificName}
+        taxonKey={bird.taxonKey}
+        w="md"
+      />
     </VStack>
   );
 };

@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic'
 
 
 const Index = () => {
-
+const BirdGrid = dynamic(() => import("../screens/BirdGrid/BirdGrid"), { ssr: false });
 
  return ( 
   <Layout>
