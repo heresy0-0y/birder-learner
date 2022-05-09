@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { VStack, Skeleton, Spinner, Box } from "@chakra-ui/react";
 import { Playlist } from "./Playlist.jsx";
-import { ApiKeyManager } from "@esri/arcgis-rest-request";
-import { reverseGeocode } from "@esri/arcgis-rest-geocoding";
+
 import { useGetSongsByBirdQuery } from "../../../services/birds";
 import dynamic from "next/dynamic";
 
@@ -13,15 +12,6 @@ const Songs = ({ taxonKey }) => {
   const [selectedTrack, setSelected] = useState();
   const apiKey = process.env.NEXT_PUBLIC_ARCGIS_API_KEY;
 
-  const fetchLocation = async (lat, long) => {
-    const location = await fetch(
-      `https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=json&token=${apiKey}&location=${long}%2C${lat}`
-    );
-    return location.address;
-  };
-
-  const authentication = ApiKeyManager.fromKey(apiKey);
-  console.log(typeof apiKey, apiKey);
   useEffect(() => {
     if (data) {
       const media = data.results;
@@ -53,7 +43,7 @@ const Songs = ({ taxonKey }) => {
       makeTheTracks();
     }
   }, [data]);
-  console.log(taxonKey);
+
   useEffect(() => {
     if (songs) {
       setSelected(songs[0].tracks[0].identifier);
@@ -63,7 +53,7 @@ const Songs = ({ taxonKey }) => {
   if (isLoading) {
     return (
       <VStack w="100%" h="100%" mt="10%" alignItems="center">
-        <Spinner size="xl" isIndeterminate />
+        <Spinner size="xl" />
       </VStack>
     );
   }

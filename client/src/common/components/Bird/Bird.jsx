@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import Songs from "./Songs/Songs";
+import Songs from "./songs/songs";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import {
@@ -16,7 +16,7 @@ import {
 export default function (props) {
   const image = useRef(null);
   const fallbackFilter = useColorModeValue("none", "invert(90%)");
-  let songs = false;
+  let focus = false;
   let boxWidth = null;
   const [padding, setPadding] = useState("100%");
   const [height, setHeight] = useState("unset");
@@ -26,7 +26,7 @@ export default function (props) {
 
   const router = useRouter().asPath;
   if (router.includes("songs")) {
-    songs = true;
+    focus = true;
     boxWidth = "100%";
   }
   if (h === 0) {
@@ -38,6 +38,7 @@ export default function (props) {
           w={w}
           h={height}
           left={left}
+          priority={focus ? "true" : "false"}
           pb={height}
           top={top}
           display={height === "" ? "none" : null}
@@ -61,7 +62,7 @@ export default function (props) {
           />
         </Box>
 
-        {songs ? <Songs auth={auth} taxonKey={taxonKey} /> : null}
+        {focus ? <Songs auth={auth} taxonKey={taxonKey} /> : null}
       </>
     );
   }
