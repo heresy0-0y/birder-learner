@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import Songs from "./songs/songs";
+import Songs from "./Songs/Songs";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import {
