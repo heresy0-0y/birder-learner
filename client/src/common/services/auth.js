@@ -41,9 +41,15 @@ export const authApi = createApi({
         method: "POST",
         body: favorite,
       })
+    }),
+    deleteFavorite: builder.mutation({
+      query: (favoriteID) => ({
+        url: `favorites/${favoriteID}`,
+        method: "DELETE",
+      })
     })
   }),
 });
 
-export const { useAddUserMutation, useGetUsersQuery, useLoginMutation, useGetFavoritesQuery, useAddFavoriteMutation } =
+export const { useAddUserMutation, useGetUsersQuery, useLoginMutation, useGetFavoritesQuery, useAddFavoriteMutation, useDeleteFavoriteMutation } =
   authApi;

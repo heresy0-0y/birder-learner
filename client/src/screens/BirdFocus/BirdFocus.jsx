@@ -1,47 +1,89 @@
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Bird } from "../../common/components";
-import { VStack, Heading, Button } from "@chakra-ui/react";
+import {MdFavoriteBorder, MdFavorite} from 'react-icons/md'
+import { VStack, Heading, IconButton } from "@chakra-ui/react";
 import { useGetBirdsByIPCountryCodeQuery } from "../../common/services/birds.js";
 import { useSelector, useDispatch } from "react-redux";
-import { useAddFavoriteMutation } from "../../common/services/auth";
+import {
+  useAddFavoriteMutation,
+  useGetFavoritesQuery,
+  useDeleteFavoriteMutation
+} from "../../common/services/auth";
 import { selectCurrentUser } from "../../store/features/authSlice";
 
 export const BirdFocus = (props) => {
   const { data, error, isLoading } = useGetBirdsByIPCountryCodeQuery();
+  const { data: favorites, isSuccess, refetch } = useGetFavoritesQuery();
+  const [userFavorites, setFavorites] = useState();
+  const [bird, setBird] = useState();
+  const [favorited, setFavorited] = useState(false);
+  const [deleteFavorite, {isSuccess: favoriteDeleted}] = useDeleteFavoriteMutation()
   const user = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
   const [addFavorite, { isLoading: favoritePending }] =
     useAddFavoriteMutation();
   const router = useRouter();
   const id = router.asPath.split("/").pop();
-  const bird = data.results.filter((bird) => bird.key == id)[0];
   const handleFavorite = async () => {
     try {
-      const favorite = {
-        user_id: user.id,
-        image_url: bird.media[0].identifier,
-        taxon_key: bird.taxonKey,
-        key: bird.key,
-        scientific_name: bird.scientificName
-      };
-      const favorited = await addFavorite(favorite);
-      console.log(favorited);
+      if (favorited) {
+        const favorite = userFavorites.filter(favorite => favorite.key === id)[0]
+        await deleteFavorite(favorite.id)
+
+        setFavorited(false)
+        refetch()
+      } else {
+
+        const favorite = {
+          user_id: user.id,
+          image_url: bird.media[0].identifier,
+          taxon_key: bird.taxonKey,
+          key: bird.key,
+          scientific_name: bird.scientificName,
+        };
+        const favoriteSent = await addFavorite(favorite);
+        setFavorited(true)
+        refetch()
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
-  if (isLoading) {
+  useEffect(() => {
+    if (data?.results) {
+      const thisBird = data.results.filter((b) => b.key == id)[0];
+      setBird(thisBird);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (isSuccess && user) {
+      setFavorites(
+        favorites.filter((favorite) => favorite.user_id === user.id)
+      );
+    }
+  }, [user, favorites]);
+
+  useEffect(() => {
+    if (bird && userFavorites) {
+      if (userFavorites.some(favorite => favorite.key === id)) {
+        setFavorited(true)
+      }
+    }
+  }, [userFavorites]);
+
+  if (isLoading || !bird) {
     return null;
   }
-
 
   return (
     <VStack>
       <Heading as="h1" size="lg">
         {bird.vernacularName ? bird.vernacularName : bird.scientificName}
       </Heading>
-      <Button onClick={handleFavorite} >Favorite</Button>
+      <IconButton onClick={handleFavorite} icon={favorited ? <MdFavorite/> : <MdFavoriteBorder/>}/>
       <Bird
         img={bird.media[0].identifier}
         bird={bird}

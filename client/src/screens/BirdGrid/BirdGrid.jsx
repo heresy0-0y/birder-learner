@@ -30,11 +30,11 @@ const BirdGrid = () => {
   const gap = useBreakpointValue({ base: 5, sm: 10, md: 10 });
 
   useEffect(() => {
-    if (currentPath.includes("favorites")) {
+    if (currentPath.includes("favorites") && favorites) {
       const userFavorites = favorites.filter(
         (favorite) => favorite.user_id === user.id
       );
-      setBirds(favorites);
+      setBirds(userFavorites);
     } else {
       setBirds(data?.results);
     }
@@ -43,13 +43,13 @@ const BirdGrid = () => {
   useEffect(() => {
     if (currentPath.includes("favorites")) {
       const birds = birdsHere?.map((bird, index) => (
-        <Link url={`/songs/${bird.id}`} key={bird.id} className={"item"}>
+        <Link url={`/songs/${bird.key}`} key={bird.key} className={"item"}>
           <Bird
             w={width}
             priority={index < 10 ? "true" : "false"}
-            // name={bird.scientificName}
+            name={bird.scientificName}
             img={bird.image_url}
-            // key={bird.key}
+            key={bird.key}
           />
         </Link>
       ));
