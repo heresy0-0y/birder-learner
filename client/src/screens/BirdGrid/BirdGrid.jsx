@@ -23,11 +23,12 @@ const BirdGrid = () => {
   }
 
   const birdies = data?.results;
-  const birds = birdies.map((bird) => (
+  const birds = birdies.map((bird, index) => (
 
       <Link url={`songs/${bird.key}`} key={bird.key} className={"item"} >
       <Bird
         w={width}
+        priority={index < 10 ? "true" : "false"}
         name={bird.scientificName}
         img={bird.media[0].identifier}
         key={bird.key}
@@ -39,10 +40,12 @@ const BirdGrid = () => {
       w="100vw"
       overflow="hidden"
       minH="100vh"
+
       // px='2%'
     >
       <Box w="100vw">
         <MasonryGrid
+
           className="container"
           column={column}
           align="center"

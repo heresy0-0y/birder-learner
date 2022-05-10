@@ -26,8 +26,11 @@ export const birdsInitApi = createApi({
     getSongsByBird: builder.query({
       query: (taxonKey) => `search?&mediaType=Sound&taxonKey=${taxonKey}&limit=200`,
     }),
+    getBirdsByCoords: builder.query({
+      query: (coords) => `search?&mediaType=StillImage`
+    })
   }),
 });
 export const selectGetBirdsByIPCountryCode = birdsInitApi.endpoints.getBirdsByIPCountryCode.select()
 export const {getBirdsByIPCountryCode} = birdsInitApi.endpoints
-export const { useGetBirdsByIPCountryCodeQuery, useGetSongsByBirdQuery, util: { getRunningOperationPromises},} = birdsInitApi;
+export const { useGetBirdsByIPCountryCodeQuery, useGetSongsByBirdQuery, useGetBirdsByCoordsQuery, util: { getRunningOperationPromises},} = birdsInitApi;

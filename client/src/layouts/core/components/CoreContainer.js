@@ -11,7 +11,6 @@ const CoreContainer = (props) => {
     <>
       <VStack
         minW="100vw"
-        zIndex="3"
         minH="100vh"
         color={color[colorMode]}
         {...props}></VStack>

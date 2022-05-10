@@ -20,7 +20,7 @@ export default function (props) {
   let boxWidth = null;
   const [padding, setPadding] = useState("100%");
   const [height, setHeight] = useState("unset");
-  const { img, name, w, left, top, pos, h, taxonKey, auth } = props;
+  const { img, name, w, left, top, pos, h, taxonKey, auth, priority } = props;
 
   const fallback = <SkeletonCircle w="100%" h="100%" />;
 
@@ -37,6 +37,7 @@ export default function (props) {
         <Box
           w={w}
           h={height}
+
           left={left}
           priority={focus ? "true" : "false"}
           pb={height}
@@ -50,6 +51,7 @@ export default function (props) {
             layout="fill"
             objectFit="cover"
             loading="eager"
+            priority={priority}
             onLoad={({ target }) => {
               const { naturalWidth, naturalHeight, width } = target;
              

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Container, Nav } from "./components";
+import { Container, Nav, Footer } from "./components";
 import { setCredentials } from "../../store/features/authSlice";
 
 const CoreLayout = (props) => {
@@ -10,6 +10,7 @@ const CoreLayout = (props) => {
       <Container>
         <Nav />
         {props.children}
+        <Footer/>
       </Container>
     </>
   );

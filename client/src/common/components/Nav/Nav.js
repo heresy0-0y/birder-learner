@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   Box,
   Flex,
-  Input,
   Menu,
-  InputGroup,
-  InputRightElement,
   Center,
   MenuList,
   MenuButton,
@@ -18,14 +15,15 @@ import { useRouter } from "next/router";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { Button } from "../Buttons/Button.jsx";
 import { selectCurrentUser } from "../../../store/features/authSlice";
-
+import Search from '../Search/Search'
 const Nav = () => {
   const inputMargin = useBreakpointValue({
     base: "0.5rem",
     sm: "4rem",
     md: "7rem",
   });
-  const router = useRouter();
+  const router = useRouter()
+  const currentPath = router.asPath;
   const user = useSelector(selectCurrentUser);
   const [userGreeting, setGreeting] = useState(null);
   const [links, setLinks] = useState([
@@ -33,6 +31,8 @@ const Nav = () => {
     { text: "Sign Up", url: "/signup" },
     { text: "Log In", url: "/login" },
   ]);
+
+
 
   useEffect(() => {
     if (typeof user !== "string" && user) {
@@ -66,17 +66,9 @@ const Nav = () => {
               w="50%"
               ml={inputMargin}
               mt="0.5rem"
-              display={{ base: "flex", lg: "none" }}>
-              <InputGroup size="md" w="100%">
-                <Input pr=".5rem" />
-                <InputRightElement width="4.5rem">
-                  <CButton variant="outline" borderLeftRadius="0px">
-                    Search
-                  </CButton>
-                </InputRightElement>
-              </InputGroup>
-            </Center>
-
+              display={currentPath.includes('search') ? { base: "flex", lg: "none" } : "none"}>
+                <Search/>
+              </Center>
             <MenuList>
               {links.map((link, index) => (
                 <MenuItem onClick={() => router.push(link.url)} key={index}>
@@ -100,15 +92,8 @@ const Nav = () => {
           <Button text={link.text} url={link.url} key={index} />
         ))}
 
-        <Box w="5%" />
-        <InputGroup size="md">
-          <Input pr=".5rem" />
-          <InputRightElement width="4.5rem">
-            <CButton variant="outline" borderLeftRadius="0px">
-              Search
-            </CButton>
-          </InputRightElement>
-        </InputGroup>
+        <Box w="5%"     />
+          {currentPath.includes('search') ? <Search /> : null}
         <Box w="30%" />
       </Flex>
     </Box>
