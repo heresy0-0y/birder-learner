@@ -1,13 +1,17 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 import { MasonryInfiniteGrid as MasonryGrid } from "@egjs/react-infinitegrid";
 import { Spinner, Box, useBreakpointValue, VStack } from "@chakra-ui/react";
 import { Bird, Link } from "../../common/components";
 import { useGetBirdsByIPCountryCodeQuery } from "../../common/services/birds.js";
 import { useGetFavoritesQuery } from "../../common/services/auth";
+import { selectCurrentUser } from "../../store/features/authSlice";
 const BirdGrid = () => {
   const { data, error, isLoading } = useGetBirdsByIPCountryCodeQuery();
-  const { data: favorites, isLoading: favoritesLoading } = useGetFavoritesQuery();
+  const user = useSelector(selectCurrentUser);
+  const { data: favorites, isLoading: favoritesLoading } =
+    useGetFavoritesQuery();
   const [birdsHere, setBirds] = useState();
   const [renderBirds, setRender] = useState();
   const [keys, setKeys] = useState();
@@ -27,6 +31,9 @@ const BirdGrid = () => {
 
   useEffect(() => {
     if (currentPath.includes("favorites")) {
+      const userFavorites = favorites.filter(
+        (favorite) => favorite.user_id === user.id
+      );
       setBirds(favorites);
     } else {
       setBirds(data?.results);
