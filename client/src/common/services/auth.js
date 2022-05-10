@@ -5,7 +5,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://birder-learner-api.herokuapp.com/",
+    baseUrl: "https://birder-api.herokuapp.com/",
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
       if (token) {
@@ -32,8 +32,18 @@ export const authApi = createApi({
         body: user,
       }),
     }),
+    getFavorites: builder.query({
+        query: () => 'favorites'
+    }),
+    addFavorite: builder.mutation({
+      query: (favorite) => ({
+        url: 'favorites',
+        method: "POST",
+        body: favorite,
+      })
+    })
   }),
 });
 
-export const { useAddUserMutation, useGetUsersQuery, useLoginMutation } =
+export const { useAddUserMutation, useGetUsersQuery, useLoginMutation, useGetFavoritesQuery, useAddFavoriteMutation } =
   authApi;

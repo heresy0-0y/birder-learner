@@ -1,12 +1,18 @@
-import React, {useRef} from "react";
+import React, { useRef, useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { MasonryInfiniteGrid as MasonryGrid } from "@egjs/react-infinitegrid";
 import { Spinner, Box, useBreakpointValue, VStack } from "@chakra-ui/react";
 import { Bird, Link } from "../../common/components";
 import { useGetBirdsByIPCountryCodeQuery } from "../../common/services/birds.js";
-import { imageConfigDefault } from "next/dist/shared/lib/image-config";
+import { useGetFavoritesQuery } from "../../common/services/auth";
 const BirdGrid = () => {
   const { data, error, isLoading } = useGetBirdsByIPCountryCodeQuery();
-
+  const { data: favorites, isLoading: favoritesLoading } = useGetFavoritesQuery();
+  const [birdsHere, setBirds] = useState();
+  const [renderBirds, setRender] = useState();
+  const [keys, setKeys] = useState();
+  const router = useRouter();
+  const currentPath = router.asPath;
   const column = useBreakpointValue({ base: "1", sm: 2, lg: "3", "2xl": 4 });
   const width = useBreakpointValue({
     base: "xs",
@@ -18,23 +24,49 @@ const BirdGrid = () => {
     "2xl": "md",
   });
   const gap = useBreakpointValue({ base: 5, sm: 10, md: 10 });
-  if (isLoading) {
+
+  useEffect(() => {
+    if (currentPath.includes("favorites")) {
+      setBirds(favorites);
+    } else {
+      setBirds(data?.results);
+    }
+  }, [isLoading]);
+
+  useEffect(() => {
+    if (currentPath.includes("favorites")) {
+      const birds = birdsHere?.map((bird, index) => (
+        <Link url={`/songs/${bird.id}`} key={bird.id} className={"item"}>
+          <Bird
+            w={width}
+            priority={index < 10 ? "true" : "false"}
+            // name={bird.scientificName}
+            img={bird.image_url}
+            // key={bird.key}
+          />
+        </Link>
+      ));
+      setRender(birds);
+    } else {
+      const birds = birdsHere?.map((bird, index) => (
+        <Link url={`songs/${bird.key}`} key={bird.key} className={"item"}>
+          <Bird
+            w={width}
+            priority={index < 10 ? "true" : "false"}
+            name={bird.scientificName}
+            img={bird.media[0].identifier}
+            key={bird.key}
+          />
+        </Link>
+      ));
+      setRender(birds);
+    }
+  }, [birdsHere]);
+
+  if (isLoading || favoritesLoading) {
     return <Spinner />;
   }
 
-  const birdies = data?.results;
-  const birds = birdies.map((bird, index) => (
-
-      <Link url={`songs/${bird.key}`} key={bird.key} className={"item"} >
-      <Bird
-        w={width}
-        priority={index < 10 ? "true" : "false"}
-        name={bird.scientificName}
-        img={bird.media[0].identifier}
-        key={bird.key}
-      />
-    </Link>
-  ));
   return (
     <VStack
       w="100vw"
@@ -45,17 +77,16 @@ const BirdGrid = () => {
     >
       <Box w="100vw">
         <MasonryGrid
-
           className="container"
           column={column}
           align="center"
           gap={gap}
           width="100vw"
           resizeDebounce="0">
-          {birds}
+          {renderBirds}
         </MasonryGrid>
       </Box>
     </VStack>
   );
 };
-export default BirdGrid
+export default BirdGrid;

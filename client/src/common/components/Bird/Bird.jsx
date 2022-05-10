@@ -1,6 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import Songs from "./Songs/Songs";
 import { useRouter } from "next/router";
+
 import Image from "next/image";
 import {
   Box,
@@ -10,11 +11,11 @@ import {
   Container,
   VisuallyHidden,
   HStack,
+  Button,
   SkeletonCircle,
 } from "@chakra-ui/react";
 
 export default function (props) {
-  const image = useRef(null);
   const fallbackFilter = useColorModeValue("none", "invert(90%)");
   let focus = false;
   let boxWidth = null;
@@ -29,6 +30,7 @@ export default function (props) {
     focus = true;
     boxWidth = "100%";
   }
+
   if (h === 0) {
     return <Spinner />;
   } else {
@@ -37,7 +39,6 @@ export default function (props) {
         <Box
           w={w}
           h={height}
-
           left={left}
           priority={focus ? "true" : "false"}
           pb={height}
@@ -54,9 +55,9 @@ export default function (props) {
             priority={priority}
             onLoad={({ target }) => {
               const { naturalWidth, naturalHeight, width } = target;
-             
-                setHeight(naturalHeight * (width / naturalWidth));
-              
+
+              setHeight(naturalHeight * (width / naturalWidth));
+
               setPadding(`calc(100% / (${naturalWidth} / ${naturalHeight})`);
             }}
             fallback={fallback}

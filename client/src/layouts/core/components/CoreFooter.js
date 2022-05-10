@@ -1,7 +1,5 @@
-import {Footer as Component} from '../../../common/components/Footer'
+import { Footer as Component } from "../../../common/components/Footer";
 
-const Footer = () => (
-    <Component/>
-)
+const Footer = () => <Component />;
 
-export default Footer
+export default Footer;

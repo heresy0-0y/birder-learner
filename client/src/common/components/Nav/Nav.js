@@ -10,11 +10,12 @@ import {
   Button as CButton,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
 import { useRouter } from "next/router";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { Button } from "../Buttons/Button.jsx";
-import { selectCurrentUser } from "../../../store/features/authSlice";
+import { selectCurrentUser, setCredentials } from "../../../store/features/authSlice";
+
 import Search from '../Search/Search'
 const Nav = () => {
   const inputMargin = useBreakpointValue({
@@ -23,6 +24,7 @@ const Nav = () => {
     md: "7rem",
   });
   const router = useRouter()
+  const dispatch = useDispatch()
   const currentPath = router.asPath;
   const user = useSelector(selectCurrentUser);
   const [userGreeting, setGreeting] = useState(null);
@@ -31,6 +33,12 @@ const Nav = () => {
     { text: "Sign Up", url: "/signup" },
     { text: "Log In", url: "/login" },
   ]);
+  
+  const handleLogout = () => {
+    localStorage.removeItem('user')
+    dispatch(setCredentials({user: null, token: null}))
+    router.push('/')
+  }
 
 
 
@@ -82,6 +90,7 @@ const Nav = () => {
       <Box pt="0.5rem" right={0} top="0.5rem" right="4%" position="absolute">
         {" "}
         {userGreeting}
+        <CButton onClick={handleLogout}>Logout</CButton>
       </Box>
       <Flex
         mt="0.5rem"

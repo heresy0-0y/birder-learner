@@ -45,6 +45,7 @@ export default function () {
       const newUser = { user: { ...form } };
       const user = await addUser(newUser);
       dispatch(setCredentials(user));
+      localStorage.setItem('user', JSON.stringify(user))
       router.push("/");
     } catch (error) {}
   };

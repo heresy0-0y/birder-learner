@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import axios from "axios";
 
 const key = process.env.NEXT_PUBLIC_BING_API_KEY;
 

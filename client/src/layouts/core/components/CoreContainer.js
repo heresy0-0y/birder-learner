@@ -4,17 +4,15 @@ import Image from "next/image";
 const CoreContainer = (props) => {
   const { colorMode } = useColorMode();
 
-  const bgColor = { light: "gray.50", dark: "gray.900" };
-
   const color = { light: "black", dark: "white" };
   return (
-    <>
-      <VStack
-        minW="100vw"
-        minH="100vh"
-        color={color[colorMode]}
-        {...props}></VStack>
-    </>
+    <VStack
+      minW="100vw"
+      w="100%"
+      h="100%"
+      minH="100vh"
+      color={color[colorMode]}
+      {...props}></VStack>
   );
 };
 export default CoreContainer;
