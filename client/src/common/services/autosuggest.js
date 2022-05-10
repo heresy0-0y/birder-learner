@@ -6,7 +6,7 @@ const key = process.env.NEXT_PUBLIC_BING_API_KEY;
 export const suggestApi = createApi({
   reducerPath: "suggestApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://dev.virtualearth.net/REST/v1",
+    baseUrl: "https://dev.virtualearth.net/REST/v1",
   }),
   endpoints: (builder) => ({
     getSuggestions: builder.query({
