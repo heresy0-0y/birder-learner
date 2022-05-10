@@ -26,7 +26,9 @@ const Search = () => {
   const [searchRequest, setSearch] = useState("");
   const { data, isLoading } = useGetSuggestionsQuery(searchText, { skip });
   const [coords, setCoords] = useState();
-  const { data: location } = useGetCoordsQuery(searchRequest, { skip: skipSearch });
+  const { data: location } = useGetCoordsQuery(searchRequest, {
+    skip: skipSearch,
+  });
   const handleSuggestSelect = (e) => {
     setText(e.target.textContent);
   };
@@ -37,10 +39,8 @@ const Search = () => {
     }
   }, [searchText]);
 
-
   const handleChange = (e) => {
     setText(e.target.value);
-    console.log(e.target.value);
     if (e.target.value === "") {
       setIsOpen(false);
       setSkip(true);
@@ -55,7 +55,6 @@ const Search = () => {
     setSearchSkip(false);
     setSkip(true);
     setText("");
-
   };
 
   return (
