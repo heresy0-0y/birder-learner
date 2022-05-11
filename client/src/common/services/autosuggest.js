@@ -12,7 +12,7 @@ export const suggestApi = createApi({
       query: (text) => `search/v3/prediction?&key=${key}&q=${text}&collection=adminArea`,
     }),
     getCoords: builder.query({
-      query: (address) => `Locations?q=${address}&key=${key}`,
+      query: (location) => `geocoding/v1/address?location=${location}&key=${key}&maxResults=2`,
     }),
     getLocationFromCoords: builder.query({
       query: (points) => ({

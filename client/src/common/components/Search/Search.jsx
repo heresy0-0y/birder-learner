@@ -24,21 +24,23 @@ const Search = () => {
   const suggestContainer = useRef(null);
   const [searchText, setText] = useState("");
   const [searchRequest, setSearch] = useState("");
-  const { data, isLoading } = useGetSuggestionsQuery(searchText, { skip });
   const [coords, setCoords] = useState();
-  const { data: location } = useGetCoordsQuery(searchRequest, {
+  const { data } = useGetSuggestionsQuery(searchText, { skip });
+  const { data: location, isSuccess, isLoading } = useGetCoordsQuery(searchRequest, {
     skip: skipSearch,
   });
+
+  useEffect(() => {
+
+    if (location?.results) {
+      console.log(location.results[0])
+      setCoords(location.results[0].locations[0].latLng);
+    }
+  }, [location]);
+
   const handleSuggestSelect = (e) => {
     setText(e.target.textContent);
   };
-
-  useEffect(() => {
-    if (searchText === "") {
-      setSearchSkip(true);
-    }
-  }, [searchText]);
-
   const handleChange = (e) => {
     setText(e.target.value);
     if (e.target.value.length < 2) {
@@ -65,22 +67,17 @@ const Search = () => {
             <Input pr=".5rem" value={searchText} onChange={handleChange} />
           </PopoverAnchor>
 
-          <PopoverContent
-            display={
-              searchText.length >= 2 ? "flex" : "none"
-            }>
+          <PopoverContent display={searchText.length >= 2 ? "flex" : "none"}>
             <PopoverBody>
               <List>
-                {data?.results.map(
-                  (result, index) => (
-                    <ListItem
-                      key={index}
-                      onClick={handleSuggestSelect}
-                      value={result.displayString}>
-                      {result.displayString}
-                    </ListItem>
-                  )
-                )}
+                {data?.results.map((result, index) => (
+                  <ListItem
+                    key={index}
+                    onClick={handleSuggestSelect}
+                    value={result.displayString}>
+                    {result.displayString}
+                  </ListItem>
+                ))}
               </List>
             </PopoverBody>
           </PopoverContent>
