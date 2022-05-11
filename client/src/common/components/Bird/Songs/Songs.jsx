@@ -10,6 +10,7 @@ const Songs = ({ taxonKey }) => {
   const { data, isLoading } = useGetSongsByBirdQuery(taxonKey);
   const [songs, setSongs] = useState();
   const [tracks, setTracks] = useState();
+  const [preTracks, setPreTracks] = useState();
   const [skip, setSkip] = useState(true);
   const [points, setPoints] = useState([]);
   const { data: locations, isSuccess } = useGetLocationFromCoordsQuery(points, {
@@ -34,35 +35,34 @@ const Songs = ({ taxonKey }) => {
         };
       });
       setPoints({ locations: coords });
-      setTracks(tracksWithoutLocation);
+      setPreTracks(tracksWithoutLocation);
     }
   }, [data]);
 
   useEffect(() => {
     if (points?.locations?.length > 0) {
-      console.log(points.locations);
       setSkip(false);
     }
   }, [points]);
 
   useEffect(() => {
-    const tracksWithLocation = tracks;
+    const tracksWithLocation = preTracks;
+    if (locations) {
+      locations.results.forEach((result, index) => {
+        const locations = result.locations[0];
 
-    locations.results.forEach((result, index) => {
-      const locations = result.locations[0];
+        const cityOrCounty = `${
+          locations.adminArea5 !== "" && !/\d/.test(locations.adminArea5)
+            ? locations.adminArea5
+            : locations.adminArea4
+        }`;
+        const address = `${cityOrCounty}, ${locations.adminArea3}, ${locations.adminArea1}`;
 
-      const cityOrCounty = `${
-        locations.adminArea5 !== "" && !/\d/.test(locations.adminArea5)
-          ? locations.adminArea5
-          : locations.adminArea4
-      }`;
-      const address = `${cityOrCounty}, ${locations.adminArea3}, ${locations.adminArea1}`;
-
-      tracksWithLocation[index].location = address;
-    });
-
-    setTracks(tracksWithLocation);
-  }, [locations, skip]);
+        tracksWithLocation[index].location = address;
+      });
+      setTracks(tracksWithLocation);
+    }
+  }, [locations]);
 
   useEffect(() => {
     setSongs(tracks);
