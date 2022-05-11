@@ -41,7 +41,7 @@ const Search = () => {
 
   const handleChange = (e) => {
     setText(e.target.value);
-    if (e.target.value === "") {
+    if (e.target.value.length < 2) {
       setIsOpen(false);
       setSkip(true);
     } else {
@@ -67,17 +67,17 @@ const Search = () => {
 
           <PopoverContent
             display={
-              data?.resourceSets[0].resources[0].value[0] ? "flex" : "none"
+              searchText.length >= 2 ? "flex" : "none"
             }>
             <PopoverBody>
               <List>
-                {data?.resourceSets[0].resources[0].value.map(
+                {data?.results.map(
                   (result, index) => (
                     <ListItem
                       key={index}
                       onClick={handleSuggestSelect}
-                      value={result.address.formattedAddress}>
-                      {result.address.formattedAddress}
+                      value={result.displayString}>
+                      {result.displayString}
                     </ListItem>
                   )
                 )}
