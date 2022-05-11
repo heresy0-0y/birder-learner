@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Bird } from "../../common/components";
-import {MdFavoriteBorder, MdFavorite} from 'react-icons/md'
+import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import { VStack, Heading, IconButton } from "@chakra-ui/react";
 import { useGetBirdsByIPCountryCodeQuery } from "../../common/services/birds.js";
 import { useSelector, useDispatch } from "react-redux";
 import {
   useAddFavoriteMutation,
   useGetFavoritesQuery,
-  useDeleteFavoriteMutation
+  useDeleteFavoriteMutation,
 } from "../../common/services/auth";
 import { selectCurrentUser } from "../../store/features/authSlice";
 
@@ -18,7 +18,8 @@ export const BirdFocus = (props) => {
   const [userFavorites, setFavorites] = useState();
   const [bird, setBird] = useState();
   const [favorited, setFavorited] = useState(false);
-  const [deleteFavorite, {isSuccess: favoriteDeleted}] = useDeleteFavoriteMutation()
+  const [deleteFavorite, { isSuccess: favoriteDeleted }] =
+    useDeleteFavoriteMutation();
   const user = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
   const [addFavorite, { isLoading: favoritePending }] =
@@ -28,13 +29,14 @@ export const BirdFocus = (props) => {
   const handleFavorite = async () => {
     try {
       if (favorited) {
-        const favorite = userFavorites.filter(favorite => favorite.key === id)[0]
-        await deleteFavorite(favorite.id)
+        const favorite = userFavorites.filter(
+          (favorite) => favorite.key === id
+        )[0];
+        await deleteFavorite(favorite.id);
 
-        setFavorited(false)
-        refetch()
+        setFavorited(false);
+        refetch();
       } else {
-
         const favorite = {
           user_id: user.id,
           image_url: bird.media[0].identifier,
@@ -43,8 +45,8 @@ export const BirdFocus = (props) => {
           scientific_name: bird.scientificName,
         };
         const favoriteSent = await addFavorite(favorite);
-        setFavorited(true)
-        refetch()
+        setFavorited(true);
+        refetch();
       }
     } catch (error) {
       console.log(error);
@@ -68,8 +70,8 @@ export const BirdFocus = (props) => {
 
   useEffect(() => {
     if (bird && userFavorites) {
-      if (userFavorites.some(favorite => favorite.key === id)) {
-        setFavorited(true)
+      if (userFavorites.some((favorite) => favorite.key === id)) {
+        setFavorited(true);
       }
     }
   }, [userFavorites]);
@@ -83,7 +85,10 @@ export const BirdFocus = (props) => {
       <Heading as="h1" size="lg">
         {bird.vernacularName ? bird.vernacularName : bird.scientificName}
       </Heading>
-      <IconButton onClick={handleFavorite} icon={favorited ? <MdFavorite/> : <MdFavoriteBorder/>}/>
+      <IconButton
+        onClick={handleFavorite}
+        icon={favorited ? <MdFavorite /> : <MdFavoriteBorder />}
+      />
       <Bird
         img={bird.media[0].identifier}
         bird={bird}

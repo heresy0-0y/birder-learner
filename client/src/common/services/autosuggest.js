@@ -14,7 +14,10 @@ export const suggestApi = createApi({
     getCoords: builder.query({
       query: (address) => `Locations?q=${address}&key=${key}`,
     }),
+    getLocationFromCoords: builder.query({
+      query: (point) => `Locations/${point}?&key=${key}`
+    })
   }),
 });
 
-export const { useGetSuggestionsQuery, useGetCoordsQuery } = suggestApi;
+export const { useGetSuggestionsQuery, useGetCoordsQuery, useGetLocationFromCoordsQuery } = suggestApi;

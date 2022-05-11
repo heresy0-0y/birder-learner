@@ -21,8 +21,8 @@ export const Playlist = (props) => {
   }
 
   return (
-    <TableContainer>
-      <Table>
+    <TableContainer maxWidth="80vw" whiteSpace="wrap">
+      <Table size="sm">
         <Thead>
           <Tr>
             <Th>Recorded by</Th>

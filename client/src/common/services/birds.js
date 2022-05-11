@@ -1,13 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { fetchLocation } from "./";
-import {HYDRATE} from 'next-redux-wrapper'
+import { HYDRATE } from "next-redux-wrapper";
 
 export const birdsInitApi = createApi({
   reducerPath: "birdsInitApi",
   baseQuery: fetchBaseQuery({ baseUrl: "https://api.gbif.org/v1/occurrence/" }),
-  extractRehydrationInfo(action, {reducerPath}) {
+  extractRehydrationInfo(action, { reducerPath }) {
     if (action.type === HYDRATE) {
-      return action.payload[reducerPath]
+      return action.payload[reducerPath];
     }
   },
   endpoints: (builder) => ({
@@ -24,13 +24,20 @@ export const birdsInitApi = createApi({
       },
     }),
     getSongsByBird: builder.query({
-      query: (taxonKey) => `search?&mediaType=Sound&taxonKey=${taxonKey}&limit=200`,
+      query: (taxonKey) =>
+        `search?&mediaType=Sound&taxonKey=${taxonKey}&limit=200`,
     }),
     getBirdsByCoords: builder.query({
-      query: (coords) => `search?&mediaType=StillImage`
-    })
+      query: (coords) => `search?&mediaType=StillImage`,
+    }),
   }),
 });
-export const selectGetBirdsByIPCountryCode = birdsInitApi.endpoints.getBirdsByIPCountryCode.select()
-export const {getBirdsByIPCountryCode} = birdsInitApi.endpoints
-export const { useGetBirdsByIPCountryCodeQuery, useGetSongsByBirdQuery, useGetBirdsByCoordsQuery, util: { getRunningOperationPromises},} = birdsInitApi;
+export const selectGetBirdsByIPCountryCode =
+  birdsInitApi.endpoints.getBirdsByIPCountryCode.select();
+export const { getBirdsByIPCountryCode } = birdsInitApi.endpoints;
+export const {
+  useGetBirdsByIPCountryCodeQuery,
+  useGetSongsByBirdQuery,
+  useGetBirdsByCoordsQuery,
+  util: { getRunningOperationPromises },
+} = birdsInitApi;

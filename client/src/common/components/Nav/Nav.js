@@ -10,21 +10,24 @@ import {
   Button as CButton,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { useSelector, useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import { Button } from "../Buttons/Button.jsx";
-import { selectCurrentUser, setCredentials } from "../../../store/features/authSlice";
+import {
+  selectCurrentUser,
+  setCredentials,
+} from "../../../store/features/authSlice";
 
-import Search from '../Search/Search'
+import Search from "../Search/Search";
 const Nav = () => {
   const inputMargin = useBreakpointValue({
     base: "0.5rem",
     sm: "4rem",
     md: "7rem",
   });
-  const router = useRouter()
-  const dispatch = useDispatch()
+  const router = useRouter();
+  const dispatch = useDispatch();
   const currentPath = router.asPath;
   const user = useSelector(selectCurrentUser);
   const [userGreeting, setGreeting] = useState(null);
@@ -33,14 +36,12 @@ const Nav = () => {
     { text: "Sign Up", url: "/signup" },
     { text: "Log In", url: "/login" },
   ]);
-  
+
   const handleLogout = () => {
-    localStorage.removeItem('user')
-    dispatch(setCredentials({user: null, token: null}))
-    router.push('/')
-  }
-
-
+    localStorage.removeItem("user");
+    dispatch(setCredentials({ user: null, token: null }));
+    router.push("/");
+  };
 
   useEffect(() => {
     if (typeof user !== "string" && user) {
@@ -74,9 +75,13 @@ const Nav = () => {
               w="50%"
               ml={inputMargin}
               mt="0.5rem"
-              display={currentPath.includes('search') ? { base: "flex", lg: "none" } : "none"}>
-                <Search/>
-              </Center>
+              display={
+                currentPath.includes("search")
+                  ? { base: "flex", lg: "none" }
+                  : "none"
+              }>
+              <Search />
+            </Center>
             <MenuList>
               {links.map((link, index) => (
                 <MenuItem onClick={() => router.push(link.url)} key={index}>
@@ -101,8 +106,8 @@ const Nav = () => {
           <Button text={link.text} url={link.url} key={index} />
         ))}
 
-        <Box w="5%"     />
-          {currentPath.includes('search') ? <Search /> : null}
+        <Box w="5%" />
+        {currentPath.includes("search") ? <Search /> : null}
         <Box w="30%" />
       </Flex>
     </Box>

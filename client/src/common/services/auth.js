@@ -1,7 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-
-
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
@@ -33,23 +31,29 @@ export const authApi = createApi({
       }),
     }),
     getFavorites: builder.query({
-        query: () => 'favorites'
+      query: () => "favorites",
     }),
     addFavorite: builder.mutation({
       query: (favorite) => ({
-        url: 'favorites',
+        url: "favorites",
         method: "POST",
         body: favorite,
-      })
+      }),
     }),
     deleteFavorite: builder.mutation({
       query: (favoriteID) => ({
         url: `favorites/${favoriteID}`,
         method: "DELETE",
-      })
-    })
+      }),
+    }),
   }),
 });
 
-export const { useAddUserMutation, useGetUsersQuery, useLoginMutation, useGetFavoritesQuery, useAddFavoriteMutation, useDeleteFavoriteMutation } =
-  authApi;
+export const {
+  useAddUserMutation,
+  useGetUsersQuery,
+  useLoginMutation,
+  useGetFavoritesQuery,
+  useAddFavoriteMutation,
+  useDeleteFavoriteMutation,
+} = authApi;
