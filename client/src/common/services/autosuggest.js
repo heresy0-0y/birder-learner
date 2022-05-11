@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const key = process.env.NEXT_PUBLIC_BING_API_KEY;
+const key = process.env.NEXT_PUBLIC_MAPQUEST_API_KEY;
 
 export const suggestApi = createApi({
   reducerPath: "suggestApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://dev.virtualearth.net/REST/v1",
+    baseUrl: `https://www.mapquestapi.com/geocoding/v1/`,
   }),
   endpoints: (builder) => ({
     getSuggestions: builder.query({
@@ -15,7 +15,11 @@ export const suggestApi = createApi({
       query: (address) => `Locations?q=${address}&key=${key}`,
     }),
     getLocationFromCoords: builder.query({
-      query: (point) => `Locations/${point}?&key=${key}`
+      query: (points) => ({
+        url: `batch?key=${key}`,
+        method: "POST",
+        body: points,
+      })
     })
   }),
 });

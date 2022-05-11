@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { VStack, Skeleton, Spinner, Box } from "@chakra-ui/react";
 import { Playlist } from "./Playlist.jsx";
-import {useGetLocationFromCoordsQuery} from '../../../services/autosuggest'
+import { useGetLocationFromCoordsQuery } from "../../../services/autosuggest";
 import { useGetSongsByBirdQuery } from "../../../services/birds";
 import dynamic from "next/dynamic";
 
@@ -9,44 +9,64 @@ const Songs = ({ taxonKey }) => {
   const Waveform = dynamic(() => import("./Waveform"), { ssr: false });
   const { data, isLoading } = useGetSongsByBirdQuery(taxonKey);
   const [songs, setSongs] = useState();
-  const [point, setPoint] = useState()
-  const {data: location, isFulfilled} = useGetLocationFromCoordsQuery(point)
+  const [tracks, setTracks] = useState();
+  const [skip, setSkip] = useState(true);
+  const [points, setPoints] = useState([]);
+  const { data: locations, isSuccess } = useGetLocationFromCoordsQuery(points, {
+    skip,
+  });
   const [selectedTrack, setSelected] = useState();
-  const apiKey = process.env.NEXT_PUBLIC_ARCGIS_API_KEY;
 
   useEffect(() => {
     if (data) {
       const media = data.results;
+      const coords = [];
+      const tracksWithoutLocation = media.map((bird, index) => {
+        const lat = bird.decimalLatitude;
+        const long = bird.decimalLongitude;
+        const tracks = bird.media.filter((item) => item.type === "Sound");
+        coords.push(`${lat},${long}`);
 
-
-      async function makeTheTracks() {
-        const tracksWithDateAndLocation = media.map(async (bird) => {
-          const lat = await  bird.decimalLatitude;
-          const long = await bird.decimalLongitude;
-          const tracks = bird.media.filter((index) => index.type === "Sound");
-          setPoint(`${lat},${long}`)
-          const yes = await isFulfilled
-          const response = await location
-          const address = response.resourceSets[0].resources[0].address
-          if (address?.error) {
-            return null;
-          }
-          return {
-            location: `${address.locality}, ${address.adminDistrict}, ${address.adminDistrict2 ? `${address.adminDistrict2}, ${address.countryRegion}` : address.countryRegion}`,
-            tracks: tracks,
-            date: bird.eventDate,
-          };
-        });
-        const resolved = await Promise.all(tracksWithDateAndLocation).then(
-          (tracks) => {
-            const list = tracks.filter((track) => track !== null);
-            setSongs(list);
-          }
-        );
-      }
-      makeTheTracks();
+        return {
+          location: index,
+          tracks: tracks,
+          date: bird.eventDate,
+        };
+      });
+      setPoints({ locations: coords });
+      setTracks(tracksWithoutLocation);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (points?.locations?.length > 0) {
+      console.log(points.locations);
+      setSkip(false);
+    }
+  }, [points]);
+
+  useEffect(() => {
+    const tracksWithLocation = tracks;
+
+    locations.results.forEach((result, index) => {
+      const locations = result.locations[0];
+
+      const cityOrCounty = `${
+        locations.adminArea5 !== "" && !/\d/.test(locations.adminArea5)
+          ? locations.adminArea5
+          : locations.adminArea4
+      }`;
+      const address = `${cityOrCounty}, ${locations.adminArea3}, ${locations.adminArea1}`;
+
+      tracksWithLocation[index].location = address;
+    });
+
+    setTracks(tracksWithLocation);
+  }, [locations, skip]);
+
+  useEffect(() => {
+    setSongs(tracks);
+  }, [tracks]);
 
   useEffect(() => {
     if (songs) {
