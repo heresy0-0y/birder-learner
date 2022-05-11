@@ -9,6 +9,7 @@ import {
   MenuItem,
   Button as CButton,
   useBreakpointValue,
+  useColorMode
 } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
@@ -21,6 +22,9 @@ import {
 
 import Search from "../Search/Search";
 const Nav = () => {
+  const { colorMode } = useColorMode();
+
+  const color = { light: "black", dark: "white" };
   const inputMargin = useBreakpointValue({
     base: "0.5rem",
     sm: "4rem",
@@ -56,7 +60,7 @@ const Nav = () => {
   }, [user]);
 
   return (
-    <Box mt="0" w="100%" display="flex">
+    <Box mt="0" w="100%" display="flex" color={color[colorMode]}>
       <Menu>
         {({ isOpen }) => (
           <>

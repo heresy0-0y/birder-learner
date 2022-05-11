@@ -34,7 +34,8 @@ function MyApp({ Component, pageProps }) {
           useSystemColorMode: true,
         }}>
         <Head>
-          <meta name="viewport" content="viewport-fit=cover" />
+          <title>Sounds Alive</title>
+          <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1" />
         </Head>
         <Wrap zIndex="-2" position="fixed" h="100vh" w="100vw">
           <Image
