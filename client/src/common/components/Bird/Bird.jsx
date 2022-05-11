@@ -21,8 +21,8 @@ export default function (props) {
   let boxWidth = null;
   const [padding, setPadding] = useState("100%");
   const [height, setHeight] = useState("unset");
-  const { img, name, w, left, top, pos, h, taxonKey, auth, priority } = props;
-
+  const { url, name, w, left, top, pos, h, taxonKey, auth, priority, sizes } = props;
+  
   const fallback = <SkeletonCircle w="100%" h="100%" />;
 
   const router = useRouter().asPath;
@@ -48,7 +48,8 @@ export default function (props) {
           overflow="hidden"
           position="relative">
           <Image
-            src={img}
+            src={url}
+            sizes="16"
             layout="fill"
             objectFit="cover"
             loading="eager"

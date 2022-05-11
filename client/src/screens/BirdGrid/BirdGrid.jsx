@@ -23,7 +23,7 @@ const BirdGrid = () => {
     useGetFavoritesQuery();
   const [birdsHere, setBirds] = useState();
   const [renderBirds, setRender] = useState();
-
+  const sizes = useBreakpointValue({base: "90vw", sm: "50vw" })
   const router = useRouter();
   const currentPath = router.asPath;
   const column = useBreakpointValue({ base: "1", sm: 2, lg: "3", "2xl": 4 });
@@ -70,8 +70,9 @@ const BirdGrid = () => {
             w={width}
             priority={index < 10 ? "true" : "false"}
             name={bird.scientificName}
-            img={bird.image_url}
+            url={bird.image_url}
             key={bird.key}
+            sizes={sizes}
           />
         </Link>
       ));
@@ -83,8 +84,9 @@ const BirdGrid = () => {
             w={width}
             priority={index < 10 ? "true" : "false"}
             name={bird.scientificName}
-            img={bird.media[0].identifier}
+            url={bird.media[0].identifier}
             key={bird.key}
+            sizes={sizes}
           />
         </Link>
       ));

@@ -89,7 +89,7 @@ export const BirdFocus = (props) => {
         icon={favorited ? <MdFavorite /> : <MdFavoriteBorder />}
       />
       <Bird
-        img={bird.media[0].identifier}
+        url={bird.media[0].identifier}
         bird={bird}
         name={bird.scientificName}
         taxonKey={bird.taxonKey}

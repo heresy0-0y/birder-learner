@@ -6,7 +6,7 @@ import Image from "next/image";
 import { wrapper } from "../store/store.js";
 import { ChakraProvider, ColorModeProvider, Wrap } from "@chakra-ui/react";
 import theme from "../theme";
-import backgroundImage from "../../public/background.jpeg";
+import backgroundImage from "../../public/bg1.webp";
 
 function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState({ user: null, token: null });
@@ -45,6 +45,7 @@ function MyApp({ Component, pageProps }) {
             layout="fill"
             placeholder="blur"
             quality="100"
+            as="backgroundImage"
             objectFit="cover"
           />
         </Wrap>
