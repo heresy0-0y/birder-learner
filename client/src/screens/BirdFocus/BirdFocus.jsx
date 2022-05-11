@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Bird } from "../../common/components";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import { VStack, Heading, IconButton } from "@chakra-ui/react";
-import { useGetBirdsByIPCountryCodeQuery } from "../../common/services/birds.js";
+import { useGetBirdByKeyQuery } from "../../common/services/birds.js";
 import { useSelector, useDispatch } from "react-redux";
 import {
   useAddFavoriteMutation,
@@ -13,19 +13,19 @@ import {
 import { selectCurrentUser } from "../../store/features/authSlice";
 
 export const BirdFocus = (props) => {
-  const { data, error, isLoading } = useGetBirdsByIPCountryCodeQuery();
   const { data: favorites, isSuccess, refetch } = useGetFavoritesQuery();
   const [userFavorites, setFavorites] = useState();
   const [bird, setBird] = useState();
   const [favorited, setFavorited] = useState(false);
   const [deleteFavorite, { isSuccess: favoriteDeleted }] =
-    useDeleteFavoriteMutation();
+  useDeleteFavoriteMutation();
   const user = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
   const [addFavorite, { isLoading: favoritePending }] =
-    useAddFavoriteMutation();
+  useAddFavoriteMutation();
   const router = useRouter();
   const id = router.asPath.split("/").pop();
+  const { data, error, isLoading } = useGetBirdByKeyQuery(id);
   const handleFavorite = async () => {
     try {
       if (favorited) {
@@ -54,9 +54,8 @@ export const BirdFocus = (props) => {
   };
 
   useEffect(() => {
-    if (data?.results) {
-      const thisBird = data.results.filter((b) => b.key == id)[0];
-      setBird(thisBird);
+    if (data) {
+      setBird(data);
     }
   }, [data]);
 

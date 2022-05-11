@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import {
   Input,
   InputGroup,
@@ -16,27 +17,43 @@ import {
   useGetSuggestionsQuery,
   useGetCoordsQuery,
 } from "../../services/autosuggest";
+import { setLocation } from "../../../store/features/locationSlice";
 
 const Search = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [skip, setSkip] = useState(true);
+  const [distance, setDistance] = useState("10");
   const [skipSearch, setSearchSkip] = useState(true);
   const suggestContainer = useRef(null);
   const [searchText, setText] = useState("");
   const [searchRequest, setSearch] = useState("");
   const [coords, setCoords] = useState();
   const { data } = useGetSuggestionsQuery(searchText, { skip });
-  const { data: location, isSuccess, isLoading } = useGetCoordsQuery(searchRequest, {
+  const {
+    data: location,
+    isSuccess,
+    isLoading,
+  } = useGetCoordsQuery(searchRequest, {
     skip: skipSearch,
   });
+  const dispatch = useDispatch();
 
   useEffect(() => {
-
     if (location?.results) {
-      console.log(location.results[0])
       setCoords(location.results[0].locations[0].latLng);
     }
   }, [location]);
+
+  useEffect(() => {
+    if (coords) {
+      const queryOptions = {
+        coords: { lat: coords.lat, lng: coords.lng },
+        distance: distance,
+      };
+
+      dispatch(setLocation(queryOptions));
+    }
+  }, [coords]);
 
   const handleSuggestSelect = (e) => {
     setText(e.target.textContent);

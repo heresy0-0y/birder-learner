@@ -28,8 +28,11 @@ export const birdsInitApi = createApi({
         `search?&mediaType=Sound&taxonKey=${taxonKey}&limit=100`,
     }),
     getBirdsByCoords: builder.query({
-      query: (coords) => `search?&mediaType=StillImage`,
+      query: (location) => `search?&mediaType=StillImage&taxonKey=212&limit=40&basisOfRecord=HUMAN_OBSERVATION&datasetKey=50c9509d-22c7-4a22-a47d-8c48425ef4a7&geoDistance=${location.coords.lat},${location.coords.lng},${location.distance}km`,
     }),
+    getBirdByKey: builder.query({
+      query: (key) => `${key}`
+    })
   }),
 });
 export const selectGetBirdsByIPCountryCode =
@@ -39,5 +42,6 @@ export const {
   useGetBirdsByIPCountryCodeQuery,
   useGetSongsByBirdQuery,
   useGetBirdsByCoordsQuery,
+  useGetBirdByKeyQuery,
   util: { getRunningOperationPromises },
 } = birdsInitApi;

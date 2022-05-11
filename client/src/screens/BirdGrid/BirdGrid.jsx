@@ -1,20 +1,29 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { MasonryInfiniteGrid as MasonryGrid } from "@egjs/react-infinitegrid";
 import { Spinner, Box, useBreakpointValue, VStack } from "@chakra-ui/react";
 import { Bird, Link } from "../../common/components";
-import { useGetBirdsByIPCountryCodeQuery } from "../../common/services/birds.js";
+import {
+  useGetBirdsByIPCountryCodeQuery,
+  useGetBirdsByCoordsQuery,
+} from "../../common/services/birds.js";
 import { useGetFavoritesQuery } from "../../common/services/auth";
 import { selectCurrentUser } from "../../store/features/authSlice";
+import { setCurrentBirds } from "../../store/features/birdsSlice";
+import { selectCurrentLocation } from "../../store/features/locationSlice";
 const BirdGrid = () => {
+  const dispatch = useDispatch()
   const { data, error, isLoading } = useGetBirdsByIPCountryCodeQuery();
+  const [skip, setSkip] = useState(true);
   const user = useSelector(selectCurrentUser);
+  const location = useSelector(selectCurrentLocation);
+  const { data: birdsByLocation, refetch } = useGetBirdsByCoordsQuery(location, { skip });
   const { data: favorites, isLoading: favoritesLoading } =
     useGetFavoritesQuery();
   const [birdsHere, setBirds] = useState();
   const [renderBirds, setRender] = useState();
-  const [keys, setKeys] = useState();
+
   const router = useRouter();
   const currentPath = router.asPath;
   const column = useBreakpointValue({ base: "1", sm: 2, lg: "3", "2xl": 4 });
@@ -30,15 +39,28 @@ const BirdGrid = () => {
   const gap = useBreakpointValue({ base: 5, sm: 10, md: 10 });
 
   useEffect(() => {
+    if (location?.coords?.lat === null) {
+      setSkip(true);
+    } else {
+      setSkip(false);
+      refetch();
+    }
+  }, [location]);
+
+  useEffect(() => {
     if (currentPath.includes("favorites") && favorites) {
       const userFavorites = favorites.filter(
         (favorite) => favorite.user_id === user.id
       );
       setBirds(userFavorites);
+    } else if (birdsByLocation?.results) {
+      setBirds(birdsByLocation.results);
+      dispatch(setCurrentBirds(birdsByLocation.results))
     } else {
       setBirds(data?.results);
+      dispatch(setCurrentBirds(data?.results))
     }
-  }, [isLoading]);
+  }, [isLoading, birdsByLocation]);
 
   useEffect(() => {
     if (currentPath.includes("favorites")) {

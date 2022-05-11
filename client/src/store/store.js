@@ -6,6 +6,7 @@ import { createWrapper } from "next-redux-wrapper";
 import { suggestApi } from "../common/services/autosuggest.js";
 import { authApi } from "../common/services/auth.js";
 import { slice as authSlice } from "./features/authSlice";
+import {locationSlice} from './features/locationSlice'
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [authSlice.name]: authSlice.reducer,
     [suggestApi.reducerPath]: suggestApi.reducer,
+    [locationSlice.name]: locationSlice.reducer,
   },
   middleware: (gDM) =>
     gDM()
