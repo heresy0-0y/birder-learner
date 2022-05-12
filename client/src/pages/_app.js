@@ -49,7 +49,6 @@ function MyApp({ Component, pageProps }) {
             src={backgroundImage}
             layout="fill"
             placeholder="blur"
-            quality="100"
             as="backgroundImage"
             objectFit="cover"
           />
