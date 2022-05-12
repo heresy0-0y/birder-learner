@@ -100,19 +100,19 @@ const BirdGrid = () => {
 
   return (
     <VStack
-      w="100vw"
+      w="100%"
       overflow="hidden"
-      minH="100vh"
-
+      minH="100%"
+      my="3%"
       // px='2%'
     >
-      <Box w="100vw">
+      <Box w="100%">
         <MasonryGrid
           className="container"
           column={column}
           align="center"
           gap={gap}
-          width="100vw"
+          width="100%"
           resizeDebounce="0">
           {renderBirds}
         </MasonryGrid>
