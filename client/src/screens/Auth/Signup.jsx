@@ -71,6 +71,7 @@ export default function () {
       <FormControl isRequired>
         <FormLabel htmlFor="email">Email</FormLabel>
         <Input
+          onKeyDown={handleKBEnter}
           id="email"
           name="email"
           type="email"
@@ -79,6 +80,7 @@ export default function () {
         />
         <FormLabel htmlFor="first_name">First Name</FormLabel>
         <Input
+          onKeyDown={handleKBEnter}
           id="first_name"
           type="first_name"
           name="first_name"
@@ -87,6 +89,7 @@ export default function () {
         />
         <FormLabel htmlFor="last_name">Last Name</FormLabel>
         <Input
+          onKeyDown={handleKBEnter}
           id="last_name"
           name="last_name"
           onChange={handleChange}
@@ -96,6 +99,7 @@ export default function () {
           <FormLabel htmlFor="password">Password</FormLabel>
           <InputGroup w="10%">
             <Input
+              onKeyDown={handleKBEnter}
               name="password"
               type={show ? "text" : "password"}
               onChange={handleChange}

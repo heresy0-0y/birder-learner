@@ -50,11 +50,20 @@ export default function (props) {
     }
   };
 
+  const handleKBEnter = (e) => {
+    e.key === "Enter" ? handleSubmit() : null;
+  };
+
   return (
     <Container my="15%">
       <FormControl>
         <FormLabel>Username</FormLabel>
-        <Input name="username" onChange={handleChange} mb="3%" />
+        <Input
+          name="username"
+          onChange={handleChange}
+          mb="3%"
+          onKeyDown={handleKBEnter}
+        />
       </FormControl>
       <FormControl>
         <FormLabel>Password</FormLabel>
@@ -64,6 +73,7 @@ export default function (props) {
             name="password"
             type={show ? "text" : "password"}
             onChange={handleChange}
+            onKeyDown={handleKBEnter}
           />
           <InputRightElement w="10%" minW="55px">
             <Button onClick={() => setShow(!show)}>Show</Button>

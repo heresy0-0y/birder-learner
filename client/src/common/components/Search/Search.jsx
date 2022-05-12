@@ -81,7 +81,12 @@ const Search = () => {
       <InputGroup size="md" w="100%">
         <Popover isOpen={isOpen.toString()}>
           <PopoverAnchor>
-            <Input pr=".5rem" value={searchText} onChange={handleChange} />
+            <Input
+              pr=".5rem"
+              value={searchText}
+              onChange={handleChange}
+              onKeyDown={handleKBEnter}
+            />
           </PopoverAnchor>
 
           <PopoverContent display={searchText.length >= 2 ? "flex" : "none"}>
