@@ -9,7 +9,7 @@ import {
   MenuItem,
   Button as CButton,
   useBreakpointValue,
-  useColorMode
+  useColorMode,
 } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
@@ -39,6 +39,7 @@ const Nav = () => {
     { text: "Home", url: "/" },
     { text: "Sign Up", url: "/signup" },
     { text: "Log In", url: "/login" },
+    { text: "Search", url: "/search" },
   ]);
 
   const handleLogout = () => {
@@ -49,18 +50,13 @@ const Nav = () => {
 
   useEffect(() => {
     if (typeof user !== "string" && user) {
-      const favorites = {
-        text: "Favorites",
-        url: `/${user.username}/favorites`,
-      };
       setGreeting(`Hello, ${user.first_name}!`);
       setLinks((prev) => [...prev].filter((link) => link.text === "Home"));
-      setLinks((prev) => [...prev, favorites]);
     }
   }, [user]);
 
   return (
-    <Box mt="0" w="100%" display="flex" color={color[colorMode]}>
+    <Box mt="0" w="100%" display="flex" color={color[colorMode]} >
       <Menu>
         {({ isOpen }) => (
           <>
@@ -86,7 +82,7 @@ const Nav = () => {
               }>
               <Search />
             </Center>
-            <MenuList>
+            <MenuList zIndex={2}>
               {links.map((link, index) => (
                 <MenuItem onClick={() => router.push(link.url)} key={index}>
                   {link.text}
@@ -96,11 +92,35 @@ const Nav = () => {
           </>
         )}
       </Menu>
-      <Box pt="0.5rem" right={0} top="0.5rem" right="4%" position="absolute">
+
         {" "}
-        {userGreeting}
-        <CButton onClick={handleLogout}>Logout</CButton>
-      </Box>
+        <Menu>
+          {({ isOpen }) => (
+            <>
+              <MenuButton
+              position="absolute"
+                display={user ? "flex" : "none"}
+                isActive={isOpen}
+                direction="row"
+                right="0.5rem"
+                mt="0.5rem"
+                ml="0.5rem"
+                as={CButton}
+                rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}>
+                {" "}{userGreeting}
+              </MenuButton>
+              <MenuList zIndex={2}>
+                <MenuItem
+                  onClick={() => router.push(`/${user.username}/favorites`)}
+                  key={"favorites"}>
+                  Favorites
+                </MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              </MenuList>
+            </>
+          )}
+        </Menu>
+
       <Flex
         mt="0.5rem"
         direction="row"
