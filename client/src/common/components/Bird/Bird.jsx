@@ -33,6 +33,7 @@ export default function (props) {
     auth,
     priority,
     maxW,
+    maxH,
     sizes,
   } = props;
 
@@ -53,6 +54,7 @@ export default function (props) {
           w={w}
           maxW={maxW}
           h={height}
+          maxH={maxH}
           left={left}
           priority={focus ? "true" : "false"}
           pb={height}

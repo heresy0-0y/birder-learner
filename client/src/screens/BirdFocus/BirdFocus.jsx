@@ -83,11 +83,12 @@ export const BirdFocus = (props) => {
     <VStack my="3%">
       <Heading as="h1" size="lg">
         {bird.vernacularName ? bird.vernacularName : bird.scientificName}
-      <IconButton ml="0.5rem"
-        onClick={handleFavorite}
-        icon={favorited ? <MdFavorite /> : <MdFavoriteBorder />}
+        <IconButton
+          ml="0.5rem"
+          onClick={handleFavorite}
+          icon={favorited ? <MdFavorite /> : <MdFavoriteBorder />}
         />
-        </Heading>
+      </Heading>
       <Bird
         url={bird.media[0].identifier}
         bird={bird}
@@ -95,6 +96,7 @@ export const BirdFocus = (props) => {
         taxonKey={bird.taxonKey}
         w="md"
         maxW="70%"
+        maxH="45%"
         priority="true"
       />
     </VStack>

@@ -65,7 +65,7 @@ export default function (props) {
             type={show ? "text" : "password"}
             onChange={handleChange}
           />
-          <InputRightElement w="10%">
+          <InputRightElement w="10%" minW="55px">
             <Button onClick={() => setShow(!show)}>Show</Button>
           </InputRightElement>
         </InputGroup>

@@ -101,7 +101,7 @@ export default function () {
               onChange={handleChange}
               mb="3%"
             />
-            <InputRightElement>
+            <InputRightElement w="10%" minW="55px">
               <Button onClick={() => setShow(!show)}>Show</Button>
             </InputRightElement>
           </InputGroup>
