@@ -56,7 +56,7 @@ const Nav = () => {
   }, [user]);
 
   return (
-    <Box mt="0" w="100%" display="flex" color={color[colorMode]} >
+    <Box mt="0" w="100%" display="flex" color={color[colorMode]}>
       <Menu>
         {({ isOpen }) => (
           <>
@@ -91,36 +91,34 @@ const Nav = () => {
             </MenuList>
           </>
         )}
-      </Menu>
-
-        {" "}
-        <Menu>
-          {({ isOpen }) => (
-            <>
-              <MenuButton
+      </Menu>{" "}
+      <Menu>
+        {({ isOpen }) => (
+          <>
+            <MenuButton
               position="absolute"
-                display={user ? "flex" : "none"}
-                isActive={isOpen}
-                direction="row"
-                right="0.5rem"
-                mt="0.5rem"
-                ml="0.5rem"
-                as={CButton}
-                rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}>
-                {" "}{userGreeting}
-              </MenuButton>
-              <MenuList zIndex={2}>
-                <MenuItem
-                  onClick={() => router.push(`/${user.username}/favorites`)}
-                  key={"favorites"}>
-                  Favorites
-                </MenuItem>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
-              </MenuList>
-            </>
-          )}
-        </Menu>
-
+              display={user ? "flex" : "none"}
+              isActive={isOpen}
+              direction="row"
+              right="0.5rem"
+              mt="0.5rem"
+              ml="0.5rem"
+              as={CButton}
+              rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}>
+              {" "}
+              {userGreeting}
+            </MenuButton>
+            <MenuList zIndex={2}>
+              <MenuItem
+                onClick={() => router.push(`/${user.username}/favorites`)}
+                key={"favorites"}>
+                Favorites
+              </MenuItem>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            </MenuList>
+          </>
+        )}
+      </Menu>
       <Flex
         mt="0.5rem"
         direction="row"

@@ -98,7 +98,11 @@ const BirdGrid = () => {
   }, [birdsHere]);
 
   if (isLoading || favoritesLoading) {
-    return <VStack w="100%" overflow="hidden" minH="100%" my="3%"><Spinner /></VStack>;
+    return (
+      <VStack w="100%" overflow="hidden" minH="100%" my="3%">
+        <Spinner />
+      </VStack>
+    );
   }
 
   return (

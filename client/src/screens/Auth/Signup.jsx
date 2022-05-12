@@ -45,14 +45,14 @@ export default function () {
       const newUser = { user: { ...form } };
       const user = await addUser(newUser);
       dispatch(setCredentials(user));
-      localStorage.setItem('user', JSON.stringify(user))
+      localStorage.setItem("user", JSON.stringify(user));
       router.push("/");
     } catch (error) {}
   };
 
   const handleShow = () => setShow(!show);
   return (
-    <Container top="15%" position="absolute">
+    <Container my="15%">
       <FormControl isRequired isInvalid={usernameError}>
         <FormLabel htmlFor="username">Username</FormLabel>
         <Input
@@ -84,7 +84,7 @@ export default function () {
             password must be at least 7 characters
           </FormErrorMessage>
         </FormControl>
-        <Button type="submit" onClick={handleSubmit} isLoading={isLoading} >
+        <Button type="submit" onClick={handleSubmit} isLoading={isLoading}>
           Sign Up{" "}
         </Button>
       </FormControl>

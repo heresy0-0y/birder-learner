@@ -21,8 +21,9 @@ export default function (props) {
   let boxWidth = null;
   const [padding, setPadding] = useState("100%");
   const [height, setHeight] = useState("unset");
-  const { url, name, w, left, top, pos, h, taxonKey, auth, priority, sizes } = props;
-  
+  const { url, name, w, left, top, pos, h, taxonKey, auth, priority, sizes } =
+    props;
+
   const fallback = <SkeletonCircle w="100%" h="100%" />;
 
   const router = useRouter().asPath;

@@ -18,11 +18,11 @@ export const BirdFocus = (props) => {
   const [bird, setBird] = useState();
   const [favorited, setFavorited] = useState(false);
   const [deleteFavorite, { isSuccess: favoriteDeleted }] =
-  useDeleteFavoriteMutation();
+    useDeleteFavoriteMutation();
   const user = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
   const [addFavorite, { isLoading: favoritePending }] =
-  useAddFavoriteMutation();
+    useAddFavoriteMutation();
   const router = useRouter();
   const id = router.asPath.split("/").pop();
   const { data, error, isLoading } = useGetBirdByKeyQuery(id);

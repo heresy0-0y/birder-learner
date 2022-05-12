@@ -6,7 +6,7 @@ import { createWrapper } from "next-redux-wrapper";
 import { suggestApi } from "../common/services/autosuggest.js";
 import { authApi } from "../common/services/auth.js";
 import { slice as authSlice } from "./features/authSlice";
-import {locationSlice} from './features/locationSlice'
+import { locationSlice } from "./features/locationSlice";
 
 export const store = configureStore({
   reducer: {

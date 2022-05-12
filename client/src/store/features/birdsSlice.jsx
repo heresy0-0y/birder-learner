@@ -2,14 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const birdsSlice = createSlice({
   name: "birds",
-  initialState: {birds: null, favorites: null},
+  initialState: { birds: null, favorites: null },
   reducers: {
     setCurrentBirds: (state, { payload: { birds } }) => {
       state.birds = birds;
     },
-    setFavoriteBirds: (state, {payload: {birds}}) => {
-      state.favorites = birds
-    }
+    setFavoriteBirds: (state, { payload: { birds } }) => {
+      state.favorites = birds;
+    },
   },
 });
 
