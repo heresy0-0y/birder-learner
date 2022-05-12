@@ -54,18 +54,19 @@ export default function (props) {
     <Container my="15%">
       <FormControl>
         <FormLabel>Username</FormLabel>
-        <Input name="username" onChange={handleChange} />
+        <Input name="username" onChange={handleChange} mb="3%" />
       </FormControl>
       <FormControl>
         <FormLabel>Password</FormLabel>
         <InputGroup>
           <Input
+            mb="3%"
             name="password"
             type={show ? "text" : "password"}
             onChange={handleChange}
           />
-          <InputRightElement>
-            <Button onClick={() => setShow(!show)}>Show</Button>
+          <InputRightElement w="10%">
+            <Button onClick={() => setShow(!show)} >Show</Button>
           </InputRightElement>
         </InputGroup>
       </FormControl>

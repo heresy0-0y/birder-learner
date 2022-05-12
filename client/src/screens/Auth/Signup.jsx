@@ -94,7 +94,7 @@ export default function () {
         />
         <FormControl isInvalid={passwordError} isRequired>
           <FormLabel htmlFor="password">Password</FormLabel>
-          <InputGroup>
+          <InputGroup w="10%">
             <Input
               name="password"
               type={show ? "text" : "password"}
