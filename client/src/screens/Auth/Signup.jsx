@@ -52,6 +52,10 @@ export default function () {
     } catch (error) {}
   };
 
+  const handleKBEnter = (e) => {
+    e.key === "Enter" ? handleSubmit() : null;
+  };
+
   const handleShow = () => setShow(!show);
   return (
     <Container my="15%">

@@ -12,6 +12,7 @@ export const authApi = createApi({
       return headers;
     },
   }),
+  keepUnusedDataFor: 31536000,
   endpoints: (builder) => ({
     getUsers: builder.query({
       query: () => "users",

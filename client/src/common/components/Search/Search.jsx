@@ -76,6 +76,10 @@ const Search = () => {
     setText("");
   };
 
+  const handleKBEnter = (e) => {
+    e.key === "Enter" ? handleSearch() : null;
+  };
+
   return (
     <Box w="100%">
       <InputGroup size="md" w="100%">

@@ -5,7 +5,8 @@
     "auto": "next dev & open http://localhost:3000",
     "build": "next build",
     "start": "next start",
-    "export": "npm run build && next export -o _static"
+    "export": "npm run build && next export -o _static",
+    "lint": "next lint"
   },
   "dependencies": {
     "@arcgis/core": "^4.23.7",

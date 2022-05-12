@@ -7,6 +7,7 @@ export const suggestApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `https://www.mapquestapi.com/`,
   }),
+  keepUnusedDataFor: 31536000,
   endpoints: (builder) => ({
     getSuggestions: builder.query({
       query: (text) =>
