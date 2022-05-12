@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }) {
   }, []);
   useEffect(() => {
     dispatch(setCredentials(user));
-  }, [user]);
+  }, [user, dispatch]);
 
   return (
     <ChakraProvider resetCSS theme={theme}>

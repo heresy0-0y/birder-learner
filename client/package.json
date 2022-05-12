@@ -32,6 +32,8 @@
     "wavesurfer.js": "^6.1.0"
   },
   "devDependencies": {
+    "eslint": "8.15.0",
+    "eslint-config-next": "12.1.6",
     "wavesurfer.js": "^6.1.0"
   }
 }
