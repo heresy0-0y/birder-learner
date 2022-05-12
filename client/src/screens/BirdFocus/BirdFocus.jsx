@@ -80,7 +80,7 @@ export const BirdFocus = (props) => {
   }
 
   return (
-    <VStack>
+    <VStack my="3%">
       <Heading as="h1" size="lg">
         {bird.vernacularName ? bird.vernacularName : bird.scientificName}
       </Heading>
