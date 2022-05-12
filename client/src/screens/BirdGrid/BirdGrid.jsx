@@ -71,6 +71,7 @@ const BirdGrid = () => {
         <Link url={`/songs/${bird.key}`} key={bird.key} className={"item"}>
           <Bird
             w={width}
+            maxW="95%"
             priority={index < 10 ? "true" : "false"}
             name={bird.scientificName}
             url={bird.image_url}
@@ -85,6 +86,7 @@ const BirdGrid = () => {
         <Link url={`songs/${bird.key}`} key={bird.key} className={"item"}>
           <Bird
             w={width}
+            maxW="95%"
             priority={index < 10 ? "true" : "false"}
             name={bird.scientificName}
             url={bird.media[0].identifier}
