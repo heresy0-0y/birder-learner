@@ -13,17 +13,20 @@ import { selectCurrentUser } from "../../store/features/authSlice";
 import { setCurrentBirds } from "../../store/features/birdsSlice";
 import { selectCurrentLocation } from "../../store/features/locationSlice";
 const BirdGrid = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { data, error, isLoading } = useGetBirdsByIPCountryCodeQuery();
   const [skip, setSkip] = useState(true);
   const user = useSelector(selectCurrentUser);
   const location = useSelector(selectCurrentLocation);
-  const { data: birdsByLocation, refetch } = useGetBirdsByCoordsQuery(location, { skip });
+  const { data: birdsByLocation, refetch } = useGetBirdsByCoordsQuery(
+    location,
+    { skip }
+  );
   const { data: favorites, isLoading: favoritesLoading } =
     useGetFavoritesQuery();
   const [birdsHere, setBirds] = useState();
   const [renderBirds, setRender] = useState();
-  const sizes = useBreakpointValue({base: "90vw", sm: "50vw" })
+  const sizes = useBreakpointValue({ base: "90vw", sm: "50vw" });
   const router = useRouter();
   const currentPath = router.asPath;
   const column = useBreakpointValue({ base: "1", sm: 2, lg: "3", "2xl": 4 });
@@ -39,7 +42,7 @@ const BirdGrid = () => {
   const gap = useBreakpointValue({ base: 5, sm: 10, md: 10 });
 
   useEffect(() => {
-    if (location?.coords?.lat === null) {
+    if (location?.coords === null) {
       setSkip(true);
     } else {
       setSkip(false);
@@ -55,10 +58,10 @@ const BirdGrid = () => {
       setBirds(userFavorites);
     } else if (birdsByLocation?.results) {
       setBirds(birdsByLocation.results);
-      dispatch(setCurrentBirds(birdsByLocation.results))
+      dispatch(setCurrentBirds(birdsByLocation.results));
     } else {
       setBirds(data?.results);
-      dispatch(setCurrentBirds(data?.results))
+      dispatch(setCurrentBirds(data?.results));
     }
   }, [isLoading, birdsByLocation]);
 
@@ -95,17 +98,11 @@ const BirdGrid = () => {
   }, [birdsHere]);
 
   if (isLoading || favoritesLoading) {
-    return <Spinner />;
+    return <VStack w="100%" overflow="hidden" minH="100%" my="3%"><Spinner /></VStack>;
   }
 
   return (
-    <VStack
-      w="100%"
-      overflow="hidden"
-      minH="100%"
-      my="3%"
-      // px='2%'
-    >
+    <VStack w="100%" overflow="hidden" minH="100%" my="3%">
       <Box w="100%">
         <MasonryGrid
           className="container"
