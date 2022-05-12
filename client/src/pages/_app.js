@@ -32,10 +32,14 @@ function MyApp({ Component, pageProps }) {
       <ColorModeProvider
         options={{
           useSystemColorMode: true,
-        }}>
+        }}
+      >
         <Head>
           <title>Sounds Alive</title>
-          <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1" />
+          <meta
+            name="viewport"
+            content="viewport-fit=cover, width=device-width, initial-scale=1"
+          />
         </Head>
         <Wrap zIndex="-2" position="fixed" h="100vh" w="100vw">
           <Image
@@ -58,22 +62,21 @@ function MyApp({ Component, pageProps }) {
 
 export default wrapper.withRedux(MyApp);
 
-  
 export function reportWebVitals(metric) {
   const url = process.env.NEXT_PUBLIC_AXIOM_INGEST_ENDPOINT;
-  
+
   if (!url) {
     return;
   }
-  
+
   const body = JSON.stringify({
     route: window.__NEXT_DATA__.page,
     ...metric,
   });
-  
+
   if (navigator.sendBeacon) {
     navigator.sendBeacon(url, body);
   } else {
-    fetch(url, { body, method: 'POST', keepalive: true });
+    fetch(url, { body, method: "POST", keepalive: true });
   }
 }

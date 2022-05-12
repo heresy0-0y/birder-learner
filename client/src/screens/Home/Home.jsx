@@ -1,3 +1,3 @@
-export default function(props) {
-    return (<></>)
+export default function (props) {
+  return <></>;
 }

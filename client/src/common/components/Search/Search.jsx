@@ -100,7 +100,8 @@ const Search = () => {
                   <ListItem
                     key={index}
                     onClick={handleSuggestSelect}
-                    value={result.displayString}>
+                    value={result.displayString}
+                  >
                     {result.displayString}
                   </ListItem>
                 ))}
@@ -113,7 +114,8 @@ const Search = () => {
           <CButton
             variant="outline"
             borderLeftRadius="0px"
-            onClick={handleSearch}>
+            onClick={handleSearch}
+          >
             Search
           </CButton>
         </InputRightElement>

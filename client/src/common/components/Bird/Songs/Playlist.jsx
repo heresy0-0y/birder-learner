@@ -35,7 +35,8 @@ export const Playlist = (props) => {
           {songs.map((song, index) => (
             <Tr
               key={index}
-              onClick={() => setSelected(song.tracks[0].identifier)}>
+              onClick={() => setSelected(song.tracks[0].identifier)}
+            >
               <Td>{song.tracks[0].creator}</Td>
               <Td>{song.location}</Td>
               <Td>{new Date(song.date).toDateString()} </Td>

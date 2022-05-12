@@ -6,9 +6,9 @@ const Link = (props) => {
 
   return (
     <LinkBox>
-    <NextLink href={url} passHref>
-      <ChakraLink isExternal={external}>{props.children}</ChakraLink>
-    </NextLink>
+      <NextLink href={url} passHref>
+        <ChakraLink isExternal={external}>{props.children}</ChakraLink>
+      </NextLink>
     </LinkBox>
   );
 };

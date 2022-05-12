@@ -12,7 +12,8 @@ export const Footer = (props) => {
       position="relative"
       bottom="0"
       color={color[colorMode]}
-      my="2%">
+      my="2%"
+    >
       <Text noOfLines="1" w="100%" align="center">
         This app is built upon and inspired by the free and open source GBIF
         network and API

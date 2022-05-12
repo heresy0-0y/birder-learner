@@ -85,7 +85,8 @@ const Waveform = ({ url }) => {
           max={1}
           step={0.025}
           onChange={handleVolume}
-          defaultValue={volume}>
+          defaultValue={volume}
+        >
           <SliderTrack>
             <SliderFilledTrack />
           </SliderTrack>

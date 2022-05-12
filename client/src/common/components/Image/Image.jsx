@@ -5,4 +5,4 @@ const Image = chakra(NextImage, {
   shouldForwardProp: (prop) => ["height", "width", "quality", "src", "alt"],
 });
 
-export default Image
+export default Image;

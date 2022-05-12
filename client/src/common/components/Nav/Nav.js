@@ -67,7 +67,8 @@ const Nav = () => {
               mt="0.5rem"
               ml="0.5rem"
               as={CButton}
-              rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}>
+              rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+            >
               {" "}
               Menu{" "}
             </MenuButton>
@@ -79,7 +80,8 @@ const Nav = () => {
                 currentPath.includes("search")
                   ? { base: "flex", lg: "none" }
                   : "none"
-              }>
+              }
+            >
               <Search />
             </Center>
             <MenuList zIndex={2}>
@@ -104,14 +106,16 @@ const Nav = () => {
               mt="0.5rem"
               ml="0.5rem"
               as={CButton}
-              rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}>
+              rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+            >
               {" "}
               {userGreeting}
             </MenuButton>
             <MenuList zIndex={2}>
               <MenuItem
                 onClick={() => router.push(`/${user.username}/favorites`)}
-                key={"favorites"}>
+                key={"favorites"}
+              >
                 Favorites
               </MenuItem>
               <MenuItem onClick={handleLogout}>Logout</MenuItem>
@@ -123,7 +127,8 @@ const Nav = () => {
         mt="0.5rem"
         direction="row"
         w="100%"
-        display={{ base: "none", lg: "flex" }}>
+        display={{ base: "none", lg: "flex" }}
+      >
         {links.map((link, index) => (
           <Button text={link.text} url={link.url} key={index} />
         ))}

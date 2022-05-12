@@ -12,7 +12,8 @@ const CoreContainer = (props) => {
       h="100%"
       minH="100vh"
       color={color[colorMode]}
-      {...props}></VStack>
+      {...props}
+    ></VStack>
   );
 };
 export default CoreContainer;

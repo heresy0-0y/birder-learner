@@ -116,7 +116,8 @@ const BirdGrid = () => {
           align="center"
           gap={gap}
           width="100%"
-          resizeDebounce="0">
+          resizeDebounce="0"
+        >
           {renderBirds}
         </MasonryGrid>
       </Box>

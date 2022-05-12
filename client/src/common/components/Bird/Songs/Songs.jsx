@@ -77,7 +77,7 @@ const Songs = ({ taxonKey }) => {
   if (isLoading) {
     return (
       <VStack w="100%" h="100%" mt="10%" alignItems="center">
-        <Spinner size="xl" mt="10%"/>
+        <Spinner size="xl" mt="10%" />
       </VStack>
     );
   }

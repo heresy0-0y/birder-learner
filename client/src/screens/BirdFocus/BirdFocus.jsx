@@ -25,7 +25,7 @@ export const BirdFocus = (props) => {
     useAddFavoriteMutation();
   const router = useRouter();
   const id = router.query.id;
-  const { data, error, isLoading } = useGetBirdByKeyQuery(id, {skip});
+  const { data, error, isLoading } = useGetBirdByKeyQuery(id, { skip });
 
   const handleFavorite = async () => {
     try {
@@ -56,11 +56,11 @@ export const BirdFocus = (props) => {
 
   useEffect(() => {
     if (id === undefined) {
-      setSkip(true)
+      setSkip(true);
     } else {
-      setSkip(false)
+      setSkip(false);
     }
-  },[id])
+  }, [id]);
 
   useEffect(() => {
     if (data) {

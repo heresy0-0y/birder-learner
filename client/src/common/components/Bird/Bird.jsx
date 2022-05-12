@@ -62,7 +62,8 @@ export default function (props) {
           display={height === "" ? "none" : null}
           borderRadius="xl"
           overflow="hidden"
-          position="relative">
+          position="relative"
+        >
           <Image
             src={url}
             sizes="16"
