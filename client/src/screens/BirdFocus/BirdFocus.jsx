@@ -16,6 +16,7 @@ export const BirdFocus = (props) => {
   const { data: favorites, isSuccess, refetch } = useGetFavoritesQuery();
   const [userFavorites, setFavorites] = useState();
   const [bird, setBird] = useState();
+  const [skip, setSkip] = useState(true);
   const [favorited, setFavorited] = useState(false);
   const [deleteFavorite, { isSuccess: favoriteDeleted }] =
     useDeleteFavoriteMutation();
@@ -24,7 +25,7 @@ export const BirdFocus = (props) => {
     useAddFavoriteMutation();
   const router = useRouter();
   const id = router.query.id;
-  const { data, error, isLoading } = useGetBirdByKeyQuery(id);
+  const { data, error, isLoading } = useGetBirdByKeyQuery(id, {skip});
 
   const handleFavorite = async () => {
     try {
@@ -52,6 +53,14 @@ export const BirdFocus = (props) => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (id === undefined) {
+      setSkip(true)
+    } else {
+      setSkip(false)
+    }
+  },[id])
 
   useEffect(() => {
     if (data) {
