@@ -1,3 +1,4 @@
+import gbifLogo from '../../../public/gbif_logo.svg'
 import { Text, Box, useColorMode } from "@chakra-ui/react";
 import Image from "next/image";
 
@@ -17,7 +18,7 @@ export const Footer = (props) => {
         Available from https://www.gbif.org/what-is-gbif [13 January 2020].
       </Text>
       <Image
-        src="https://www.gbif.org/img/full_logo_white.svg"
+        src={gbifLogo}
         width="100"
         height="20"
       />
