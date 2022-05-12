@@ -1,6 +1,9 @@
 module.exports = {
   compress: true,
   swcMinify: true,
+  compiler: {
+    removeConsole: true
+  },
   images: {
     domains: ["inaturalist-open-data.s3.amazonaws.com", "www.gbif.org"],
     formats: ["image/avif", "image/webp"],
