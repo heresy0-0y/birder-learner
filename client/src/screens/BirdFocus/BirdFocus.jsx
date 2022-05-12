@@ -24,7 +24,7 @@ export const BirdFocus = (props) => {
   const [addFavorite, { isLoading: favoritePending }] =
     useAddFavoriteMutation();
   const router = useRouter();
-  const id = router.asPath.split("/").pop();
+  const id = router.query.id;
   const { data, error, isLoading } = useGetBirdByKeyQuery(id);
   const handleFavorite = async () => {
     try {

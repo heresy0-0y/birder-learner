@@ -66,7 +66,7 @@ export default function (props) {
             onChange={handleChange}
           />
           <InputRightElement w="10%">
-            <Button onClick={() => setShow(!show)} >Show</Button>
+            <Button onClick={() => setShow(!show)}>Show</Button>
           </InputRightElement>
         </InputGroup>
       </FormControl>
