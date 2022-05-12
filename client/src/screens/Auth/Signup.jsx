@@ -9,6 +9,8 @@ import {
   FormControl,
   FormLabel,
   FormHelperText,
+  InputGroup,
+  InputRightElement,
   FormErrorMessage,
   Input,
   Button,
@@ -56,6 +58,7 @@ export default function () {
       <FormControl isRequired isInvalid={usernameError}>
         <FormLabel htmlFor="username">Username</FormLabel>
         <Input
+          mb="3%"
           id="username"
           type="username"
           name="username"
@@ -65,21 +68,43 @@ export default function () {
           Sorry, that username is already taken
         </FormErrorMessage>
       </FormControl>
-      <FormControl>
+      <FormControl isRequired>
         <FormLabel htmlFor="email">Email</FormLabel>
-        <Input id="email" name="email" type="email" onChange={handleChange} />
+        <Input
+          id="email"
+          name="email"
+          type="email"
+          onChange={handleChange}
+          mb="3%"
+        />
         <FormLabel htmlFor="first_name">First Name</FormLabel>
         <Input
           id="first_name"
           type="first_name"
           name="first_name"
           onChange={handleChange}
+          mb="3%"
         />
         <FormLabel htmlFor="last_name">Last Name</FormLabel>
-        <Input id="last_name" name="last_name" onChange={handleChange} />
-        <FormControl isInvalid={passwordError}>
+        <Input
+          id="last_name"
+          name="last_name"
+          onChange={handleChange}
+          mb="3%"
+        />
+        <FormControl isInvalid={passwordError} isRequired>
           <FormLabel htmlFor="password">Password</FormLabel>
-          <Input name="password" onChange={handleChange} />
+          <InputGroup>
+            <Input
+              name="password"
+              type={show ? "text" : "password"}
+              onChange={handleChange}
+              mb="3%"
+            />
+            <InputRightElement>
+              <Button onClick={() => setShow(!show)}>Show</Button>
+            </InputRightElement>
+          </InputGroup>
           <FormErrorMessage>
             password must be at least 7 characters
           </FormErrorMessage>

@@ -6,6 +6,8 @@ import {
   FormControl,
   FormLabel,
   Input,
+  InputGroup,
+  InputRightElement,
   Button,
   useToast,
 } from "@chakra-ui/react";
@@ -17,6 +19,7 @@ import { useLoginMutation } from "../../common/services/auth";
 
 export default function (props) {
   const router = useRouter();
+  const [show, setShow] = useState(false);
   const dispatch = useDispatch();
   const toast = useToast();
   const [form, setForm] = useState({
@@ -55,7 +58,16 @@ export default function (props) {
       </FormControl>
       <FormControl>
         <FormLabel>Password</FormLabel>
-        <Input name="password" onChange={handleChange} />
+        <InputGroup>
+          <Input
+            name="password"
+            type={show ? "text" : "password"}
+            onChange={handleChange}
+          />
+          <InputRightElement>
+            <Button onClick={() => setShow(!show)}>Show</Button>
+          </InputRightElement>
+        </InputGroup>
       </FormControl>
       <Button onClick={handleSubmit} isLoading={isLoading}>
         Submit
