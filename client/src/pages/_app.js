@@ -39,6 +39,7 @@ function MyApp({ Component, pageProps }) {
         </Head>
         <Wrap zIndex="-2" position="fixed" h="100vh" w="100vw">
           <Image
+            alt="background image - clouds in a blue sky"
             priority
             loading="eager"
             src={backgroundImage}
