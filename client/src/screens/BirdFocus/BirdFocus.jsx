@@ -20,12 +20,12 @@ export const BirdFocus = (props) => {
   const [deleteFavorite, { isSuccess: favoriteDeleted }] =
     useDeleteFavoriteMutation();
   const user = useSelector(selectCurrentUser);
-  const dispatch = useDispatch();
   const [addFavorite, { isLoading: favoritePending }] =
     useAddFavoriteMutation();
   const router = useRouter();
   const id = router.query.id;
   const { data, error, isLoading } = useGetBirdByKeyQuery(id);
+
   const handleFavorite = async () => {
     try {
       if (favorited) {
@@ -83,11 +83,11 @@ export const BirdFocus = (props) => {
     <VStack my="3%">
       <Heading as="h1" size="lg">
         {bird.vernacularName ? bird.vernacularName : bird.scientificName}
-      </Heading>
-      <IconButton
+      <IconButton ml="0.5rem"
         onClick={handleFavorite}
         icon={favorited ? <MdFavorite /> : <MdFavoriteBorder />}
-      />
+        />
+        </Heading>
       <Bird
         url={bird.media[0].identifier}
         bird={bird}
