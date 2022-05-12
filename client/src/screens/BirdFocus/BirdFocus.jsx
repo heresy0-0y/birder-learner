@@ -94,6 +94,7 @@ export const BirdFocus = (props) => {
         name={bird.scientificName}
         taxonKey={bird.taxonKey}
         w="md"
+        maxW="70%"
         priority="true"
       />
     </VStack>

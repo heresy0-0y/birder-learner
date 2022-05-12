@@ -21,7 +21,7 @@ export default function (props) {
   let boxWidth = null;
   const [padding, setPadding] = useState("100%");
   const [height, setHeight] = useState("unset");
-  const { url, name, w, left, top, pos, h, taxonKey, auth, priority, sizes } =
+  const { url, name, w, left, top, pos, h, taxonKey, auth, priority, maxW, sizes } =
     props;
 
   const fallback = <SkeletonCircle w="100%" h="100%" />;
@@ -39,6 +39,7 @@ export default function (props) {
       <>
         <Box
           w={w}
+          maxW={maxW}
           h={height}
           left={left}
           priority={focus ? "true" : "false"}
