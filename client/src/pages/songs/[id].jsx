@@ -1,7 +1,11 @@
-import { wrapper } from "../../../store/store";
-import Songs from "../[id]";
+import { wrapper } from "../../store/store";
 import { Layout } from "../../layouts/core/";
 import { BirdFocus } from "../../screens/BirdFocus/BirdFocus";
+import {
+  getBirdByKey,
+  getSongsByBird,
+  getRunningOperationPromises,
+} from "../../common/services/birds";
 
 export default function Songs() {
   return (
@@ -10,11 +14,6 @@ export default function Songs() {
     </Layout>
   );
 }
-import {
-  getBirdByKey,
-  getSongsByBird,
-  getRunningOperationPromises,
-} from "../../../common/services/birds";
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
