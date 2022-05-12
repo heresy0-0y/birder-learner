@@ -6,7 +6,7 @@ import Image from "next/image";
 import { wrapper } from "../store/store.js";
 import { ChakraProvider, ColorModeProvider, Wrap } from "@chakra-ui/react";
 import theme from "../theme";
-// import backgroundImage from "../../public/bg1.webp";
+import backgroundImage from "../../public/bg1.webp";
 
 function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState({ user: null, token: null });
@@ -46,7 +46,7 @@ function MyApp({ Component, pageProps }) {
             alt="background image - clouds in a blue sky"
             priority
             loading="eager"
-            src={'/bg1.we'}
+            src={backgroundImage}
             layout="fill"
             placeholder="blur"
             quality="100"
