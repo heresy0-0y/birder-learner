@@ -1,14 +1,7 @@
-import BirdGrid from "../screens/BirdGrid/BirdGrid";
-import dynamic from "next/dynamic";
-import { useGetFavoritesQuery } from "../common/services/auth";
+import Home from "../screens/Home/Home";
 
 const Index = () => {
-  const BirdGrid = dynamic(() => import("../screens/BirdGrid/BirdGrid"), {
-    ssr: false,
-  });
-  const { data } = useGetFavoritesQuery();
-
-  return <BirdGrid></BirdGrid>;
+  return <Home></Home>;
 };
 
 export default Index;
