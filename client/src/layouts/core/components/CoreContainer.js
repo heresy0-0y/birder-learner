@@ -4,7 +4,7 @@ import Image from "next/image";
 const CoreContainer = (props) => {
   const { colorMode } = useColorMode();
 
-  const color = { light: "black", dark: "#C8FFBA" };
+  const color = { light: "#002A64", dark: "#C8FFBA" };
   return (
     <VStack
       minW="100vw"

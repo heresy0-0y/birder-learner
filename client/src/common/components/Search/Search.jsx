@@ -7,6 +7,7 @@ import {
   Box,
   InputRightElement,
   List,
+  MenuItem,
   ListItem,
   Popover,
   PopoverContent,
@@ -22,12 +23,13 @@ import { setLocation } from "../../../store/features/locationSlice";
 const Search = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [skip, setSkip] = useState(true);
-  const [distance, setDistance] = useState("10");
+  const [distance, setDistance] = useState("15");
   const [skipSearch, setSearchSkip] = useState(true);
   const suggestContainer = useRef(null);
   const [searchText, setText] = useState("");
   const [searchRequest, setSearch] = useState("");
   const [coords, setCoords] = useState();
+  const searchBar = useRef(null);
   const { data } = useGetSuggestionsQuery(searchText, { skip });
   const {
     data: location,
@@ -56,6 +58,7 @@ const Search = () => {
   }, [coords]);
 
   const handleSuggestSelect = (e) => {
+    searchBar.current.focus();
     setText(e.target.textContent);
   };
   const handleChange = (e) => {
@@ -83,26 +86,35 @@ const Search = () => {
   return (
     <Box w="100%">
       <InputGroup size="md" w="100%">
-        <Popover isOpen={isOpen.toString()}>
+        <Popover isOpen={isOpen.toString()} initialFocusRef={searchBar}>
           <PopoverAnchor>
             <Input
               pr=".5rem"
+              ref={searchBar}
               value={searchText}
               onChange={handleChange}
               onKeyDown={handleKBEnter}
             />
           </PopoverAnchor>
 
-          <PopoverContent display={searchText.length >= 2 ? "flex" : "none"}>
+          <PopoverContent
+            display={searchText.length >= 2 ? "flex" : "none"}
+            mt="-1.5"
+            w="100%"
+          >
             <PopoverBody>
               <List>
                 {data?.results.map((result, index) => (
-                  <ListItem
-                    key={index}
-                    onClick={handleSuggestSelect}
-                    value={result.displayString}
-                  >
-                    {result.displayString}
+                  <ListItem>
+                    <CButton
+                      size="sm"
+                      my="1%"
+                      key={index}
+                      onClick={handleSuggestSelect}
+                      value={result.displayString}
+                    >
+                      {result.displayString}
+                    </CButton>
                   </ListItem>
                 ))}
               </List>
@@ -112,8 +124,10 @@ const Search = () => {
 
         <InputRightElement width="4.5rem" ref={suggestContainer}>
           <CButton
+            isLoading={isLoading}
             variant="outline"
             borderLeftRadius="0px"
+            border="none"
             onClick={handleSearch}
           >
             Search

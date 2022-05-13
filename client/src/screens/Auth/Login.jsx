@@ -76,7 +76,9 @@ export default function (props) {
             onKeyDown={handleKBEnter}
           />
           <InputRightElement w="10%" minW="55px">
-            <Button onClick={() => setShow(!show)}>Show</Button>
+            <Button border="none" onClick={() => setShow(!show)}>
+              Show
+            </Button>
           </InputRightElement>
         </InputGroup>
       </FormControl>

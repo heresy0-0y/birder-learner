@@ -42,7 +42,7 @@ const Nav = () => {
   }, [localUser, dispatch]);
   const { colorMode } = useColorMode();
 
-  const color = { light: "black", dark: "#C8FFBA" };
+  const color = { light: "#002A64", dark: "#C8FFBA" };
   const inputMargin = useBreakpointValue({
     base: "0.5rem",
     sm: "4rem",

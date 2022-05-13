@@ -5,7 +5,7 @@ import Image from "next/image";
 export const Footer = (props) => {
   const { colorMode } = useColorMode();
 
-  const color = { light: "black", dark: "#C8FFBA" };
+  const color = { light: "#002A64", dark: "#C8FFBA" };
   return (
     <Box
       zIndex="1"

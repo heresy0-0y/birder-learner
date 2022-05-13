@@ -8,7 +8,6 @@ import {
 import {
   FormControl,
   FormLabel,
-  FormHelperText,
   InputGroup,
   InputRightElement,
   FormErrorMessage,
@@ -110,7 +109,9 @@ export default function () {
               mb="3%"
             />
             <InputRightElement w="10%" minW="55px">
-              <Button onClick={() => setShow(!show)}>Show</Button>
+              <Button border="none" onClick={() => setShow(!show)}>
+                Show
+              </Button>
             </InputRightElement>
           </InputGroup>
           <FormErrorMessage>

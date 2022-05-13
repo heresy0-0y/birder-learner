@@ -9,7 +9,11 @@ module.exports = withBundleAnalyzer({
     removeConsole: true,
   },
   images: {
-    domains: ["inaturalist-open-data.s3.amazonaws.com", "www.gbif.org"],
+    domains: [
+      "inaturalist-open-data.s3.amazonaws.com",
+      "www.gbif.org",
+      "static.inaturalist.org",
+    ],
     formats: ["image/avif", "image/webp"],
     deviceSizes: [360, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 350],

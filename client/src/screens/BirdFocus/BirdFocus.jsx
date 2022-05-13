@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { Bird } from "../../common/components";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import { VStack, Heading, IconButton } from "@chakra-ui/react";
 import { useGetBirdByKeyQuery } from "../../common/services/birds.js";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   useAddFavoriteMutation,
   useGetFavoritesQuery,
@@ -26,7 +25,7 @@ export const BirdFocus = (props) => {
     useAddFavoriteMutation();
   const router = useRouter();
   const id = router.query.id;
-  const { data, error, isLoading } = useGetBirdByKeyQuery(id, { skip });
+  const { data, isLoading } = useGetBirdByKeyQuery(id, { skip });
 
   const handleFavorite = async () => {
     try {
