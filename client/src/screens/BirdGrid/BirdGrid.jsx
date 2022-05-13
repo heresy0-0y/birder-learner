@@ -69,7 +69,7 @@ const BirdGrid = () => {
     if (currentPath.includes("favorites")) {
       const birds = birdsHere?.map((bird, index) => (
         <Link
-          url={`/songs/${bird.key}`}
+          url={`/songs/${bird.key}&${bird.taxonKey}`}
           key={bird.key}
           className={"item"}
           w="fit-content"
@@ -89,7 +89,7 @@ const BirdGrid = () => {
     } else {
       const birds = birdsHere?.map((bird, index) => (
         <Link
-          url={`songs/${bird.key}`}
+          url={`songs/${bird.key}/${bird.taxonKey}`}
           key={bird.key}
           className={"item"}
           maxW="min-content"
