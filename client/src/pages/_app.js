@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
-import { useDispatch } from "react-redux";
 import { Layout } from "../layouts/core";
-import { setCredentials } from "../store/features/authSlice";
 import Image from "next/image";
 import { wrapper } from "../store/store.js";
 import { ChakraProvider, ColorModeProvider, Flex } from "@chakra-ui/react";
@@ -22,6 +20,10 @@ function MyApp({ Component, pageProps }) {
           <meta
             name="viewport"
             content="viewport-fit=cover, width=device-width, initial-scale=1"
+          />
+          <meta
+            name="description"
+            content="Sounds Alive; see and hear birds in your neighborhood, aggregated from the Global Biodiversity Information Facility API"
           />
         </Head>
 
