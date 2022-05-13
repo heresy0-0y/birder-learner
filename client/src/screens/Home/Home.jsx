@@ -9,6 +9,7 @@ export default function (props) {
         <Image
           src={birdSilhouette}
           layout="responsive"
+          priority
           width="10%"
           height="10%"
           objectFit="contain"
@@ -41,6 +42,7 @@ export default function (props) {
       </Container>
       <Box boxSize="2xs" position="relative" alignItems="center">
         <Image
+          priority
           src={birdSilhouette}
           layout="fill"
           style={{ transform: "scaleX(-1)" }}
