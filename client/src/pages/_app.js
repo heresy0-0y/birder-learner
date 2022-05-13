@@ -5,7 +5,7 @@ import { Layout } from "../layouts/core";
 import { setCredentials } from "../store/features/authSlice";
 import Image from "next/image";
 import { wrapper } from "../store/store.js";
-import { ChakraProvider, ColorModeProvider, Wrap } from "@chakra-ui/react";
+import { ChakraProvider, ColorModeProvider, Container } from "@chakra-ui/react";
 import theme from "../theme";
 import backgroundImage from "../../public/bg1.webp";
 
@@ -43,7 +43,7 @@ function MyApp({ Component, pageProps }) {
           />
         </Head>
 
-        <Wrap zIndex="-2" position="fixed" h="100vh" w="100vw">
+        <Container zIndex="-2" position="fixed" h="100vh" w="100vw">
           <Image
             alt="background image - clouds in a blue sky"
             priority
@@ -54,7 +54,7 @@ function MyApp({ Component, pageProps }) {
             as="backgroundImage"
             objectFit="cover"
           />
-        </Wrap>
+        </Container>
         <Layout>
           <Component {...pageProps} />
         </Layout>

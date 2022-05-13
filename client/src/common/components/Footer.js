@@ -23,7 +23,7 @@ export const Footer = (props) => {
         GBIF: The Global Biodiversity Information Facility (2022) What is GBIF?.
         Available from https://www.gbif.org/what-is-gbif [13 January 2020].
       </Text>
-      <Image src={gbifLogo} layout="responsive" width="50%" height="3%" />
+      <Image src={gbifLogo} layout="responsive" width="50%" height="3%" alt="GBIF Logo - white" role="graphic"/>
     </Box>
   );
 };
