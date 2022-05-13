@@ -1,5 +1,4 @@
 import { wrapper } from "../../store/store";
-import { Layout } from "../../layouts/core/";
 import { BirdFocus } from "../../screens/BirdFocus/BirdFocus";
 import {
   getBirdByKey,
@@ -8,11 +7,7 @@ import {
 } from "../../common/services/birds";
 
 export default function Songs() {
-  return (
-    <Layout>
-      <BirdFocus />
-    </Layout>
-  );
+  return <BirdFocus></BirdFocus>;
 }
 
 export const getServerSideProps = wrapper.getServerSideProps(

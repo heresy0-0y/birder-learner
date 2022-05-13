@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { useDispatch } from "react-redux";
+import { Layout } from "../layouts/core";
 import { setCredentials } from "../store/features/authSlice";
 import Image from "next/image";
 import { wrapper } from "../store/store.js";
@@ -41,6 +42,7 @@ function MyApp({ Component, pageProps }) {
             content="viewport-fit=cover, width=device-width, initial-scale=1"
           />
         </Head>
+
         <Wrap zIndex="-2" position="fixed" h="100vh" w="100vw">
           <Image
             alt="background image - clouds in a blue sky"
@@ -53,7 +55,9 @@ function MyApp({ Component, pageProps }) {
             objectFit="cover"
           />
         </Wrap>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ColorModeProvider>
     </ChakraProvider>
   );

@@ -1,4 +1,3 @@
-import { Layout } from "../layouts/core";
 import BirdGrid from "../screens/BirdGrid/BirdGrid";
 
 import { wrapper } from "../store/store";
@@ -9,11 +8,7 @@ import {
 } from "../common/services/birds";
 
 const Search = () => {
-  return (
-    <Layout>
-      <BirdGrid />
-    </Layout>
-  );
+  return <BirdGrid></BirdGrid>;
 };
 
 export default Search;

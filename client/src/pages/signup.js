@@ -1,10 +1,5 @@
-import { Layout } from "../layouts/core/";
 import Signup from "../screens/Auth/Signup";
 
-const SignUp = () => (
-  <Layout>
-    <Signup />
-  </Layout>
-);
+const SignUp = () => <Signup></Signup>;
 
 export default SignUp;

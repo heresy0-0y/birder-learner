@@ -1,10 +1,5 @@
-import { Layout } from "../../layouts/core";
 import BirdGrid from "../../screens/BirdGrid/BirdGrid";
 
-const Favorites = () => (
-  <Layout>
-    <BirdGrid />
-  </Layout>
-);
+const Favorites = () => <BirdGrid></BirdGrid>;
 
 export default Favorites;
