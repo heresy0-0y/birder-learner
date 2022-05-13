@@ -1,4 +1,5 @@
-import { default as NextLink } from "next/link";
+import { useRef, useEffect, useState } from "react";
+import NextLink from "next/link";
 import { LinkOverlay as ChakraLink, LinkBox } from "@chakra-ui/react";
 
 const Link = (props) => {
@@ -7,7 +8,9 @@ const Link = (props) => {
   return (
     <LinkBox>
       <NextLink href={url} passHref>
-        <ChakraLink isExternal={external}>{props.children}</ChakraLink>
+        <ChakraLink isExternal={external} w="fit-content">
+          {props.children}
+        </ChakraLink>
       </NextLink>
     </LinkBox>
   );

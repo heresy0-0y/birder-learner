@@ -68,7 +68,12 @@ const BirdGrid = () => {
   useEffect(() => {
     if (currentPath.includes("favorites")) {
       const birds = birdsHere?.map((bird, index) => (
-        <Link url={`/songs/${bird.key}`} key={bird.key} className={"item"}>
+        <Link
+          url={`/songs/${bird.key}`}
+          key={bird.key}
+          className={"item"}
+          w="fit-content"
+        >
           <Bird
             w={width}
             maxW="95%"
@@ -83,16 +88,23 @@ const BirdGrid = () => {
       setRender(birds);
     } else {
       const birds = birdsHere?.map((bird, index) => (
-        <Link url={`songs/${bird.key}`} key={bird.key} className={"item"}>
-          <Bird
-            w={width}
-            maxW="95%"
-            priority={index < 10 ? "true" : "false"}
-            name={bird.scientificName}
-            url={bird.media[0].identifier}
-            key={bird.key}
-            sizes={sizes}
-          />
+        <Link
+          url={`songs/${bird.key}`}
+          key={bird.key}
+          className={"item"}
+          maxW="min-content"
+        >
+          <Box minW="100%">
+            <Bird
+              w={width}
+              maxW="95%"
+              priority={index < 10 ? "true" : "false"}
+              name={bird.scientificName}
+              url={bird.media[0].identifier}
+              key={bird.key}
+              sizes={sizes}
+            />
+          </Box>
         </Link>
       ));
       setRender(birds);
@@ -108,7 +120,7 @@ const BirdGrid = () => {
   }
 
   return (
-    <VStack w="100%" overflow="hidden" minH="100%" my="3%">
+    <VStack w="100%" overflow="hidden" minH="100%" my="2%">
       <Box w="100%">
         <MasonryGrid
           className="container"

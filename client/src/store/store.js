@@ -25,6 +25,6 @@ export const store = configureStore({
 
 export const makeStore = () => store;
 
-export const wrapper = createWrapper(makeStore, { debug: true });
+export const wrapper = createWrapper(makeStore);
 
 setupListeners(store.dispatch);

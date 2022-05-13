@@ -6,15 +6,16 @@ import {
   Center,
   MenuList,
   MenuButton,
+  ButtonGroup,
   MenuItem,
-  Button as CButton,
+  Button,
   useBreakpointValue,
   useColorMode,
 } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
-import { Button } from "../Buttons/Button.jsx";
+
 import {
   selectCurrentUser,
   setCredentials,
@@ -92,7 +93,7 @@ const Nav = () => {
               direction="row"
               mt="0.5rem"
               ml="0.5rem"
-              as={CButton}
+              as={Button}
               rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
             >
               {" "}
@@ -132,7 +133,7 @@ const Nav = () => {
               right="0.5rem"
               mt="0.5rem"
               ml="0.5rem"
-              as={CButton}
+              as={Button}
               rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
             >
               {" "}
@@ -152,14 +153,22 @@ const Nav = () => {
       </Menu>
       <Flex
         mt="0.5rem"
+        ml="0.5rem"
         direction="row"
         w="100%"
         display={{ base: "none", lg: "flex" }}
       >
-        {links.map((link, index) => (
-          <Button text={link.text} url={link.url} key={index} />
-        ))}
-
+        <ButtonGroup isAttached>
+          {links.map((link, index) => (
+            <Button
+              variant="ghost"
+              onClick={() => router.push(link.url)}
+              key={index}
+            >
+              {link.text}
+            </Button>
+          ))}
+        </ButtonGroup>
         <Box w="5%" />
         {currentPath.includes("search") ? <Search /> : null}
         <Box w="30%" />

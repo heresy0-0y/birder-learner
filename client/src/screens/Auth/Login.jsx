@@ -76,13 +76,23 @@ export default function (props) {
             onKeyDown={handleKBEnter}
           />
           <InputRightElement w="10%" minW="55px">
-            <Button h="95%" w="95%" bg="hsla(210, 38%, 95%, 0.1)" border="none" onClick={() => setShow(!show)}>
+            <Button
+              h="95%"
+              w="95%"
+              bg="hsla(210, 38%, 95%, 0.1)"
+              border="none"
+              onClick={() => setShow(!show)}
+            >
               Show
             </Button>
           </InputRightElement>
         </InputGroup>
       </FormControl>
-      <Button bg="hsla(210, 38%, 95%, 0.1)" onClick={handleSubmit} isLoading={isLoading}>
+      <Button
+        bg="hsla(210, 38%, 95%, 0.1)"
+        onClick={handleSubmit}
+        isLoading={isLoading}
+      >
         Submit
       </Button>
     </Container>
