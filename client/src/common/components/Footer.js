@@ -30,7 +30,6 @@ export const Footer = (props) => {
         width="50%"
         height="3%"
         alt="GBIF Logo - white"
-        role="graphic"
       />
     </Box>
   );
