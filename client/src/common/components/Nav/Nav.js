@@ -51,7 +51,11 @@ const Nav = () => {
   useEffect(() => {
     if (typeof user !== "string" && user) {
       setGreeting(`Hello, ${user.first_name}!`);
-      setLinks((prev) => [...prev].filter((link) => link.text === "Home" || link.text === "Search"));
+      setLinks((prev) =>
+        [...prev].filter(
+          (link) => link.text === "Home" || link.text === "Search"
+        )
+      );
     }
   }, [user]);
 
