@@ -53,12 +53,13 @@ const Nav = () => {
   const currentPath = router.asPath;
   const user = useSelector(selectCurrentUser);
   const [userGreeting, setGreeting] = useState(null);
-  const [links, setLinks] = useState([
+  const initialLinks = [
     { text: "Home", url: "/" },
     { text: "Sign Up", url: "/signup" },
     { text: "Log In", url: "/login" },
     { text: "Search", url: "/search" },
-  ]);
+  ];
+  const [links, setLinks] = useState(initialLinks);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -74,6 +75,8 @@ const Nav = () => {
           (link) => link.text === "Home" || link.text === "Search"
         )
       );
+    } else {
+      setLinks(initialLinks);
     }
   }, [user]);
 
