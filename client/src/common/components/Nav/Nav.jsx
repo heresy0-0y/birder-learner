@@ -152,6 +152,7 @@ const Nav = () => {
         )}
       </Menu>
       <Flex
+        color={color[colorMode]}
         mt="0.5rem"
         ml="0.5rem"
         direction="row"
@@ -161,6 +162,7 @@ const Nav = () => {
         <ButtonGroup isAttached>
           {links.map((link, index) => (
             <Button
+              color={color[colorMode]}
               variant="ghost"
               onClick={() => router.push(link.url)}
               key={index}

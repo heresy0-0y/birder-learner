@@ -7,7 +7,7 @@ import {
   Box,
   InputRightElement,
   List,
-  MenuItem,
+  useColorMode,
   ListItem,
   Popover,
   PopoverContent,
@@ -39,6 +39,9 @@ const Search = () => {
     skip: skipSearch,
   });
   const dispatch = useDispatch();
+  const { colorMode } = useColorMode();
+
+  const color = { light: "#002A64", dark: "#C8FFBA" };
 
   useEffect(() => {
     if (location?.results) {
@@ -89,6 +92,7 @@ const Search = () => {
         <Popover isOpen={isOpen.toString()} initialFocusRef={searchBar}>
           <PopoverAnchor>
             <Input
+              borderColor={color[colorMode]}
               pr=".5rem"
               ref={searchBar}
               value={searchText}
@@ -124,6 +128,7 @@ const Search = () => {
 
         <InputRightElement width="4.5rem" ref={suggestContainer}>
           <CButton
+            color={color[colorMode]}
             h="95%"
             w="95%"
             isLoading={isLoading}
