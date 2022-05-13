@@ -124,6 +124,8 @@ const Search = () => {
 
         <InputRightElement width="4.5rem" ref={suggestContainer}>
           <CButton
+            h="95%"
+            w="95%"
             isLoading={isLoading}
             variant="outline"
             borderLeftRadius="0px"

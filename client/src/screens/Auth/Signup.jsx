@@ -109,7 +109,7 @@ export default function () {
               mb="3%"
             />
             <InputRightElement w="10%" minW="55px">
-              <Button border="none" onClick={() => setShow(!show)}>
+              <Button border="none" h="95%" w="95%" bg="hsla(210, 38%, 95%, 0.1)" onClick={() => setShow(!show)}>
                 Show
               </Button>
             </InputRightElement>
@@ -118,7 +118,7 @@ export default function () {
             password must be at least 7 characters
           </FormErrorMessage>
         </FormControl>
-        <Button type="submit" onClick={handleSubmit} isLoading={isLoading}>
+        <Button type="submit" onClick={handleSubmit} isLoading={isLoading} bg="hsla(210, 38%, 95%, 0.1)">
           Sign Up{" "}
         </Button>
       </FormControl>
