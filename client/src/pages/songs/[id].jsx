@@ -18,7 +18,7 @@ export default function Songs() {
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (context) => {
     const id = context.params?.name;
-    if (id.length > 4) {
+    if (id?.length > 4) {
       store.dispatch(getBirdByKey.initiate(id));
     }
 
