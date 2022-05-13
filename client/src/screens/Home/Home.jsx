@@ -13,7 +13,7 @@ export default function (props) {
       <Image src={birdSilhouette} layout="fill" alt="sounds alive logo - silhouette of a hummingbird in a yellow-green gradient" />
       </Box>
       </Flex>
-      <Text mb="3%" align="center">
+      <Text mt="5%" mb="3%" align="center">
         Thank you for stopping by. We have so much to share. Your city’s
         feathered denizens are waiting to meet you and sing you their songs.
       </Text>
