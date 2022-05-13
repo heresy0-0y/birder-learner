@@ -24,7 +24,7 @@ import Search from "../Search/Search";
 const Nav = () => {
   const { colorMode } = useColorMode();
 
-  const color = { light: "black", dark: "white" };
+  const color = { light: "white", dark: "white" };
   const inputMargin = useBreakpointValue({
     base: "0.5rem",
     sm: "4rem",
