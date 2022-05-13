@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { Bird } from "../../common/components";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
@@ -93,6 +94,7 @@ export const BirdFocus = (props) => {
       <Heading as="h1" size="lg">
         {bird.vernacularName ? bird.vernacularName : bird.scientificName}
         <IconButton
+          bg="hsla(210, 38%, 95%, 0.1)"
           ml="0.5rem"
           onClick={handleFavorite}
           icon={favorited ? <MdFavorite /> : <MdFavoriteBorder />}

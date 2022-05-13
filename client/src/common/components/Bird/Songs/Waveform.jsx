@@ -74,7 +74,7 @@ const Waveform = ({ url }) => {
         <div id="waveform" ref={waveform} />
       </Skeleton>
       <Flex direction="column" justify="center" mt="1rem">
-        <Button m="4" onClick={handlePlayPause}>
+        <Button m="4" onClick={handlePlayPause} bg="hsla(210, 38%, 95%, 0.1)">
           {play ? "pause" : "play"}
         </Button>
         <Slider

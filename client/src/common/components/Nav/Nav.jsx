@@ -22,16 +22,34 @@ import {
 
 import Search from "../Search/Search";
 const Nav = () => {
+  const [localUser, setUser] = useState({ user: null, token: null });
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const checkForSession = async () => {
+      const localUserString = localStorage.getItem("user");
+      const localUser = JSON.parse(localUserString);
+      if (localUser !== null) {
+        if (Object.keys(localUser).includes("user")) {
+          setUser(localUser);
+        }
+      }
+    };
+    checkForSession();
+  }, []);
+  useEffect(() => {
+    dispatch(setCredentials(localUser));
+  }, [localUser, dispatch]);
   const { colorMode } = useColorMode();
 
-  const color = { light: "black", dark: "white" };
+  const color = { light: "black", dark: "#C8FFBA" };
   const inputMargin = useBreakpointValue({
     base: "0.5rem",
     sm: "4rem",
     md: "7rem",
   });
   const router = useRouter();
-  const dispatch = useDispatch();
+
   const currentPath = router.asPath;
   const user = useSelector(selectCurrentUser);
   const [userGreeting, setGreeting] = useState(null);
@@ -65,6 +83,7 @@ const Nav = () => {
         {({ isOpen }) => (
           <>
             <MenuButton
+              bg="hsla(210, 38%, 95%, 0.1)"
               display={{ base: "flex", lg: "none" }}
               isActive={isOpen}
               direction="row"
@@ -102,6 +121,7 @@ const Nav = () => {
         {({ isOpen }) => (
           <>
             <MenuButton
+              bg="hsla(210, 38%, 95%, 0.1)"
               position="absolute"
               display={user ? "flex" : "none"}
               isActive={isOpen}

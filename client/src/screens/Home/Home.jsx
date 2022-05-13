@@ -2,14 +2,15 @@ import Image from "next/image";
 import { Heading, Container, Text, Box, Flex } from "@chakra-ui/react";
 import birdSilhouette from "../../../public/bird-silhouette.webp";
 
-
 export default function (props) {
   return (
-    <Flex direction="row" align="center">
-      <Box boxSize="2xs" position="relative" alignItems="center">
+    <Flex direction="column" align="center">
+      <Box w="3xs" position="relative" alignItems="center">
         <Image
           src={birdSilhouette}
-          layout="fill"
+          layout="responsive"
+          width="10%"
+          height="10%"
           objectFit="contain"
           alt="sounds alive logo - silhouette of a hummingbird in a yellow-green gradient"
         />
@@ -38,11 +39,11 @@ export default function (props) {
           right outside our windows?
         </Text>
       </Container>
-      <Box  boxSize="2xs" position="relative" alignItems="center">
+      <Box boxSize="2xs" position="relative" alignItems="center">
         <Image
           src={birdSilhouette}
           layout="fill"
-          style={{transform: "scaleX(-1)"}}
+          style={{ transform: "scaleX(-1)" }}
           objectFit="contain"
           alt="sounds alive logo - silhouette of a hummingbird in a yellow-green gradient"
         />
