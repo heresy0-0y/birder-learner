@@ -5,20 +5,14 @@ import { Layout } from "../layouts/core";
 import { setCredentials } from "../store/features/authSlice";
 import Image from "next/image";
 import { wrapper } from "../store/store.js";
-import {
-  ChakraProvider,
-  ColorModeProvider,
-  Container,
-  Wrap,
-  Flex,
-  Box,
-} from "@chakra-ui/react";
+import { ChakraProvider, ColorModeProvider, Flex } from "@chakra-ui/react";
 import theme from "../theme";
 import backgroundImage from "../../public/bg1.webp";
 
 function MyApp({ Component, pageProps }) {
   const [user, setUser] = useState({ user: null, token: null });
   const dispatch = useDispatch();
+
   useEffect(() => {
     const checkForSession = async () => {
       const localUserString = localStorage.getItem("user");

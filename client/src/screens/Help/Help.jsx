@@ -8,7 +8,7 @@ import {
   List,
   ListItem,
 } from "@chakra-ui/react";
-import birdSilhouette from "../../../public/0.5x-bird-silhouette.webp";
+import birdSilhouette from "../../../public/bird-silhouette.webp";
 
 export default function (props) {
   return (

@@ -1,14 +1,16 @@
 import Image from "next/image";
 import { Heading, Container, Text, Box, Flex } from "@chakra-ui/react";
-import birdSilhouette from "../../../public/0.5x-bird-silhouette.webp";
+import birdSilhouette from "../../../public/bird-silhouette.webp";
+
 
 export default function (props) {
   return (
-    <Flex direction="column" align="center">
-      <Box w="sm" boxSize="3xs" position="relative" alignItems="center">
+    <Flex direction="row" align="center">
+      <Box boxSize="2xs" position="relative" alignItems="center">
         <Image
           src={birdSilhouette}
           layout="fill"
+          objectFit="contain"
           alt="sounds alive logo - silhouette of a hummingbird in a yellow-green gradient"
         />
       </Box>
@@ -36,6 +38,15 @@ export default function (props) {
           right outside our windows?
         </Text>
       </Container>
+      <Box  boxSize="2xs" position="relative" alignItems="center">
+        <Image
+          src={birdSilhouette}
+          layout="fill"
+          style={{transform: "scaleX(-1)"}}
+          objectFit="contain"
+          alt="sounds alive logo - silhouette of a hummingbird in a yellow-green gradient"
+        />
+      </Box>
     </Flex>
   );
 }
