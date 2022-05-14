@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }) {
           <title>Sounds Alive</title>
           <meta
             name="viewport"
-            content="viewport-fit=cover, width=device-width, initial-scale=1"
+            content="viewport-fit=cover, width=device-width, height=device-height, initial-scale=1"
           />
           <meta
             name="description"
