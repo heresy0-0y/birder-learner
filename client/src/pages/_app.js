@@ -1,29 +1,12 @@
-import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { Layout } from "../layouts/core";
 import Image from "next/image";
 import { wrapper } from "../store/store.js";
-import {
-  ChakraProvider,
-  ColorModeProvider,
-  Box,
-  Container,
-  Flex,
-  Wrap,
-  useColorMode,
-} from "@chakra-ui/react";
+import { ChakraProvider, ColorModeProvider, Box, Flex } from "@chakra-ui/react";
 import theme from "../theme";
 import backgroundImage from "../../public/bg1.webp";
 
 function MyApp({ Component, pageProps }) {
-  const { colorMode } = useColorMode();
-  const opacity = { light: 0.5, dark: 0.7 };
-  const [opacityMode, setOpacity] = useState(opacity[colorMode]);
-  const bgFilterColor = { light: "#ACC1DF", dark: "#13315A" };
-
-  useEffect(() => {
-    setOpacity(opacity[colorMode]);
-  }, [colorMode]);
   return (
     <ChakraProvider resetCSS theme={theme}>
       <ColorModeProvider
