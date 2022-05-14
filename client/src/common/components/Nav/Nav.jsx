@@ -5,6 +5,7 @@ import {
   Menu,
   Center,
   MenuList,
+  Spacer,
   MenuButton,
   ButtonGroup,
   MenuItem,
@@ -82,95 +83,19 @@ const Nav = () => {
   }, [user]);
 
   return (
-    <Flex
-      wrap="wrap"
-      mt="0"
-      w="100%"
-      direction="row"
-      align="center"
-      justify="space-between"
-      color={color[colorMode]}
-    >
-      <Menu>
-        {({ isOpen }) => (
-          <>
-            <MenuButton
-              bg="hsla(210, 38%, 95%, 0.1)"
-              display={{ base: "flex", lg: "none" }}
-              isActive={isOpen}
-              direction="row"
-              as={Button}
-              rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
-            >
-              {" "}
-              Menu{" "}
-            </MenuButton>
-            {/* <Center
-              w="50%"
-              display={
-                currentPath.includes("search")
-                  ? { base: "flex", lg: "none" }
-                  : "none"
-              }
-            >
-              <Search />
-            </Center> */}
-            <MenuList zIndex={2}>
-              {links.map((link, index) => (
-                <MenuItem onClick={() => router.push(link.url)} key={index}>
-                  {link.text}
-                </MenuItem>
-              ))}
-            </MenuList>
-          </>
-        )}
-      </Menu>{" "}
-      <Menu>
-        {({ isOpen }) => (
-          <>
-            <MenuButton
-              bg="hsla(210, 38%, 95%, 0.1)"
-              display={user ? "flex" : "none"}
-              isActive={isOpen}
-              direction="row"
-              as={Button}
-              rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
-            >
-              {" "}
-              {userGreeting}
-            </MenuButton>
-            <Center
-              // flexBasis="50%"
-              w="100%"
-              display={
-                currentPath.includes("search")
-                  ? { base: "flex", lg: "none" }
-                  : "none"
-              }
-            >
-              <Search />
-            </Center>
-            <MenuList zIndex={2}>
-              <MenuItem
-                onClick={() => router.push(`/${user.username}/favorites`)}
-                key={"favorites"}
-              >
-                Favorites
-              </MenuItem>
-              <MenuItem onClick={handleLogout}>Logout</MenuItem>
-            </MenuList>
-          </>
-        )}
-      </Menu>
+    <>
       <Flex
-        color={color[colorMode]}
-        mt="0.5rem"
-        ml="0.5rem"
         direction="row"
+        wrap="wrap"
+        mt="0.7rem"
+        px="0.7rem"
         w="100%"
-        display={{ base: "none", lg: "flex" }}
+        minW="100vw"
+        align="center"
+        justify="space-between"
+        color={color[colorMode]}
       >
-        <ButtonGroup isAttached>
+        <ButtonGroup isAttached display={{ base: "none", lg: "flex" }}>
           {links.map((link, index) => (
             <Button
               color={color[colorMode]}
@@ -182,11 +107,68 @@ const Nav = () => {
             </Button>
           ))}
         </ButtonGroup>
-        <Box w="5%" />
-        {currentPath.includes("search") ? <Search /> : null}
-        <Box w="30%" />
+        <Menu flex-basis="20%">
+          {({ isOpen }) => (
+            <>
+              <MenuButton
+                bg="hsla(210, 38%, 95%, 0.1)"
+                display={{ base: "flex", lg: "none" }}
+                isActive={isOpen}
+                direction="row"
+                as={Button}
+                rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+              >
+                {" "}
+                Menu{" "}
+              </MenuButton>
+              <MenuList zIndex={2}>
+                {links.map((link, index) => (
+                  <MenuItem onClick={() => router.push(link.url)} key={index}>
+                    {link.text}
+                  </MenuItem>
+                ))}
+              </MenuList>
+            </>
+          )}
+        </Menu>{" "}
+        <Menu>
+          {({ isOpen }) => (
+            <>
+              <MenuButton
+                bg="hsla(210, 38%, 95%, 0.1)"
+                display={user ? "flex" : "none"}
+                isActive={isOpen}
+                direction="row"
+                as={Button}
+                rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+              >
+                {" "}
+                {userGreeting}
+              </MenuButton>
+              <Box
+                flexBasis="100%"
+                display={currentPath.includes("search") ? "inherit" : "none"}
+              >
+                <Spacer />
+                <Box w="70%">
+                  <Search />
+                </Box>
+                <Spacer />
+              </Box>
+              <MenuList zIndex={2}>
+                <MenuItem
+                  onClick={() => router.push(`/${user.username}/favorites`)}
+                  key={"favorites"}
+                >
+                  Favorites
+                </MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              </MenuList>
+            </>
+          )}
+        </Menu>
       </Flex>
-    </Flex>
+    </>
   );
 };
 

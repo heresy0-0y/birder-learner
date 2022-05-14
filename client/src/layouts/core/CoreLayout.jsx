@@ -7,7 +7,7 @@ const CoreLayout = (props) => {
   const opacity = { light: 0.5, dark: 0.7 };
   const bgFilterColor = { light: "#ACC1DF", dark: "#13315A" };
   return (
-    <Flex mt="-1%" w="100%" h="100%" direction="column" align="center">
+    <Flex w="100%" h="100%" direction="column" align="center">
       <Nav />
       <Container>{props.children}</Container>
       <Footer />
