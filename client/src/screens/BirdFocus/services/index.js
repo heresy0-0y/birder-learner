@@ -1,0 +1,1 @@
+export { handleFavorite } from "./handleFavorite";

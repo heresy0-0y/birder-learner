@@ -2,7 +2,13 @@ import React, { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { MasonryInfiniteGrid as MasonryGrid } from "@egjs/react-infinitegrid";
-import { Spinner, Box, useBreakpointValue, VStack } from "@chakra-ui/react";
+import {
+  Spinner,
+  Box,
+  useBreakpointValue,
+  VStack,
+  Flex,
+} from "@chakra-ui/react";
 import { Bird, Link } from "../../common/components";
 import {
   useGetBirdsByIPCountryCodeQuery,
@@ -92,19 +98,16 @@ const BirdGrid = () => {
           url={`songs/${bird.key}/${bird.taxonKey}`}
           key={bird.key}
           className={"item"}
-          maxW="min-content"
         >
-          <Box minW="100%">
-            <Bird
-              w={width}
-              maxW="95%"
-              priority={index < 10 ? "true" : "false"}
-              name={bird.scientificName}
-              url={bird.media[0].identifier}
-              key={bird.key}
-              sizes={sizes}
-            />
-          </Box>
+          <Bird
+            w={width}
+            maxW="100%"
+            priority={index < 10 ? "true" : "false"}
+            name={bird.scientificName}
+            url={bird.media[0].identifier}
+            key={bird.key}
+            sizes={sizes}
+          />
         </Link>
       ));
       setRender(birds);
@@ -113,27 +116,27 @@ const BirdGrid = () => {
 
   if (isLoading || favoritesLoading) {
     return (
-      <VStack w="100%" overflow="hidden" minH="100%" my="3%">
+      <VStack w="100%" minH="100%" my="3%">
         <Spinner />
       </VStack>
     );
   }
 
   return (
-    <VStack w="100%" overflow="hidden" minH="100%" my="2%">
+    <Flex direction="column" align="center" h="100%" w="100%" my="2%">
       <Box w="100%">
         <MasonryGrid
           className="container"
           column={column}
           align="center"
           gap={gap}
-          width="100%"
-          resizeDebounce="0"
+          width="100vw"
+          resizeDebounce="20"
         >
           {renderBirds}
         </MasonryGrid>
       </Box>
-    </VStack>
+    </Flex>
   );
 };
 export default BirdGrid;

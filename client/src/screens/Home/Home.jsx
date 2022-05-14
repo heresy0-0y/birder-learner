@@ -17,7 +17,7 @@ export default function (props) {
         />
       </Box>
 
-      <Container my="5%">
+      <Container my="5%" zIndex={1}>
         <Heading align="center" mb="5%">
           Welcome to Sounds Alive
         </Heading>

@@ -3,11 +3,27 @@ import Head from "next/head";
 import { Layout } from "../layouts/core";
 import Image from "next/image";
 import { wrapper } from "../store/store.js";
-import { ChakraProvider, ColorModeProvider, Flex } from "@chakra-ui/react";
+import {
+  ChakraProvider,
+  ColorModeProvider,
+  Box,
+  Container,
+  Flex,
+  Wrap,
+  useColorMode,
+} from "@chakra-ui/react";
 import theme from "../theme";
 import backgroundImage from "../../public/bg1.webp";
 
 function MyApp({ Component, pageProps }) {
+  const { colorMode } = useColorMode();
+  const opacity = { light: 0.5, dark: 0.7 };
+  const [opacityMode, setOpacity] = useState(opacity[colorMode]);
+  const bgFilterColor = { light: "#ACC1DF", dark: "#13315A" };
+
+  useEffect(() => {
+    setOpacity(opacity[colorMode]);
+  }, [colorMode]);
   return (
     <ChakraProvider resetCSS theme={theme}>
       <ColorModeProvider
@@ -27,17 +43,33 @@ function MyApp({ Component, pageProps }) {
           />
         </Head>
 
-        <Flex zIndex="-2" position="fixed" h="100vh" w="100vw">
-          <Image
-            alt="background image - clouds in a blue sky"
-            priority
-            loading="eager"
-            src={backgroundImage}
-            layout="fill"
-            placeholder="blur"
-            as="backgroundImage"
-            objectFit="cover"
-          />
+        <Flex
+          position="static"
+          w="100"
+          h="100%"
+          direction="column"
+          align="center"
+        >
+          <Box
+            zIndex="-3"
+            position="fixed"
+            w="100%"
+            h="100%"
+            top="0"
+            bottom="0"
+            left="0"
+          >
+            <Image
+              alt="background image - clouds in a blue sky"
+              priority
+              loading="eager"
+              src={backgroundImage}
+              layout="fill"
+              placeholder="blur"
+              as="backgroundImage"
+              objectFit="cover"
+            />
+          </Box>
         </Flex>
         <Layout>
           <Component {...pageProps} />

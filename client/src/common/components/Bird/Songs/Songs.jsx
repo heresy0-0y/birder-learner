@@ -52,7 +52,9 @@ const Songs = ({ taxonKey }) => {
         const locations = result.locations[0];
 
         const cityOrCounty = `${
-          locations?.adminArea5 !== "" && !/\d/.test(locations.adminArea5)
+          locations?.adminArea5 !== "" &&
+          locations?.adminArea5 &&
+          !/\d/.test(locations.adminArea5)
             ? locations?.adminArea5
             : locations?.adminArea4
         }`;

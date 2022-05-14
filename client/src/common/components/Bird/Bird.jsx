@@ -52,10 +52,9 @@ export default function (props) {
       <>
         <Box
           w={w}
-          maxW={maxW}
+          maxW={maxW ? maxW : null}
           h={height}
           maxH={maxH}
-          left={left}
           priority={focus ? "true" : "false"}
           pb={height}
           top={top}

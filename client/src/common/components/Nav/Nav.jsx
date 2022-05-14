@@ -82,7 +82,14 @@ const Nav = () => {
   }, [user]);
 
   return (
-    <Box mt="0" w="100%" display="flex" color={color[colorMode]}>
+    <Flex
+      mt="0"
+      w="100%"
+      direction="row"
+      align="center"
+      justify="space-between"
+      color={color[colorMode]}
+    >
       <Menu>
         {({ isOpen }) => (
           <>
@@ -91,8 +98,6 @@ const Nav = () => {
               display={{ base: "flex", lg: "none" }}
               isActive={isOpen}
               direction="row"
-              mt="0.5rem"
-              ml="0.5rem"
               as={Button}
               rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
             >
@@ -101,8 +106,6 @@ const Nav = () => {
             </MenuButton>
             <Center
               w="50%"
-              ml={inputMargin}
-              mt="0.5rem"
               display={
                 currentPath.includes("search")
                   ? { base: "flex", lg: "none" }
@@ -126,13 +129,9 @@ const Nav = () => {
           <>
             <MenuButton
               bg="hsla(210, 38%, 95%, 0.1)"
-              position="absolute"
               display={user ? "flex" : "none"}
               isActive={isOpen}
               direction="row"
-              right="0.5rem"
-              mt="0.5rem"
-              ml="0.5rem"
               as={Button}
               rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
             >
@@ -175,7 +174,7 @@ const Nav = () => {
         {currentPath.includes("search") ? <Search /> : null}
         <Box w="30%" />
       </Flex>
-    </Box>
+    </Flex>
   );
 };
 

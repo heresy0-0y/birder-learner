@@ -20,12 +20,11 @@ const Waveform = ({ url }) => {
 
   useEffect(() => {
     setPlay(false);
-    setLoading(true);
 
     waveform.current = WaveSurfer.create({
       container: waveform.current,
-      waveColor: "#00A877",
-      progressColor: "#acbf60",
+      waveColor: "#00F2AB",
+      progressColor: "#C8FFBA",
       barWidth: 3,
       responsive: true,
       barRadius: 2,
@@ -38,6 +37,7 @@ const Waveform = ({ url }) => {
     if (url !== undefined) {
       waveform.current.load(`https://corsanyblah.herokuapp.com/${url}`);
     }
+    setLoading(true);
     waveform.current.on("ready", function () {
       waveform.current.setVolume(0.1);
       waveform.current.pause();
@@ -46,6 +46,9 @@ const Waveform = ({ url }) => {
   }, [url]);
 
   useEffect(() => {
+    waveform.current.on("waveform-ready", function () {
+      setLoading(false);
+    });
     waveform.current.on("finish", function () {
       setPlay(false);
     });

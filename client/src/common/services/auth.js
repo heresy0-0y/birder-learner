@@ -58,3 +58,5 @@ export const {
   useAddFavoriteMutation,
   useDeleteFavoriteMutation,
 } = authApi;
+
+export const { getFavorites } = authApi.endpoints;
