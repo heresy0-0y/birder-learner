@@ -95,6 +95,7 @@ export const BirdFocus = (props) => {
         <IconButton
           bg="hsla(210, 38%, 95%, 0.1)"
           ml="0.5rem"
+          aria-label="favorite"
           onClick={handleFavorite}
           icon={favorited ? <MdFavorite /> : <MdFavoriteBorder />}
         />

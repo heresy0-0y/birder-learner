@@ -25,7 +25,7 @@ import Search from "../Search/Search";
 const Nav = () => {
   const [localUser, setUser] = useState({ user: null, token: null });
   const dispatch = useDispatch();
-
+  const searchLine = useBreakpointValue({base: ''})
   useEffect(() => {
     const checkForSession = async () => {
       const localUserString = localStorage.getItem("user");
@@ -83,6 +83,7 @@ const Nav = () => {
 
   return (
     <Flex
+    wrap="wrap"
       mt="0"
       w="100%"
       direction="row"
@@ -104,7 +105,7 @@ const Nav = () => {
               {" "}
               Menu{" "}
             </MenuButton>
-            <Center
+            {/* <Center
               w="50%"
               display={
                 currentPath.includes("search")
@@ -113,7 +114,7 @@ const Nav = () => {
               }
             >
               <Search />
-            </Center>
+            </Center> */}
             <MenuList zIndex={2}>
               {links.map((link, index) => (
                 <MenuItem onClick={() => router.push(link.url)} key={index}>
@@ -138,6 +139,17 @@ const Nav = () => {
               {" "}
               {userGreeting}
             </MenuButton>
+            <Center
+            // flexBasis="50%"
+              w="100%"
+              display={
+                currentPath.includes("search")
+                  ? { base: "flex", lg: "none" }
+                  : "none"
+              }
+            >
+              <Search />
+            </Center>
             <MenuList zIndex={2}>
               <MenuItem
                 onClick={() => router.push(`/${user.username}/favorites`)}

@@ -5,7 +5,7 @@ import { HYDRATE } from "next-redux-wrapper";
 export const birdsInitApi = createApi({
   reducerPath: "birdsInitApi",
   baseQuery: fetchBaseQuery({ baseUrl: "https://api.gbif.org/v1/occurrence/" }),
-  keepUnusedDataFor: 2147483647,
+  keepUnusedDataFor: 2147483,
   extractRehydrationInfo(action, { reducerPath }) {
     if (action.type === HYDRATE) {
       return action.payload[reducerPath];

@@ -100,7 +100,7 @@ export default function () {
         />
         <FormControl isInvalid={passwordError} isRequired>
           <FormLabel htmlFor="password">Password</FormLabel>
-          <InputGroup w="10%">
+          <InputGroup>
             <Input
               onKeyDown={handleKBEnter}
               name="password"

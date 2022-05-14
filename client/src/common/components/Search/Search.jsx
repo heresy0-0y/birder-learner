@@ -87,7 +87,7 @@ const Search = () => {
   };
 
   return (
-    <Box w="100%">
+    <Box w="90%" mt="3%">
       <InputGroup size="md" w="100%">
         <Popover isOpen={isOpen.toString()} initialFocusRef={searchBar}>
           <PopoverAnchor>
