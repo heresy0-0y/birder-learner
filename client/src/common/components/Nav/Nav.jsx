@@ -25,7 +25,7 @@ import Search from "../Search/Search";
 const Nav = () => {
   const [localUser, setUser] = useState({ user: null, token: null });
   const dispatch = useDispatch();
-  const searchLine = useBreakpointValue({base: ''})
+  const searchLine = useBreakpointValue({ base: "" });
   useEffect(() => {
     const checkForSession = async () => {
       const localUserString = localStorage.getItem("user");
@@ -83,7 +83,7 @@ const Nav = () => {
 
   return (
     <Flex
-    wrap="wrap"
+      wrap="wrap"
       mt="0"
       w="100%"
       direction="row"
@@ -140,7 +140,7 @@ const Nav = () => {
               {userGreeting}
             </MenuButton>
             <Center
-            // flexBasis="50%"
+              // flexBasis="50%"
               w="100%"
               display={
                 currentPath.includes("search")
