@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Input,
   InputGroup,
@@ -19,7 +19,10 @@ import {
   useGetSuggestionsQuery,
   useGetCoordsQuery,
 } from "../../services/autosuggest";
-import { setLocation } from "../../../store/features/locationSlice";
+import {
+  setLocation,
+  selectIsFetching,
+} from "../../../store/features/locationSlice";
 
 const Search = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,6 +35,9 @@ const Search = () => {
   const [coords, setCoords] = useState();
   const searchBar = useRef(null);
   const { data } = useGetSuggestionsQuery(searchText, { skip });
+
+  const isFetching = useSelector(selectIsFetching);
+
   const {
     data: location,
     isSuccess,
@@ -39,11 +45,14 @@ const Search = () => {
   } = useGetCoordsQuery(searchRequest, {
     skip: skipSearch,
   });
+
   const dispatch = useDispatch();
   const { colorMode } = useColorMode();
   const searchMarginTop = useBreakpointValue({ base: "3%", lg: "null" });
 
+  const bg = { light: "#ACC1DF", dark: "#13315A" };
   const color = { light: "#002A64", dark: "#C8FFBA" };
+  const highlight = { light: "#acc1df88", dark: "#acc1df88" };
 
   useEffect(() => {
     if (location?.results) {
@@ -90,12 +99,12 @@ const Search = () => {
 
   return (
     <Box w="90%" pt={searchMarginTop}>
-      <InputGroup size="md" w="100%">
+      <InputGroup size="md">
         <Popover isOpen={isOpen.toString()} initialFocusRef={searchBar}>
           <PopoverAnchor>
             <Input
               borderColor={color[colorMode]}
-              pr=".5rem"
+              pr="4.5rem"
               ref={searchBar}
               value={searchText}
               onChange={handleChange}
@@ -104,25 +113,36 @@ const Search = () => {
           </PopoverAnchor>
 
           <PopoverContent
+            bg={bg[colorMode]}
             display={searchText.length >= 2 ? "flex" : "none"}
             mt="-1.5"
             w="100%"
+            borderColor={color[colorMode]}
           >
             <PopoverBody>
               <List>
-                {data?.results.map((result, index) => (
-                  <ListItem>
-                    <CButton
-                      size="sm"
-                      my="1%"
-                      key={index}
-                      onClick={handleSuggestSelect}
-                      value={result.displayString}
-                    >
-                      {result.displayString}
-                    </CButton>
-                  </ListItem>
-                ))}
+                {!data?.results[0] ? (
+                  <ListItem>Hmm, no suggestions for this query...</ListItem>
+                ) : null}
+
+                {data?.results[0]
+                  ? data?.results.map((result, index) => (
+                      <ListItem>
+                        <CButton
+                          size="sm"
+                          my="1%"
+                          _focus={{ bg: `${highlight[colorMode]}` }}
+                          _hover={{ bg: `${highlight[colorMode]}` }}
+                          key={index}
+                          variant="ghost"
+                          onClick={handleSuggestSelect}
+                          value={result.displayString}
+                        >
+                          {result.displayString}
+                        </CButton>
+                      </ListItem>
+                    ))
+                  : null}
               </List>
             </PopoverBody>
           </PopoverContent>
@@ -130,10 +150,10 @@ const Search = () => {
 
         <InputRightElement width="4.5rem" ref={suggestContainer}>
           <CButton
+            _hover={{ bg: `${bg[colorMode]}` }}
+            _expanded={{ bg: `${highlight[colorMode]}` }}
             color={color[colorMode]}
-            h="95%"
-            w="95%"
-            isLoading={isLoading}
+            isLoading={isLoading || isFetching}
             variant="outline"
             borderLeftRadius="0px"
             border="none"

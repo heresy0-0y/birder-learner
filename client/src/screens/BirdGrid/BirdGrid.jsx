@@ -17,17 +17,22 @@ import {
 import { useGetFavoritesQuery } from "../../common/services/auth";
 import { selectCurrentUser } from "../../store/features/authSlice";
 import { setCurrentBirds } from "../../store/features/birdsSlice";
-import { selectCurrentLocation } from "../../store/features/locationSlice";
+import {
+  selectCurrentLocation,
+  setFetching,
+} from "../../store/features/locationSlice";
 const BirdGrid = () => {
   const dispatch = useDispatch();
   const { data, error, isLoading } = useGetBirdsByIPCountryCodeQuery();
   const [skip, setSkip] = useState(true);
   const user = useSelector(selectCurrentUser);
   const location = useSelector(selectCurrentLocation);
-  const { data: birdsByLocation, refetch } = useGetBirdsByCoordsQuery(
-    location,
-    { skip }
-  );
+  const {
+    data: birdsByLocation,
+    isFetching,
+    isLoading: isLoadingCoords,
+    refetch,
+  } = useGetBirdsByCoordsQuery(location, { skip });
   const { data: favorites, isLoading: favoritesLoading } =
     useGetFavoritesQuery();
   const [birdsHere, setBirds] = useState();
@@ -55,6 +60,14 @@ const BirdGrid = () => {
       refetch();
     }
   }, [location]);
+
+  useEffect(() => {
+    if (isFetching) {
+      dispatch(setFetching(true));
+    } else {
+      dispatch(setFetching(false));
+    }
+  }, [isFetching]);
 
   useEffect(() => {
     if (currentPath.includes("favorites") && favorites) {
@@ -114,7 +127,7 @@ const BirdGrid = () => {
     }
   }, [birdsHere]);
 
-  if (isLoading || favoritesLoading) {
+  if (isLoading || favoritesLoading || isLoadingCoords) {
     return (
       <VStack w="100%" minH="100%" my="3%">
         <Spinner />

@@ -39,8 +39,12 @@ export const birdsInitApi = createApi({
 });
 export const selectGetBirdsByIPCountryCode =
   birdsInitApi.endpoints.getBirdsByIPCountryCode.select();
-export const { getBirdsByIPCountryCode, getBirdByKey, getSongsByBird } =
-  birdsInitApi.endpoints;
+export const {
+  getBirdsByIPCountryCode,
+  getBirdByKey,
+  getSongsByBird,
+  getBirdsByCoords,
+} = birdsInitApi.endpoints;
 export const {
   useGetBirdsByIPCountryCodeQuery,
   useGetSongsByBirdQuery,
@@ -48,3 +52,6 @@ export const {
   useGetBirdByKeyQuery,
   util: { getRunningOperationPromises },
 } = birdsInitApi;
+
+export const useQueryStateResult =
+  birdsInitApi.endpoints.getBirdsByCoords.useQueryState;

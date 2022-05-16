@@ -138,16 +138,15 @@ const Nav = () => {
             <>
               <MenuButton
                 bg="hsla(210, 38%, 95%, 0.1)"
-                display={user ? "flex" : "none"}
+                display={user ? "inline-block" : "none"}
                 isActive={isOpen}
-                direction="row"
                 as={Button}
                 _hover={{ bg: `${bg[colorMode]}` }}
                 _expanded={{ bg: `${bg[colorMode]}` }}
-                rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+                leftIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
               >
                 {" "}
-                {userGreeting}
+                {userGreeting}{" "}
               </MenuButton>
               <Box
                 flexBasis="100%"
