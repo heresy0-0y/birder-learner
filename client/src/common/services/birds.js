@@ -26,7 +26,7 @@ export const birdsInitApi = createApi({
     }),
     getSongsByBird: builder.query({
       query: (taxonKey) =>
-        `search?&mediaType=Sound&taxonKey=${taxonKey}&limit=100`,
+        `search?&mediaType=Sound&taxonKey=${taxonKey}&limit=26`,
     }),
     getBirdsByCoords: builder.query({
       query: (location) =>

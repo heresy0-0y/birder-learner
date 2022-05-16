@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import {
   List,
-  Text,
   Center,
-  ListIcon,
-  ListItem,
   TableContainer,
   Table,
   Thead,
@@ -27,10 +24,10 @@ export const Playlist = (props) => {
         <Table size="sm">
           <Thead>
             <Tr>
-              <Th>Recorded by</Th>
-              <Th>Location</Th>
-              <Th>Date</Th>
-              <Th>Published by</Th>
+              <Th color="inherit">Recorded by</Th>
+              <Th color="inherit">Location</Th>
+              <Th color="inherit">Date</Th>
+              <Th color="inherit">Published by</Th>
             </Tr>
           </Thead>
           <Tbody>
