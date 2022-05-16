@@ -20,6 +20,7 @@ import { setCurrentBirds } from "../../store/features/birdsSlice";
 import {
   selectCurrentLocation,
   setFetching,
+  setLocation,
 } from "../../store/features/locationSlice";
 const BirdGrid = () => {
   const dispatch = useDispatch();
@@ -78,6 +79,7 @@ const BirdGrid = () => {
     } else if (birdsByLocation?.results) {
       setBirds(birdsByLocation.results);
       dispatch(setCurrentBirds(birdsByLocation.results));
+      dispatch(setLocation({ coords: null, distance: null }));
     } else {
       setBirds(data?.results);
       dispatch(setCurrentBirds(data?.results));
@@ -108,7 +110,7 @@ const BirdGrid = () => {
     } else {
       const birds = birdsHere?.map((bird, index) => (
         <Link
-          url={`songs/${bird.key}/${bird.taxonKey}`}
+          url={`/songs/${bird.key}/${bird.taxonKey}`}
           key={bird.key}
           className={"item"}
         >

@@ -4,7 +4,7 @@ import { HYDRATE } from "next-redux-wrapper";
 
 export const birdsInitApi = createApi({
   reducerPath: "birdsInitApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://api.gbif.org/v1/occurrence/" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "https://api.gbif.org/v1/" }),
   keepUnusedDataFor: 2147483,
   extractRehydrationInfo(action, { reducerPath }) {
     if (action.type === HYDRATE) {
@@ -18,7 +18,7 @@ export const birdsInitApi = createApi({
         if (countryFromIP.error) throw countryFromIP.error;
         const countryCode = countryFromIP;
         const result = await fetchWithBQ(
-          `search?&mediaType=StillImage&taxonKey=212&limit=40&basisOfRecord=HUMAN_OBSERVATION&datasetKey=50c9509d-22c7-4a22-a47d-8c48425ef4a7&country=${countryCode}`
+          `occurrence/search?&mediaType=StillImage&taxonKey=212&limit=40&basisOfRecord=HUMAN_OBSERVATION&datasetKey=50c9509d-22c7-4a22-a47d-8c48425ef4a7&country=${countryCode}`
         );
         if (result.error) throw response.error;
         return result.data ? { data: result.data } : { error: result.error };
@@ -26,14 +26,17 @@ export const birdsInitApi = createApi({
     }),
     getSongsByBird: builder.query({
       query: (taxonKey) =>
-        `search?&mediaType=Sound&taxonKey=${taxonKey}&limit=26`,
+        `occurrence/search?&mediaType=Sound&taxonKey=${taxonKey}&limit=26`,
     }),
     getBirdsByCoords: builder.query({
       query: (location) =>
-        `search?&mediaType=StillImage&taxonKey=212&limit=40&basisOfRecord=HUMAN_OBSERVATION&datasetKey=50c9509d-22c7-4a22-a47d-8c48425ef4a7&geoDistance=${location.coords.lat},${location.coords.lng},${location.distance}km`,
+        `occurrence/search?&mediaType=StillImage&taxonKey=212&limit=40&basisOfRecord=HUMAN_OBSERVATION&datasetKey=50c9509d-22c7-4a22-a47d-8c48425ef4a7&geoDistance=${location.coords.lat},${location.coords.lng},${location.distance}km`,
     }),
     getBirdByKey: builder.query({
-      query: (key) => `${key}`,
+      query: (key) => `occurrence/${key}`,
+    }),
+    getVernacular: builder.query({
+      query: (taxonKey) => `species/${taxonKey}`,
     }),
   }),
 });
@@ -50,6 +53,7 @@ export const {
   useGetSongsByBirdQuery,
   useGetBirdsByCoordsQuery,
   useGetBirdByKeyQuery,
+  useGetVernacularQuery,
   util: { getRunningOperationPromises },
 } = birdsInitApi;
 

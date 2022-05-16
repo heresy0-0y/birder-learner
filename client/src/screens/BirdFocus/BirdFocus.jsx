@@ -3,7 +3,10 @@ import { useRouter } from "next/router";
 import { Bird } from "../../common/components";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
 import { Flex, Heading, IconButton } from "@chakra-ui/react";
-import { useGetBirdByKeyQuery } from "../../common/services/birds.js";
+import {
+  useGetBirdByKeyQuery,
+  useGetVernacularQuery,
+} from "../../common/services/birds.js";
 import { useSelector } from "react-redux";
 import {
   useAddFavoriteMutation,
@@ -25,7 +28,9 @@ export const BirdFocus = (props) => {
     useAddFavoriteMutation();
   const router = useRouter();
   const id = router.query.id;
+  const taxonKey = router.query.taxonKey;
   const { data, isLoading } = useGetBirdByKeyQuery(id, { skip });
+  const { data: speciesInfo } = useGetVernacularQuery(taxonKey);
 
   const handleFavorite = async () => {
     try {
@@ -91,7 +96,7 @@ export const BirdFocus = (props) => {
   return (
     <Flex my="3%" direction="column" align="center">
       <Heading as="h1" size="lg" maxW="90%" mb="3%" align="center">
-        {bird.vernacularName ? bird.vernacularName : bird.scientificName}
+        {speciesInfo?.vernacularName}
         <IconButton
           bg="hsla(210, 38%, 95%, 0.1)"
           ml="0.5rem"

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Input,
@@ -34,6 +35,7 @@ const Search = () => {
   const [searchRequest, setSearch] = useState("");
   const [coords, setCoords] = useState();
   const searchBar = useRef(null);
+  const router = useRouter();
   const { data } = useGetSuggestionsQuery(searchText, { skip });
 
   const isFetching = useSelector(selectIsFetching);
@@ -68,9 +70,15 @@ const Search = () => {
       };
 
       dispatch(setLocation(queryOptions));
+      router.push(`/search/${JSON.stringify(queryOptions)}`);
     }
   }, [coords]);
 
+  if (router.query.location) {
+    if (router.asPath.includes("search")) {
+      dispatch(setLocation(JSON.parse(router.query.location)));
+    }
+  }
   const handleSuggestSelect = (e) => {
     searchBar.current.focus();
     setText(e.target.textContent);
@@ -127,7 +135,7 @@ const Search = () => {
 
                 {data?.results[0]
                   ? data?.results.map((result, index) => (
-                      <ListItem>
+                      <ListItem key={index}>
                         <CButton
                           size="sm"
                           my="1%"
