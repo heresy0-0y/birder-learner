@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Bird } from "../../common/components";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
-import { VStack, Heading, IconButton } from "@chakra-ui/react";
+import { Flex, Heading, IconButton } from "@chakra-ui/react";
 import { useGetBirdByKeyQuery } from "../../common/services/birds.js";
 import { useSelector } from "react-redux";
 import {
@@ -89,8 +89,8 @@ export const BirdFocus = (props) => {
   }
 
   return (
-    <VStack my="3%">
-      <Heading as="h1" size="lg">
+    <Flex my="3%" direction="column" align="center">
+      <Heading as="h1" size="lg" maxW="90%" mb="3%" align="center">
         {bird.vernacularName ? bird.vernacularName : bird.scientificName}
         <IconButton
           bg="hsla(210, 38%, 95%, 0.1)"
@@ -105,11 +105,10 @@ export const BirdFocus = (props) => {
         bird={bird}
         name={bird.scientificName}
         taxonKey={bird.taxonKey}
-        w="md"
-        maxW="70%"
-        maxH="45%"
+        w="40%"
+        h="40%"
         priority="true"
       />
-    </VStack>
+    </Flex>
   );
 };

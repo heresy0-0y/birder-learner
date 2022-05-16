@@ -3,6 +3,7 @@ import { AiOutlinePlayCircle } from "react-icons/ai";
 import {
   List,
   Text,
+  Center,
   ListIcon,
   ListItem,
   TableContainer,
@@ -21,30 +22,32 @@ export const Playlist = (props) => {
   }
 
   return (
-    <TableContainer maxWidth="80vw" whiteSpace="wrap">
-      <Table size="sm">
-        <Thead>
-          <Tr>
-            <Th>Recorded by</Th>
-            <Th>Location</Th>
-            <Th>Date</Th>
-            <Th>Published by</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {songs.map((song, index) => (
-            <Tr
-              key={index}
-              onClick={() => setSelected(song.tracks[0].identifier)}
-            >
-              <Td>{song.tracks[0].creator}</Td>
-              <Td>{song.location}</Td>
-              <Td>{new Date(song.date).toDateString()} </Td>
-              <Td>{song.tracks[0].publisher}</Td>
+    <Center mb="5%">
+      <TableContainer maxWidth="90vw" whiteSpace="wrap">
+        <Table size="sm">
+          <Thead>
+            <Tr>
+              <Th>Recorded by</Th>
+              <Th>Location</Th>
+              <Th>Date</Th>
+              <Th>Published by</Th>
             </Tr>
-          ))}
-        </Tbody>
-      </Table>
-    </TableContainer>
+          </Thead>
+          <Tbody>
+            {songs.map((song, index) => (
+              <Tr
+                key={index}
+                onClick={() => setSelected(song.tracks[0].identifier)}
+              >
+                <Td>{song.tracks[0].creator}</Td>
+                <Td>{song.location}</Td>
+                <Td>{new Date(song.date).toDateString()} </Td>
+                <Td>{song.tracks[0].publisher}</Td>
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
+      </TableContainer>
+    </Center>
   );
 };

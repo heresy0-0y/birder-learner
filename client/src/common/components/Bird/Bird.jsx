@@ -30,6 +30,7 @@ export default function (props) {
     pos,
     h,
     taxonKey,
+    layout,
     auth,
     priority,
     maxW,
@@ -51,12 +52,12 @@ export default function (props) {
     return (
       <>
         <Box
-          w={w}
+          w={focus ? "95%" : w}
           maxW={maxW ? maxW : null}
-          h={height}
+          h={focus ? null : height}
           maxH={maxH}
           priority={focus ? "true" : "false"}
-          pb={height}
+          pb={focus ? null : height}
           top={top}
           display={height === "" ? "none" : null}
           borderRadius="xl"
@@ -66,7 +67,9 @@ export default function (props) {
           <Image
             src={url}
             sizes="16"
-            layout="fill"
+            layout={focus ? "responsive" : "fill"}
+            width={focus ? w : null}
+            height={focus ? h : null}
             objectFit="cover"
             loading="eager"
             priority={priority}

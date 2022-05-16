@@ -2,7 +2,6 @@ import gbifLogo from "../../../../public/gbif_logo.svg";
 import { Text, Box, useColorMode } from "@chakra-ui/react";
 import Image from "next/image";
 
-
 const Footer = () => {
   const { colorMode } = useColorMode();
 

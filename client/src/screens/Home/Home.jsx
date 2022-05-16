@@ -5,20 +5,20 @@ import birdSilhouette from "../../../public/bird-silhouette.webp";
 export default function (props) {
   return (
     <Flex direction="column" align="center">
-      <Box w="3xs" position="relative" alignItems="center">
+      <Box w="3xs" position="relative" alignItems="center" my="5%">
         <Image
           src={birdSilhouette}
           layout="responsive"
           priority
           width="10%"
-          height="10%"
+          height="5%"
           objectFit="contain"
           alt="sounds alive logo - silhouette of a hummingbird in a yellow-green gradient"
         />
       </Box>
 
-      <Container my="5%" zIndex={1}>
-        <Heading align="center" mb="5%">
+      <Container zIndex={1}>
+        <Heading align="center" mb="5%" size="lg">
           Welcome to Sounds Alive
         </Heading>
         <Text mt="5%" mb="3%" align="center">
@@ -40,13 +40,16 @@ export default function (props) {
           right outside our windows?
         </Text>
       </Container>
-      <Box boxSize="2xs" position="relative" alignItems="center">
+
+      <Box w="3xs" position="relative" alignItems="center" my="5%">
         <Image
-          priority
           src={birdSilhouette}
-          layout="fill"
-          style={{ transform: "scaleX(-1)" }}
+          layout="responsive"
+          priority
+          width="10%"
+          height="5%"
           objectFit="contain"
+          style={{ transform: "scaleX(-1)" }}
           alt="sounds alive logo - silhouette of a hummingbird in a yellow-green gradient"
         />
       </Box>

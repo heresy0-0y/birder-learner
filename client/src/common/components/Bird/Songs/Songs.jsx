@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { VStack, Skeleton, Spinner, Box } from "@chakra-ui/react";
+import { VStack, Skeleton, Spinner, Box, Flex } from "@chakra-ui/react";
 import { Playlist } from "./Playlist.jsx";
 import { useGetLocationFromCoordsQuery } from "../../../services/autosuggest";
 import { useGetSongsByBirdQuery } from "../../../services/birds";
@@ -86,7 +86,7 @@ const Songs = ({ taxonKey }) => {
 
   return (
     <>
-      <VStack minW="100%" h="100%">
+      <Flex minW="100%" h="100%" direction="column" align="center">
         <Box h="300" w="100%">
           <Waveform url={selectedTrack} />
         </Box>
@@ -97,7 +97,7 @@ const Songs = ({ taxonKey }) => {
             setSelected={setSelected}
           />
         </Skeleton>
-      </VStack>
+      </Flex>
     </>
   );
 };

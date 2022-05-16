@@ -2,13 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import WaveSurfer from "wavesurfer.js";
 
 import {
-  Flex,
   Button,
   Slider,
   SliderTrack,
   SliderFilledTrack,
   Skeleton,
+  Box,
   FormLabel,
+  Center,
   SliderThumb,
 } from "@chakra-ui/react";
 
@@ -72,32 +73,35 @@ const Waveform = ({ url }) => {
   };
 
   return (
-    <Flex direction="column" minW="100%" mt="2rem">
-      <Skeleton isLoaded={loading}>
-        <div id="waveform" ref={waveform} />
-      </Skeleton>
-      <Flex direction="column" justify="center" mt="1rem">
-        <Button m="4" onClick={handlePlayPause} bg="hsla(210, 38%, 95%, 0.1)">
-          {play ? "pause" : "play"}
-        </Button>
-        <Slider
-          aria-label="volume slider"
-          id="volume"
-          name="volume"
-          min={0.01}
-          max={1}
-          step={0.025}
-          onChange={handleVolume}
-          defaultValue={volume}
-        >
-          <SliderTrack>
-            <SliderFilledTrack />
-          </SliderTrack>
-          <SliderThumb boxSize={3} />
-        </Slider>
-        <FormLabel>volume</FormLabel>
-      </Flex>
-    </Flex>
+    <>
+      <Center>
+        <Box mt="3%" w="95%" align="center">
+          <Skeleton isLoaded={loading}>
+            <div id="waveform" ref={waveform} />
+          </Skeleton>
+
+          <Button m="4" onClick={handlePlayPause} bg="hsla(210, 38%, 95%, 0.1)">
+            {play ? "pause" : "play"}
+          </Button>
+          <Slider
+            aria-label="volume slider"
+            id="volume"
+            name="volume"
+            min={0.01}
+            max={1}
+            step={0.025}
+            onChange={handleVolume}
+            defaultValue={volume}
+          >
+            <SliderTrack>
+              <SliderFilledTrack />
+            </SliderTrack>
+            <SliderThumb boxSize={3} />
+          </Slider>
+          <FormLabel>volume</FormLabel>
+        </Box>
+      </Center>
+    </>
   );
 };
 

@@ -42,9 +42,9 @@ const Nav = () => {
     dispatch(setCredentials(localUser));
   }, [localUser, dispatch]);
   const { colorMode } = useColorMode();
-
+  const bg = { light: "#ACC1DF", dark: "#13315A" };
   const color = { light: "#002A64", dark: "#C8FFBA" };
-
+  const highlight = { light: "#acc1df88", dark: "#acc1df88" };
   const router = useRouter();
 
   const currentPath = router.asPath;
@@ -111,15 +111,21 @@ const Nav = () => {
                 display={{ base: "flex", lg: "none" }}
                 isActive={isOpen}
                 direction="row"
+                _hover={{ bg: `${bg[colorMode]}` }}
+                _expanded={{ bg: `${highlight[colorMode]}` }}
                 as={Button}
                 rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
               >
                 {" "}
                 Menu{" "}
               </MenuButton>
-              <MenuList zIndex={2}>
+              <MenuList zIndex={2} bg={bg[colorMode]}>
                 {links.map((link, index) => (
-                  <MenuItem onClick={() => router.push(link.url)} key={index}>
+                  <MenuItem
+                    onClick={() => router.push(link.url)}
+                    key={index}
+                    _focus={{ bg: `${highlight[colorMode]}` }}
+                  >
                     {link.text}
                   </MenuItem>
                 ))}
@@ -136,6 +142,8 @@ const Nav = () => {
                 isActive={isOpen}
                 direction="row"
                 as={Button}
+                _hover={{ bg: `${bg[colorMode]}` }}
+                _expanded={{ bg: `${bg[colorMode]}` }}
                 rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
               >
                 {" "}
@@ -151,14 +159,20 @@ const Nav = () => {
                 </Center>
                 <Spacer />
               </Box>
-              <MenuList zIndex={2}>
+              <MenuList zIndex={2} bg={bg[colorMode]}>
                 <MenuItem
+                  _focus={{ bg: `${highlight[colorMode]}` }}
                   onClick={() => router.push(`/${user.username}/favorites`)}
                   key={"favorites"}
                 >
                   Favorites
                 </MenuItem>
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                <MenuItem
+                  onClick={handleLogout}
+                  _focus={{ bg: `${highlight[colorMode]}` }}
+                >
+                  Logout
+                </MenuItem>
               </MenuList>
             </>
           )}
