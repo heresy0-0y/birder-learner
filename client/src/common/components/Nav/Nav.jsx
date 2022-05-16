@@ -10,7 +10,6 @@ import {
   ButtonGroup,
   MenuItem,
   Button,
-  useBreakpointValue,
   useColorMode,
 } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
@@ -26,7 +25,7 @@ import Search from "../Search/Search";
 const Nav = () => {
   const [localUser, setUser] = useState({ user: null, token: null });
   const dispatch = useDispatch();
-  const searchLine = useBreakpointValue({ base: "" });
+
   useEffect(() => {
     const checkForSession = async () => {
       const localUserString = localStorage.getItem("user");
@@ -45,11 +44,7 @@ const Nav = () => {
   const { colorMode } = useColorMode();
 
   const color = { light: "#002A64", dark: "#C8FFBA" };
-  const inputMargin = useBreakpointValue({
-    base: "0.5rem",
-    sm: "4rem",
-    md: "7rem",
-  });
+
   const router = useRouter();
 
   const currentPath = router.asPath;
@@ -90,6 +85,7 @@ const Nav = () => {
         mt="0.7rem"
         px="0.7rem"
         w="100%"
+        h="4%"
         minW="100vw"
         align="center"
         justify="space-between"
@@ -150,9 +146,9 @@ const Nav = () => {
                 display={currentPath.includes("search") ? "inherit" : "none"}
               >
                 <Spacer />
-                <Box w="70%">
+                <Center w="70%">
                   <Search />
-                </Box>
+                </Center>
                 <Spacer />
               </Box>
               <MenuList zIndex={2}>

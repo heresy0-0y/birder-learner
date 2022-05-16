@@ -10,6 +10,7 @@ import {
   useColorMode,
   ListItem,
   Popover,
+  useBreakpointValue,
   PopoverContent,
   PopoverBody,
   PopoverAnchor,
@@ -40,6 +41,7 @@ const Search = () => {
   });
   const dispatch = useDispatch();
   const { colorMode } = useColorMode();
+  const searchMarginTop = useBreakpointValue({ base: "3%", lg: "null" });
 
   const color = { light: "#002A64", dark: "#C8FFBA" };
 
@@ -87,7 +89,7 @@ const Search = () => {
   };
 
   return (
-    <Box w="90%" mt="3%">
+    <Box w="90%" pt={searchMarginTop}>
       <InputGroup size="md" w="100%">
         <Popover isOpen={isOpen.toString()} initialFocusRef={searchBar}>
           <PopoverAnchor>
