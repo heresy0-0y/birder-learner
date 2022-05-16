@@ -16,7 +16,7 @@ import {
 const Waveform = ({ url }) => {
   const waveform = useRef(null);
   const [play, setPlay] = useState(false);
-  const [volume, setVolume] = useState(0.1);
+  const [volume, setVolume] = useState(0.5);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const Waveform = ({ url }) => {
     }
     setLoading(true);
     waveform.current.on("ready", function () {
-      waveform.current.setVolume(0.1);
+      waveform.current.setVolume(volume);
       waveform.current.pause();
       return () => waveform.current.destroy();
     });
