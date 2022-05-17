@@ -17,7 +17,7 @@ import { selectCurrentUser } from "../../store/features/authSlice";
 
 export const BirdFocus = (props) => {
   const { data: favorites, isSuccess, refetch } = useGetFavoritesQuery();
-  const [userFavorites, setFavorites] = useState();
+  const [userFavorites, setFavorites] = useState(favorites);
   const [bird, setBird] = useState();
   const [skip, setSkip] = useState(true);
   const [favorited, setFavorited] = useState(false);

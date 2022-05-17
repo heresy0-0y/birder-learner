@@ -94,6 +94,7 @@ const Nav = () => {
         <ButtonGroup isAttached display={{ base: "none", lg: "flex" }}>
           {links.map((link, index) => (
             <Button
+              _hover={{ bg: `${bg[colorMode]}` }}
               color={color[colorMode]}
               variant="ghost"
               onClick={() => router.push(link.url)}
