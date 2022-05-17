@@ -90,7 +90,7 @@ const BirdGrid = () => {
     if (currentPath.includes("favorites")) {
       const birds = birdsHere?.map((bird, index) => (
         <Link
-          url={`/songs/${bird.key}&${bird.taxonKey}`}
+          url={`/songs/${bird.key}/${bird.taxon_key}`}
           key={bird.key}
           className={"item"}
           w="fit-content"
