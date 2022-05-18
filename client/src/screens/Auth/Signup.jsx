@@ -14,11 +14,18 @@ import {
   Input,
   Button,
   Container,
+  useColorMode,
 } from "@chakra-ui/react";
 import { setCredentials } from "../../store/features/authSlice";
 
 export default function () {
   const router = useRouter();
+
+  const { colorMode } = useColorMode();
+  const color = { light: "#002A64", dark: "#C8FFBA" };
+  const borderColor = color[colorMode];
+  const bg = { light: "#ACC1DF", dark: "#13315A" };
+
   const { data: usernames, isSuccess } = useGetUsersQuery();
   const [addUser, { isLoading }] = useAddUserMutation();
   const dispatch = useDispatch();
@@ -63,6 +70,7 @@ export default function () {
         <Input
           mb="3%"
           id="username"
+          borderColor={borderColor}
           type="username"
           name="username"
           onChange={handleChange}
@@ -78,6 +86,7 @@ export default function () {
           id="email"
           name="email"
           type="email"
+          borderColor={borderColor}
           onChange={handleChange}
           mb="3%"
         />
@@ -87,11 +96,13 @@ export default function () {
           id="first_name"
           type="first_name"
           name="first_name"
+          borderColor={borderColor}
           onChange={handleChange}
           mb="3%"
         />
         <FormLabel htmlFor="last_name">Last Name</FormLabel>
         <Input
+          borderColor={borderColor}
           onKeyDown={handleKBEnter}
           id="last_name"
           name="last_name"
@@ -104,6 +115,7 @@ export default function () {
             <Input
               onKeyDown={handleKBEnter}
               name="password"
+              borderColor={borderColor}
               type={show ? "text" : "password"}
               onChange={handleChange}
               mb="3%"
@@ -112,6 +124,7 @@ export default function () {
               <Button
                 border="none"
                 h="95%"
+                _hover={{ bg: `${bg[colorMode]}` }}
                 w="95%"
                 bg="hsla(210, 38%, 95%, 0.1)"
                 onClick={() => setShow(!show)}
@@ -125,6 +138,7 @@ export default function () {
           </FormErrorMessage>
         </FormControl>
         <Button
+          _hover={{ bg: `${bg[colorMode]}` }}
           type="submit"
           onClick={handleSubmit}
           isLoading={isLoading}

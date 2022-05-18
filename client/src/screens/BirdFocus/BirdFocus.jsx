@@ -129,9 +129,9 @@ export const BirdFocus = (props) => {
         bird={bird}
         name={bird.scientificName}
         taxonKey={bird.taxonKey}
-        w="md"
+        w="lg"
         maxW="90%"
-        h="40vh"
+        h="50vw"
         priority="true"
       />
     </Flex>

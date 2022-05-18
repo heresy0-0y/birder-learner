@@ -10,6 +10,7 @@ import {
   InputRightElement,
   Button,
   useToast,
+  useColorMode,
 } from "@chakra-ui/react";
 import {
   setCredentials,
@@ -18,6 +19,11 @@ import {
 import { useLoginMutation } from "../../common/services/auth";
 
 export default function (props) {
+  const { colorMode } = useColorMode();
+  const color = { light: "#002A64", dark: "#C8FFBA" };
+  const borderColor = color[colorMode];
+  const bg = { light: "#ACC1DF", dark: "#13315A" };
+
   const router = useRouter();
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
@@ -59,6 +65,7 @@ export default function (props) {
       <FormControl>
         <FormLabel>Username</FormLabel>
         <Input
+          borderColor={borderColor}
           name="username"
           onChange={handleChange}
           mb="3%"
@@ -70,6 +77,7 @@ export default function (props) {
         <InputGroup>
           <Input
             mb="3%"
+            borderColor={borderColor}
             name="password"
             type={show ? "text" : "password"}
             onChange={handleChange}
@@ -78,6 +86,7 @@ export default function (props) {
           <InputRightElement w="10%" minW="55px">
             <Button
               h="95%"
+              _hover={{ bg: `${bg[colorMode]}` }}
               w="95%"
               bg="hsla(210, 38%, 95%, 0.1)"
               border="none"
@@ -89,6 +98,7 @@ export default function (props) {
         </InputGroup>
       </FormControl>
       <Button
+        _hover={{ bg: `${bg[colorMode]}` }}
         bg="hsla(210, 38%, 95%, 0.1)"
         onClick={handleSubmit}
         isLoading={isLoading}

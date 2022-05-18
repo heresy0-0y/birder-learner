@@ -20,7 +20,6 @@ export default function (props) {
     boxWidth: w,
     boxHeight: height,
     priority: priority,
-    fit: "cover",
   });
 
   const fallback = <SkeletonCircle w="100%" h="100%" />;
@@ -36,7 +35,6 @@ export default function (props) {
         priority: true,
         boxWidth: w,
         focus: true,
-        fit: "fill",
       };
       setStyle((prev) => ({ ...prev, ...focusStyle }));
     } else {
