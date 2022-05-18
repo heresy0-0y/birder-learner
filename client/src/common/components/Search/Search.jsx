@@ -111,6 +111,7 @@ const Search = () => {
         <Popover isOpen={isOpen.toString()} initialFocusRef={searchBar}>
           <PopoverAnchor>
             <Input
+              placeholder="Search by locale (i.e. City, State, Country, etc.)"
               borderColor={color[colorMode]}
               pr="4.5rem"
               ref={searchBar}
