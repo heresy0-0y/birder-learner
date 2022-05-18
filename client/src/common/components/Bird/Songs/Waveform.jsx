@@ -11,9 +11,13 @@ import {
   FormLabel,
   Center,
   SliderThumb,
+  useColorMode,
 } from "@chakra-ui/react";
 
 const Waveform = ({ url }) => {
+  const { colorMode } = useColorMode();
+  const bg = { light: "#ACC1DF", dark: "#13315A" };
+
   const waveform = useRef(null);
   const [play, setPlay] = useState(false);
   const [volume, setVolume] = useState(0.5);
@@ -33,7 +37,6 @@ const Waveform = ({ url }) => {
       partialRender: true,
       cursorColor: "seafoam-green",
       hideScrollbar: true,
-      // closeeAudioContext: true,
     });
     if (url !== undefined) {
       waveform.current.load(`https://corsanyblah.herokuapp.com/${url}`);
@@ -80,7 +83,12 @@ const Waveform = ({ url }) => {
             <div id="waveform" ref={waveform} />
           </Skeleton>
 
-          <Button m="4" onClick={handlePlayPause} bg="hsla(210, 38%, 95%, 0.1)">
+          <Button
+            m="4"
+            onClick={handlePlayPause}
+            bg="hsla(210, 38%, 95%, 0.1)"
+            _hover={{ bg: `${bg[colorMode]}` }}
+          >
             {play ? "pause" : "play"}
           </Button>
           <Slider
