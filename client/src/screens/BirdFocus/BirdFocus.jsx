@@ -113,8 +113,8 @@ export const BirdFocus = (props) => {
   };
 
   return (
-    <Flex my="3%" direction="column" align="center" maxW="90%">
-      <Heading as="h1" size="lg" maxW="90%" mb="3%" align="center">
+    <Flex my="3%" direction="column" align="center" maxW="95%">
+      <Heading as="h1" size="lg" maxW="100%" mb="3%" align="center">
         {birdName}
         <IconButton
           bg="hsla(210, 38%, 95%, 0.1)"
