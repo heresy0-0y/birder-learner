@@ -110,19 +110,20 @@ const BirdGrid = () => {
     } else {
       const birds = birdsHere?.map((bird, index) => (
         <Link
+          w={width}
           url={`/songs/${bird.key}/${bird.taxonKey}`}
           key={bird.key}
           className={"item"}
         >
           <Bird
             w={width}
-            maxW="100%"
+            // maxW="100%"
             priority={index < 10 ? "true" : "false"}
             name={bird.scientificName}
             url={bird.media[0].identifier}
             key={bird.key}
             sizes={sizes}
-          />
+          ></Bird>
         </Link>
       ));
       setRender(birds);
@@ -138,8 +139,8 @@ const BirdGrid = () => {
   }
 
   return (
-    <Flex direction="column" align="center" h="100%" w="100%" my="2%">
-      <Box w="100%">
+    <Flex w="100vw" align="center" direction="column">
+      <Box my="3%" w="100vw" left="0" right="0">
         <MasonryGrid
           className="container"
           column={column}

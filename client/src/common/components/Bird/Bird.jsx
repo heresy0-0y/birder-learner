@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Songs from "./Songs/Songs";
 import { useRouter } from "next/router";
 
@@ -7,44 +7,42 @@ import {
   Box,
   Spinner,
   useColorModeValue,
-  useBreakpointValue,
-  Container,
-  VisuallyHidden,
-  HStack,
-  Button,
   SkeletonCircle,
 } from "@chakra-ui/react";
 
 export default function (props) {
+  const { url, name, w, top, h, taxonKey, auth, priority, maxW, maxH } = props;
   const fallbackFilter = useColorModeValue("none", "invert(90%)");
-  let focus = false;
-  let boxWidth = null;
-  const [padding, setPadding] = useState("100%");
   const [height, setHeight] = useState("unset");
-  const {
-    url,
-    name,
-    w,
-    left,
-    top,
-    pos,
-    h,
-    taxonKey,
-    layout,
-    auth,
-    priority,
-    maxW,
-    maxH,
-    sizes,
-  } = props;
+  const [style, setStyle] = useState({
+    width: null,
+    height: null,
+    boxWidth: w,
+    boxHeight: height,
+    priority: priority,
+    fit: "cover",
+  });
 
   const fallback = <SkeletonCircle w="100%" h="100%" />;
 
-  const router = useRouter().asPath;
-  if (router.includes("songs")) {
+  const router = useRouter();
+
+  useEffect(() => {
     focus = true;
-    boxWidth = "100%";
-  }
+    if (router.asPath.includes("songs")) {
+      setHeight(null);
+      let focusStyle = {
+        boxHeight: h,
+        priority: true,
+        boxWidth: w,
+        focus: true,
+        fit: "fill",
+      };
+      setStyle((prev) => ({ ...prev, ...focusStyle }));
+    } else {
+      setStyle((prev) => ({ ...prev, pb: height }));
+    }
+  }, [height]);
 
   if (h === 0) {
     return <Spinner />;
@@ -52,12 +50,11 @@ export default function (props) {
     return (
       <>
         <Box
-          w={focus ? "95%" : w}
+          w={style.boxWidth}
           maxW={maxW ? maxW : null}
-          h={focus ? null : height}
+          h={style.boxHeight}
           maxH={maxH}
-          priority={focus ? "true" : "false"}
-          pb={focus ? null : height}
+          pb={height}
           top={top}
           display={height === "" ? "none" : null}
           borderRadius="xl"
@@ -67,25 +64,22 @@ export default function (props) {
           <Image
             src={url}
             sizes="16"
-            layout={focus ? "responsive" : "fill"}
-            width={focus ? w : null}
-            height={focus ? h : null}
+            layout="fill"
             objectFit="cover"
+            objectPosition="50% 20%"
             loading="eager"
             priority={priority}
             onLoad={({ target }) => {
               const { naturalWidth, naturalHeight, width } = target;
 
               setHeight(naturalHeight * (width / naturalWidth));
-
-              setPadding(`calc(100% / (${naturalWidth} / ${naturalHeight})`);
             }}
             fallback={fallback}
             alt={`image of ${name}`}
           />
         </Box>
 
-        {focus ? <Songs auth={auth} taxonKey={taxonKey} /> : null}
+        {style.focus ? <Songs auth={auth} taxonKey={taxonKey} /> : null}
       </>
     );
   }

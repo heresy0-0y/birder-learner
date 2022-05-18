@@ -9,10 +9,11 @@ const CoreContainer = (props) => {
     <Flex
       position="relative"
       direction="column"
-      align="center"
       minW="100vw"
       minH="100vh"
+      w="100vw"
       h="100%"
+      align="center"
       color={color[colorMode]}
     >
       {props.children}

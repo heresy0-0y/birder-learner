@@ -1,5 +1,4 @@
 {
-  "private": true,
   "scripts": {
     "dev": "next dev",
     "auto": "next dev & open http://localhost:3000",

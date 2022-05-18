@@ -3,14 +3,12 @@ import NextLink from "next/link";
 import { LinkOverlay as ChakraLink, LinkBox } from "@chakra-ui/react";
 
 const Link = (props) => {
-  const { external, wrapper, url } = props;
+  const { external, url } = props;
 
   return (
     <LinkBox>
       <NextLink href={url} passHref>
-        <ChakraLink isExternal={external} w="fit-content">
-          {props.children}
-        </ChakraLink>
+        <ChakraLink isExternal={external}>{props.children}</ChakraLink>
       </NextLink>
     </LinkBox>
   );

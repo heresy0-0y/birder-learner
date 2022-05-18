@@ -16,21 +16,74 @@ import {
 import { selectCurrentUser } from "../../store/features/authSlice";
 
 export const BirdFocus = (props) => {
-  const { data: favorites, isSuccess, refetch } = useGetFavoritesQuery();
-  const [userFavorites, setFavorites] = useState(favorites);
-  const [bird, setBird] = useState();
-  const [skip, setSkip] = useState(true);
-  const [favorited, setFavorited] = useState(false);
-  const [deleteFavorite, { isSuccess: favoriteDeleted }] =
-    useDeleteFavoriteMutation();
-  const user = useSelector(selectCurrentUser);
-  const [addFavorite, { isLoading: favoritePending }] =
-    useAddFavoriteMutation();
   const router = useRouter();
-  const id = router.query.id;
-  const taxonKey = router.query.taxonKey;
-  const { data, isLoading } = useGetBirdByKeyQuery(id, { skip });
+  const { id, taxonKey } = router.query;
+
+  const user = useSelector(selectCurrentUser);
+  const [skip, setSkip] = useState(true);
+  const [bird, setBird] = useState();
+  const [userFavorites, setFavorites] = useState([]);
+  const [birdName, setName] = useState("");
+  const [favorited, setFavorited] = useState(false);
+  const [favoritedIcon, setFavoritedIcon] = useState(<MdFavoriteBorder />);
+
+  const { data: favorites, refetch } = useGetFavoritesQuery();
   const { data: speciesInfo } = useGetVernacularQuery(taxonKey);
+  const { data, isLoading } = useGetBirdByKeyQuery(id, { skip });
+
+  const [deleteFavorite] = useDeleteFavoriteMutation();
+  const [addFavorite] = useAddFavoriteMutation();
+
+  useEffect(() => {
+    if (id === undefined) {
+      setSkip(true);
+    } else {
+      setSkip(false);
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (favorited) {
+      setFavoritedIcon(<MdFavorite />);
+    }
+  }, [favorited]);
+
+  useEffect(() => {
+    if (user && favorites) {
+      setFavorites(
+        favorites.filter((favorite) => favorite.user_id === user.id)
+      );
+    }
+  }, [user, favorites]);
+
+  useEffect(() => {
+    if (data) {
+      setBird(data);
+      if (birdName === "") {
+        setName(data.scientificName);
+      }
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (speciesInfo?.vernacularName) {
+      setName(speciesInfo.vernacularName);
+    }
+  }, [speciesInfo]);
+
+  useEffect(() => {
+    if (favorites) {
+      favorites.forEach((favorite) => {
+        if (favorite.key === id) {
+          setFavorited(true);
+        }
+      });
+    }
+  }, [userFavorites]);
+
+  if (isLoading || !bird) {
+    return null;
+  }
 
   const handleFavorite = async () => {
     try {
@@ -59,50 +112,16 @@ export const BirdFocus = (props) => {
     }
   };
 
-  useEffect(() => {
-    if (id === undefined) {
-      setSkip(true);
-    } else {
-      setSkip(false);
-    }
-  }, [id]);
-
-  useEffect(() => {
-    if (data) {
-      setBird(data);
-    }
-  }, [data]);
-
-  useEffect(() => {
-    if (isSuccess && user) {
-      setFavorites(
-        favorites.filter((favorite) => favorite.user_id === user.id)
-      );
-    }
-  }, [user, favorites]);
-
-  useEffect(() => {
-    if (bird && userFavorites) {
-      if (userFavorites.some((favorite) => favorite.key === id)) {
-        setFavorited(true);
-      }
-    }
-  }, [userFavorites]);
-
-  if (isLoading || !bird) {
-    return null;
-  }
-
   return (
-    <Flex my="3%" direction="column" align="center">
+    <Flex my="3%" direction="column" align="center" maxW="90%">
       <Heading as="h1" size="lg" maxW="90%" mb="3%" align="center">
-        {speciesInfo?.vernacularName}
+        {birdName}
         <IconButton
           bg="hsla(210, 38%, 95%, 0.1)"
           ml="0.5rem"
           aria-label="favorite"
           onClick={handleFavorite}
-          icon={favorited ? <MdFavorite /> : <MdFavoriteBorder />}
+          icon={favoritedIcon}
         />
       </Heading>
       <Bird
@@ -110,8 +129,9 @@ export const BirdFocus = (props) => {
         bird={bird}
         name={bird.scientificName}
         taxonKey={bird.taxonKey}
-        w="40%"
-        h="40%"
+        w="md"
+        maxW="90%"
+        h="40vh"
         priority="true"
       />
     </Flex>
