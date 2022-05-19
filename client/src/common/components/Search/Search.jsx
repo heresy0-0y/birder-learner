@@ -50,7 +50,7 @@ const Search = () => {
 
   const dispatch = useDispatch();
   const { colorMode } = useColorMode();
-  const searchMarginTop = useBreakpointValue({ base: "3%", lg: "null" });
+  const searchMarginTop = useBreakpointValue({ base: "3%", lg: "1%" });
 
   const bg = { light: "#ACC1DF", dark: "#13315A" };
   const color = { light: "#002A64", dark: "#C8FFBA" };

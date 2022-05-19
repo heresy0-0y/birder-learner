@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Bird } from "../../common/components";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
-import { Flex, Heading, IconButton } from "@chakra-ui/react";
+import { Flex, Heading, IconButton, useColorMode } from "@chakra-ui/react";
 import {
   useGetBirdByKeyQuery,
   useGetVernacularQuery,
@@ -19,6 +19,11 @@ export const BirdFocus = (props) => {
   const router = useRouter();
   const { id, taxonKey } = router.query;
 
+  const { colorMode } = useColorMode();
+  const bg = { light: "#ACC1DF", dark: "#13315A" };
+  const color = { light: "#002A64", dark: "#C8FFBA" };
+  const highlight = { light: "#acc1df88", dark: "#acc1df88" };
+
   const user = useSelector(selectCurrentUser);
   const [skip, setSkip] = useState(true);
   const [bird, setBird] = useState();
@@ -31,8 +36,9 @@ export const BirdFocus = (props) => {
   const { data: speciesInfo } = useGetVernacularQuery(taxonKey);
   const { data, isLoading } = useGetBirdByKeyQuery(id, { skip });
 
-  const [deleteFavorite] = useDeleteFavoriteMutation();
-  const [addFavorite] = useAddFavoriteMutation();
+  const [deleteFavorite, { isLoading: unfavoriting }] =
+    useDeleteFavoriteMutation();
+  const [addFavorite, { isLoading: favoriting }] = useAddFavoriteMutation();
 
   useEffect(() => {
     if (id === undefined) {
@@ -117,10 +123,13 @@ export const BirdFocus = (props) => {
       <Heading as="h1" size="lg" maxW="100%" mb="3%" align="center">
         {birdName}
         <IconButton
+          display={user ? null : "none"}
+          _hover={{ bg: `${bg[colorMode]}` }}
           bg="hsla(210, 38%, 95%, 0.1)"
           ml="0.5rem"
           aria-label="favorite"
           onClick={handleFavorite}
+          isLoading={favoriting || unfavoriting}
           icon={favoritedIcon}
         />
       </Heading>

@@ -95,6 +95,7 @@ const Nav = () => {
           {links.map((link, index) => (
             <Button
               _hover={{ bg: `${bg[colorMode]}` }}
+              bg="hsla(210, 38%, 95%, 0.1)"
               color={color[colorMode]}
               variant="ghost"
               onClick={() => router.push(link.url)}
