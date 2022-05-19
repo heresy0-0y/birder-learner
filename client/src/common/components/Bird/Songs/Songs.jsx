@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { VStack, Skeleton, Spinner, Box, Flex } from "@chakra-ui/react";
 import { Playlist } from "./Playlist.jsx";
-import { useGetLocationFromCoordsQuery } from "../../../services/autosuggest";
+import { useGetLocationFromCoordsQuery, useGetLocationsFromQueryQuery } from "../../../services/batchReverseGeocode";
 import { useGetSongsByBirdQuery } from "../../../services/birds";
 import dynamic from "next/dynamic";
 
@@ -12,11 +12,15 @@ const Songs = ({ taxonKey }) => {
   const [tracks, setTracks] = useState();
   const [preTracks, setPreTracks] = useState();
   const [skip, setSkip] = useState(true);
+  const [skipFinal, setFinalSkip] = useState(true)
   const [points, setPoints] = useState([]);
   const { data: locations, isSuccess } = useGetLocationFromCoordsQuery(points, {
     skip,
   });
+  const {data: locationsFrom, refetch, isFetching} = useGetLocationsFromQueryQuery(locations?.id, {skipFinal})
   const [selectedTrack, setSelected] = useState();
+
+ 
 
   useEffect(() => {
     if (data) {
@@ -26,7 +30,7 @@ const Songs = ({ taxonKey }) => {
         const lat = bird.decimalLatitude;
         const long = bird.decimalLongitude;
         const tracks = bird.media.filter((item) => item.type === "Sound");
-        coords.push(`${lat},${long}`);
+        coords.push([long, lat]);
 
         return {
           location: index,
@@ -34,37 +38,40 @@ const Songs = ({ taxonKey }) => {
           date: bird.eventDate,
         };
       });
-      setPoints({ locations: coords });
+      setPoints(coords );
       setPreTracks(tracksWithoutLocation);
     }
   }, [data]);
 
   useEffect(() => {
-    if (points?.locations?.length > 0) {
+    if (points.length > 0) {
+      console.log(points)
       setSkip(false);
     }
   }, [points]);
 
   useEffect(() => {
+    if (locations?.id) {
+      setFinalSkip(false)
+    }
+  },[locations])
+
+  useEffect(() => {
     const tracksWithLocation = preTracks;
-    if (locations) {
-      locations.results.forEach((result, index) => {
-        const locations = result.locations[0];
+    if (locationsFrom?.status === "pending") {
+        refetch()
+    } else if (locationsFrom?.length > 0) {
+      locationsFrom.forEach((result, index) => {
 
-        const cityOrCounty = `${
-          locations?.adminArea5 !== "" &&
-          locations?.adminArea5 &&
-          !/\d/.test(locations.adminArea5)
-            ? locations?.adminArea5
-            : locations?.adminArea4
-        }`;
-        const address = `${cityOrCounty}, ${locations.adminArea3}, ${locations.adminArea1}`;
 
-        tracksWithLocation[index].location = address;
+        const address = result.formatted;
+        const location = address.replace("United States of America", "U.S.") 
+
+        tracksWithLocation[index].location = location;
       });
       setTracks(tracksWithLocation);
     }
-  }, [locations]);
+  }, [locationsFrom, isFetching]);
 
   useEffect(() => {
     setSongs(tracks);

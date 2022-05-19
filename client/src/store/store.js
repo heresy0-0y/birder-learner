@@ -6,6 +6,7 @@ import { createWrapper } from "next-redux-wrapper";
 import { suggestApi } from "../common/services/autosuggest.js";
 import { authApi } from "../common/services/auth.js";
 import { slice as authSlice } from "./features/authSlice";
+import { batchGeocodeApi } from "../common/services/batchReverseGeocode.js";
 import { locationSlice } from "./features/locationSlice";
 
 export const store = configureStore({
@@ -15,12 +16,13 @@ export const store = configureStore({
     [authSlice.name]: authSlice.reducer,
     [suggestApi.reducerPath]: suggestApi.reducer,
     [locationSlice.name]: locationSlice.reducer,
+    [batchGeocodeApi.reducerPath]: batchGeocodeApi.reducer 
   },
   middleware: (gDM) =>
     gDM()
       .concat(birdsInitApi.middleware)
       .concat(authApi.middleware)
-      .concat(suggestApi.middleware),
+      .concat(suggestApi.middleware).concat(batchGeocodeApi.middleware),
 });
 
 export const makeStore = () => store;
