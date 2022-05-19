@@ -2,7 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Bird } from "../../common/components";
 import { MdFavoriteBorder, MdFavorite } from "react-icons/md";
-import { Flex, Heading, IconButton, useColorMode } from "@chakra-ui/react";
+import {
+  Flex,
+  Heading,
+  IconButton,
+  useColorMode,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import {
   useGetBirdByKeyQuery,
   useGetVernacularQuery,
@@ -19,6 +25,9 @@ export const BirdFocus = (props) => {
   const router = useRouter();
   const { id, taxonKey } = router.query;
 
+  const topMargin = useBreakpointValue({ base: "3%", md: "1%" });
+  const width = useBreakpointValue({ base: "lg", md: "xl" });
+  const height = useBreakpointValue({ base: "50vw", md: "40vh", lg: "30vh" });
   const { colorMode } = useColorMode();
   const bg = { light: "#ACC1DF", dark: "#13315A" };
   const color = { light: "#002A64", dark: "#C8FFBA" };
@@ -119,7 +128,7 @@ export const BirdFocus = (props) => {
   };
 
   return (
-    <Flex my="3%" direction="column" align="center" maxW="95%">
+    <Flex mb="3%" mt={topMargin} direction="column" align="center" maxW="95%">
       <Heading as="h1" size="lg" maxW="100%" mb="3%" align="center">
         {birdName}
         <IconButton
@@ -138,9 +147,9 @@ export const BirdFocus = (props) => {
         bird={bird}
         name={bird.scientificName}
         taxonKey={bird.taxonKey}
-        w="lg"
+        w={width}
         maxW="90%"
-        h="50vw"
+        h={height}
         priority="true"
       />
     </Flex>

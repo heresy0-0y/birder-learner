@@ -11,11 +11,11 @@ import dynamic from "next/dynamic";
 const Songs = ({ taxonKey }) => {
   const Waveform = dynamic(() => import("./Waveform"), { ssr: false });
   const { data, isLoading } = useGetSongsByBirdQuery(taxonKey);
-  const [songs, setSongs] = useState();
-  const [tracks, setTracks] = useState();
-  const [preTracks, setPreTracks] = useState();
-  const [skip, setSkip] = useState(true);
   const [skipFinal, setFinalSkip] = useState(true);
+  const [skip, setSkip] = useState(true);
+  const [preTracks, setPreTracks] = useState();
+  const [tracks, setTracks] = useState();
+  const [songs, setSongs] = useState();
   const [points, setPoints] = useState([]);
   const { data: locations, isSuccess } = useGetLocationFromCoordsQuery(points, {
     skip,
@@ -24,7 +24,7 @@ const Songs = ({ taxonKey }) => {
     data: locationsFrom,
     refetch,
     isFetching,
-  } = useGetLocationsFromQueryQuery(locations?.id, { skipFinal });
+  } = useGetLocationsFromQueryQuery(locations?.id, { skip: skipFinal });
   const [selectedTrack, setSelected] = useState();
 
   useEffect(() => {
@@ -50,7 +50,6 @@ const Songs = ({ taxonKey }) => {
 
   useEffect(() => {
     if (points.length > 0) {
-      console.log(points);
       setSkip(false);
     }
   }, [points]);
@@ -58,6 +57,8 @@ const Songs = ({ taxonKey }) => {
   useEffect(() => {
     if (locations?.id !== undefined) {
       setFinalSkip(false);
+    } else {
+      setFinalSkip(true);
     }
   }, [locations]);
 
