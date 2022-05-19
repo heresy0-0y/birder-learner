@@ -30,7 +30,7 @@ export const birdsInitApi = createApi({
     }),
     getBirdsByCoords: builder.query({
       query: (location) =>
-        `occurrence/search?&mediaType=StillImage&taxonKey=212&limit=40&basisOfRecord=HUMAN_OBSERVATION&datasetKey=50c9509d-22c7-4a22-a47d-8c48425ef4a7&geoDistance=${location.coords.lat},${location.coords.lng},${location.distance}km`,
+        `occurrence/search?&mediaType=StillImage&taxonKey=212&limit=40&basisOfRecord=HUMAN_OBSERVATION&datasetKey=50c9509d-22c7-4a22-a47d-8c48425ef4a7&geoDistance=${location["coords"]["lat"]},${location.coords.lng},${location.distance}km`,
     }),
     getBirdByKey: builder.query({
       query: (key) => `occurrence/${key}`,

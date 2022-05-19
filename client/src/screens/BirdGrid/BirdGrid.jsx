@@ -32,8 +32,7 @@ const BirdGrid = () => {
     data: birdsByLocation,
     isFetching,
     isLoading: isLoadingCoords,
-    refetch,
-  } = useGetBirdsByCoordsQuery(location, { skip });
+  } = useGetBirdsByCoordsQuery(location, { skip: skip });
   const { data: favorites, isLoading: favoritesLoading } =
     useGetFavoritesQuery();
   const [birdsHere, setBirds] = useState();
@@ -41,6 +40,8 @@ const BirdGrid = () => {
   const sizes = useBreakpointValue({ base: "90vw", sm: "50vw" });
   const router = useRouter();
   const currentPath = router.asPath;
+  const routerQuery = router.query;
+
   const column = useBreakpointValue({ base: "1", sm: 2, lg: "3", "2xl": 4 });
   const width = useBreakpointValue({
     base: "xs",
@@ -54,13 +55,19 @@ const BirdGrid = () => {
   const gap = useBreakpointValue({ base: 5, sm: 10, md: 10 });
 
   useEffect(() => {
-    if (location?.coords === null) {
-      setSkip(true);
-    } else {
-      setSkip(false);
-      refetch();
+    if (routerQuery.location) {
+      if (location !== JSON.parse(routerQuery.location))
+        dispatch(setLocation(JSON.parse(routerQuery.location)));
     }
-  }, [location]);
+  }, []);
+
+  useEffect(() => {
+    if (!location?.coords) {
+      setSkip(true);
+    } else if (typeof location?.coords?.lat === 'number'){
+      setSkip(false);
+    }
+  }, [location?.coords]);
 
   useEffect(() => {
     if (isFetching) {

@@ -64,6 +64,8 @@ function MyApp({ Component, pageProps }) {
 
 export default wrapper.withRedux(MyApp);
 
+// Axiom Log DB
+
 export function reportWebVitals(metric) {
   const url = process.env.NEXT_PUBLIC_AXIOM_INGEST_ENDPOINT;
 

@@ -1,17 +1,21 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
+import { MdLocationSearching, MdMyLocation } from "react-icons/md";
 import {
   Input,
   InputGroup,
   Button as CButton,
+  ButtonGroup,
   Box,
   InputRightElement,
   List,
   useColorMode,
+  IconButton,
   ListItem,
   Popover,
   useBreakpointValue,
+  useToast,
   PopoverContent,
   PopoverBody,
   PopoverAnchor,
@@ -26,6 +30,7 @@ import {
 } from "../../../store/features/locationSlice";
 
 const Search = () => {
+  const toast = useToast()
   const [isOpen, setIsOpen] = useState(false);
   const [skip, setSkip] = useState(true);
   const [distance, setDistance] = useState("15");
@@ -33,6 +38,9 @@ const Search = () => {
   const suggestContainer = useRef(null);
   const [searchText, setText] = useState("");
   const [searchRequest, setSearch] = useState("");
+  const [currentLocation, setCurrentLocation] = useState({
+    icon: <MdLocationSearching />,
+  });
   const [coords, setCoords] = useState();
   const searchBar = useRef(null);
   const router = useRouter();
@@ -75,18 +83,13 @@ const Search = () => {
     }
   }, [coords]);
 
-  if (router.query.location) {
-    if (router.asPath.includes("search")) {
-      dispatch(setLocation(JSON.parse(router.query.location)));
-    }
-  }
   const handleSuggestSelect = (e) => {
     searchBar.current.focus();
     setText(e.target.textContent);
   };
   const handleChange = (e) => {
     setText(e.target.value);
-    if (e.target.value.length < 2) {
+    if (e.target.value.length < 3) {
       setIsOpen(false);
       setSkip(true);
     } else {
@@ -94,6 +97,29 @@ const Search = () => {
       setIsOpen(true);
     }
   };
+
+  const handleCurrentLocation = () => {
+    if (!navigator.geolocation) {
+      toast({
+        status: "error",
+        title: "Error",
+        description: "Sorry, your browser doesn't support geolocation!",
+        isClosable: true,
+      })
+    } else if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((pos) => {
+        const geolocation = { lat: pos.coords.latitude, lon: pos.coords.longitude }
+        setCoords(geolocation)
+      }, () => {
+        toast({
+          status: "error",
+          title: "Error",
+          description: "Hmm, we couldn't retrieve your location",
+          isClosable: true,
+        })
+      })
+}
+  }
 
   const handleSearch = () => {
     setSearch(searchText);
@@ -107,14 +133,14 @@ const Search = () => {
   };
 
   return (
-    <Box w="90%" pt={searchMarginTop}>
+    <Box w="100%" pt={searchMarginTop}>
       <InputGroup size="md">
         <Popover isOpen={isOpen.toString()} initialFocusRef={searchBar}>
           <PopoverAnchor>
             <Input
               placeholder="Search by locale (i.e. City, State, Country, etc.)"
               borderColor={color[colorMode]}
-              pr="4.5rem"
+              pr="7rem"
               ref={searchBar}
               value={searchText}
               onChange={handleChange}
@@ -124,7 +150,7 @@ const Search = () => {
 
           <PopoverContent
             bg={bg[colorMode]}
-            display={searchText.length >= 2 ? "flex" : "none"}
+            display={searchText.length >= 3? "flex" : "none"}
             mt="-1.5"
             w="100%"
             borderColor={color[colorMode]}
@@ -158,19 +184,28 @@ const Search = () => {
           </PopoverContent>
         </Popover>
 
-        <InputRightElement width="4.5rem" ref={suggestContainer}>
-          <CButton
-            _hover={{ bg: `${bg[colorMode]}` }}
-            _expanded={{ bg: `${highlight[colorMode]}` }}
-            color={color[colorMode]}
-            isLoading={isLoading || isFetching}
-            variant="outline"
-            borderLeftRadius="0px"
-            border="none"
-            onClick={handleSearch}
-          >
-            Search
-          </CButton>
+        <InputRightElement width="7rem" ref={suggestContainer}>
+          <ButtonGroup isAttached w="7rem">
+            <IconButton
+                borderColor={color[colorMode]}
+              icon={currentLocation.icon}
+              variant="outline"
+              _hover={{ bg: `${bg[colorMode]}` }}
+              color={color[colorMode]}
+              borderRight="none"
+              onClick={handleCurrentLocation}
+            />
+            <CButton
+                borderColor={color[colorMode]}
+              _hover={{ bg: `${bg[colorMode]}` }}
+              color={color[colorMode]}
+              isLoading={isLoading || isFetching}
+              variant="outline"
+              onClick={handleSearch}
+            >
+              Search
+            </CButton>
+          </ButtonGroup>
         </InputRightElement>
       </InputGroup>
     </Box>

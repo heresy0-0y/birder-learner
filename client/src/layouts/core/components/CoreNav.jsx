@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import dynamic from 'next/dynamic'
 import {
   Box,
   Flex,
@@ -21,8 +22,11 @@ import {
   setCredentials,
 } from "../../../store/features/authSlice";
 
-import Search from "../../../common/components/Search/Search";
+
 const Nav = () => {
+  const Search = dynamic(() => import("../../../common/components/Search/Search"), {
+    ssr: true,
+  });
   const [localUser, setUser] = useState({ user: null, token: null });
   const dispatch = useDispatch();
 
