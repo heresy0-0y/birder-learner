@@ -56,7 +56,7 @@ const Songs = ({ taxonKey }) => {
   }, [points]);
 
   useEffect(() => {
-    if (locations?.id) {
+    if (locations?.id !== undefined) {
       setFinalSkip(false);
     }
   }, [locations]);
@@ -86,7 +86,7 @@ const Songs = ({ taxonKey }) => {
     }
   }, [songs]);
 
-  if (isLoading) {
+  if (isLoading || isFetching) {
     return (
       <VStack w="100%" h="100%" mt="10%" alignItems="center">
         <Spinner size="xl" mt="10%" />
