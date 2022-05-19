@@ -20,12 +20,14 @@ export const batchGeocodeApi = createApi({
         body: points,
       }),
     }),
-      getLocationsFromQuery: builder.query({
-        query: (id) => `batch/geocode/reverse?apiKey=${key}&format=json&id=${id}`
-    })
+    getLocationsFromQuery: builder.query({
+      query: (id) => `batch/geocode/reverse?apiKey=${key}&format=json&id=${id}`,
+    }),
   }),
 });
 
 export const {
-  useGetLocationFromCoordsQuery, useGetCoordsQuery, useGetLocationsFromQueryQuery
+  useGetLocationFromCoordsQuery,
+  useGetCoordsQuery,
+  useGetLocationsFromQueryQuery,
 } = batchGeocodeApi;

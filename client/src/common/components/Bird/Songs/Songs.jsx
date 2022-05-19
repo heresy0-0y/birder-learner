@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { VStack, Skeleton, Spinner, Box, Flex } from "@chakra-ui/react";
 import { Playlist } from "./Playlist.jsx";
-import { useGetLocationFromCoordsQuery, useGetLocationsFromQueryQuery } from "../../../services/batchReverseGeocode";
+import {
+  useGetLocationFromCoordsQuery,
+  useGetLocationsFromQueryQuery,
+} from "../../../services/autosuggest";
 import { useGetSongsByBirdQuery } from "../../../services/birds";
 import dynamic from "next/dynamic";
 
@@ -12,15 +15,17 @@ const Songs = ({ taxonKey }) => {
   const [tracks, setTracks] = useState();
   const [preTracks, setPreTracks] = useState();
   const [skip, setSkip] = useState(true);
-  const [skipFinal, setFinalSkip] = useState(true)
+  const [skipFinal, setFinalSkip] = useState(true);
   const [points, setPoints] = useState([]);
   const { data: locations, isSuccess } = useGetLocationFromCoordsQuery(points, {
     skip,
   });
-  const {data: locationsFrom, refetch, isFetching} = useGetLocationsFromQueryQuery(locations?.id, {skipFinal})
+  const {
+    data: locationsFrom,
+    refetch,
+    isFetching,
+  } = useGetLocationsFromQueryQuery(locations?.id, { skipFinal });
   const [selectedTrack, setSelected] = useState();
-
- 
 
   useEffect(() => {
     if (data) {
@@ -38,34 +43,32 @@ const Songs = ({ taxonKey }) => {
           date: bird.eventDate,
         };
       });
-      setPoints(coords );
+      setPoints(coords);
       setPreTracks(tracksWithoutLocation);
     }
   }, [data]);
 
   useEffect(() => {
     if (points.length > 0) {
-      console.log(points)
+      console.log(points);
       setSkip(false);
     }
   }, [points]);
 
   useEffect(() => {
     if (locations?.id) {
-      setFinalSkip(false)
+      setFinalSkip(false);
     }
-  },[locations])
+  }, [locations]);
 
   useEffect(() => {
     const tracksWithLocation = preTracks;
     if (locationsFrom?.status === "pending") {
-        refetch()
+      refetch();
     } else if (locationsFrom?.length > 0) {
       locationsFrom.forEach((result, index) => {
-
-
         const address = result.formatted;
-        const location = address.replace("United States of America", "U.S.") 
+        const location = address.replace("United States of America", "U.S.");
 
         tracksWithLocation[index].location = location;
       });

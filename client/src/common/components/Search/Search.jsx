@@ -57,15 +57,16 @@ const Search = () => {
   const highlight = { light: "#acc1df88", dark: "#acc1df88" };
 
   useEffect(() => {
-    if (location?.results) {
-      setCoords(location.results[0].locations[0].latLng);
+    if (location?.features) {
+      const locationProps = location.features[0].properties;
+      setCoords({ lat: locationProps.lat, lon: locationProps.lon });
     }
   }, [location]);
 
   useEffect(() => {
     if (coords) {
       const queryOptions = {
-        coords: { lat: coords.lat, lng: coords.lng },
+        coords: { lat: coords.lat, lng: coords.lon },
         distance: distance,
       };
 
@@ -145,9 +146,9 @@ const Search = () => {
                           key={index}
                           variant="ghost"
                           onClick={handleSuggestSelect}
-                          value={result.displayString}
+                          value={result.formatted}
                         >
-                          {result.displayString}
+                          {result.formatted}
                         </CButton>
                       </ListItem>
                     ))

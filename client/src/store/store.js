@@ -16,13 +16,14 @@ export const store = configureStore({
     [authSlice.name]: authSlice.reducer,
     [suggestApi.reducerPath]: suggestApi.reducer,
     [locationSlice.name]: locationSlice.reducer,
-    [batchGeocodeApi.reducerPath]: batchGeocodeApi.reducer 
+    [batchGeocodeApi.reducerPath]: batchGeocodeApi.reducer,
   },
   middleware: (gDM) =>
     gDM()
       .concat(birdsInitApi.middleware)
       .concat(authApi.middleware)
-      .concat(suggestApi.middleware).concat(batchGeocodeApi.middleware),
+      .concat(suggestApi.middleware)
+      .concat(batchGeocodeApi.middleware),
 });
 
 export const makeStore = () => store;
