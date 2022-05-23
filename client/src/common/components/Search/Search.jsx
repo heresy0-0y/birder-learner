@@ -106,6 +106,7 @@ const Search = () => {
         description: "Sorry, your browser doesn't support geolocation!",
         isClosable: true,
       })
+      console.log(navigator.geolocation)
     } else if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
         const geolocation = { lat: pos.coords.latitude, lon: pos.coords.longitude }
