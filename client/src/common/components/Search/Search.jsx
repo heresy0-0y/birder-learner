@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { MdLocationSearching, MdMyLocation } from "react-icons/md";
+import { getUserPosition } from "../../services/getUserPosition";
 import {
   Input,
   InputGroup,
@@ -116,8 +117,9 @@ const Search = () => {
   const options = {
     timeout: 27000
   }
-  const handleCurrentLocation = () => {
-   navigator.geolocation.getCurrentPosition(success, error, options)
+  const handleCurrentLocation = async () => {
+    const response = await getUserPosition()
+    console.log(response)
   }
 
   const handleSearch = () => {
