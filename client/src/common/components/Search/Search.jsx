@@ -126,6 +126,7 @@ const Search = () => {
         description: "Oops! Your privacy settings won't allow us to do that."
         })
     } else {
+      console.log(response.result)
       success(response.result)
     }
   }
