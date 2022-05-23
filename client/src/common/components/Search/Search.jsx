@@ -118,19 +118,7 @@ const Search = () => {
     timeout: 27000
   }
   const handleCurrentLocation =  async () => {
-    const response = await getUserPosition()
-    if (response.status === "rejected") {
-      toast({
-        status: "error",
-        title: "error",
-        description: "Oops! Your privacy settings won't allow us to do that."
-        })
-    } else {
-      response.then((result) => {
-        console.log(result)
-      })
-      success(response.result)
-    }
+    navigator.geolocation.getCurrentPosition(success,error, options)
   }
 
   const handleSearch = () => {
