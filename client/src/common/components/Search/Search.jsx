@@ -98,31 +98,26 @@ const Search = () => {
     }
   };
 
+  const success = (pos) => {
+    const geolocation = { lat: pos.coords.latitude, lon: pos.coords.longitude }
+    setCoords(geolocation)
+  }
+
+  const error = () => {
+    toast({
+      status: "error",
+      title: "Error",
+      description: "Hmm, we couldn't retrieve your location",
+      isClosable: true,
+    })
+    console.log(navigator.geolocation.getCurrentPosition())
+  }
+
+  const options = {
+    timeout: 27000
+  }
   const handleCurrentLocation = () => {
-    if (!navigator.geolocation) {
-      toast({
-        status: "error",
-        title: "Error",
-        description: "Sorry, your browser doesn't support geolocation!",
-        isClosable: true,
-      })
-      console.log(navigator.geolocation)
-    } else if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((pos) => {
-        const geolocation = { lat: pos.coords.latitude, lon: pos.coords.longitude }
-        setCoords(geolocation)
-        console.log(geolocation)
-      }, (error) => {
-        toast({
-          status: "error",
-          title: "Error",
-          description: "Hmm, we couldn't retrieve your location",
-          isClosable: true,
-        })
-      })
-      console.log(navigator.geolocation)
-      console.log(error)
-}
+   navigator.geolocation.getCurrentPosition(success, error, options)
   }
 
   const handleSearch = () => {
