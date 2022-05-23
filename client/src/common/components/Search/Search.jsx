@@ -111,6 +111,7 @@ const Search = () => {
       navigator.geolocation.getCurrentPosition((pos) => {
         const geolocation = { lat: pos.coords.latitude, lon: pos.coords.longitude }
         setCoords(geolocation)
+        console.log(geolocation)
       }, () => {
         toast({
           status: "error",
@@ -119,6 +120,7 @@ const Search = () => {
           isClosable: true,
         })
       })
+      console.log(navigator.geolocation)
 }
   }
 
