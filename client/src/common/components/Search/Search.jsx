@@ -112,7 +112,7 @@ const Search = () => {
         const geolocation = { lat: pos.coords.latitude, lon: pos.coords.longitude }
         setCoords(geolocation)
         console.log(geolocation)
-      }, () => {
+      }, (error) => {
         toast({
           status: "error",
           title: "Error",
@@ -121,6 +121,7 @@ const Search = () => {
         })
       })
       console.log(navigator.geolocation)
+      console.log(error)
 }
   }
 
