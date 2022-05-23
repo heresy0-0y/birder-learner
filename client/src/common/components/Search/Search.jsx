@@ -118,8 +118,16 @@ const Search = () => {
     timeout: 27000
   }
   const handleCurrentLocation =  () => {
-    const response =  getUserPosition()
-    console.log(response)
+    const response = getUserPosition()
+    if (response.status === "rejected") {
+      toast({
+        status: "error",
+        title: "error",
+        description: "Oops! Your privacy settings won't allow us to do that."
+        })
+    } else {
+      success(response.result)
+    }
   }
 
   const handleSearch = () => {
