@@ -117,8 +117,8 @@ const Search = () => {
   const options = {
     timeout: 27000
   }
-  const handleCurrentLocation = async () => {
-    const response = await getUserPosition()
+  const handleCurrentLocation =  () => {
+    const response =  getUserPosition()
     console.log(response)
   }
 
