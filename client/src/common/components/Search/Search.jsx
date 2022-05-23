@@ -117,8 +117,8 @@ const Search = () => {
   const options = {
     timeout: 27000
   }
-  const handleCurrentLocation =  () => {
-    const response = getUserPosition()
+  const handleCurrentLocation =  async () => {
+    const response = await getUserPosition()
     if (response.status === "rejected") {
       toast({
         status: "error",
