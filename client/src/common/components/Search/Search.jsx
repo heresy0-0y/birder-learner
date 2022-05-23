@@ -110,7 +110,7 @@ const Search = () => {
       description: "Hmm, we couldn't retrieve your location",
       isClosable: true,
     })
-    console.log(navigator.geolocation.getCurrentPosition())
+    console.log(navigator.standalone)
   }
 
   const options = {
