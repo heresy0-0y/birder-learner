@@ -35,8 +35,7 @@ const Songs = ({ taxonKey }) => {
         const lat = bird.decimalLatitude;
         const long = bird.decimalLongitude;
         const tracks = bird.media.filter((item) => item.type === "Sound");
-        coords.push([long, lat]);
-
+        if (lat) coords.push([long, lat]);
         return {
           location: index,
           tracks: tracks,

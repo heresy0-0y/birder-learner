@@ -3,6 +3,8 @@ import { Layout } from "../layouts/core";
 import Image from "next/image";
 import { wrapper } from "../store/store.js";
 import { ChakraProvider, ColorModeProvider, Box, Flex } from "@chakra-ui/react";
+import "@fontsource/b612-mono";
+import "@fontsource/nova-mono";
 import theme from "../theme";
 import backgroundImage from "../../public/bg1.webp";
 
