@@ -3,8 +3,8 @@ import { createBreakpoints } from "@chakra-ui/theme-tools";
 
 const fonts = {
   mono: `'Menlo', monospace`,
-  heading: `'B612 Mono', monospace`,
-  body: `'Nova Mono', monospace`,
+  body: `'B612 Mono', monospace`,
+  heading: `'Nova Mono', monospace`,
 };
 
 const breakpoints = createBreakpoints({
