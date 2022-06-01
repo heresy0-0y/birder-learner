@@ -15,6 +15,7 @@
     "@emotion/react": "^11.0.0",
     "@emotion/styled": "^11.0.0",
     "@fontsource/b612-mono": "^4.5.8",
+    "@fontsource/mononoki": "^4.5.3",
     "@fontsource/nova-mono": "^4.5.8",
     "@reduxjs/toolkit": "^1.8.1",
     "framer-motion": "^4.0.3",

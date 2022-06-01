@@ -31,7 +31,7 @@ import {
 } from "../../../store/features/locationSlice";
 
 const Search = () => {
-  const toast = useToast()
+  const toast = useToast();
   const [isOpen, setIsOpen] = useState(false);
   const [skip, setSkip] = useState(true);
   const [distance, setDistance] = useState("15");
@@ -100,9 +100,9 @@ const Search = () => {
   };
 
   const success = (pos) => {
-    const geolocation = { lat: pos.coords.latitude, lon: pos.coords.longitude }
-    setCoords(geolocation)
-  }
+    const geolocation = { lat: pos.coords.latitude, lon: pos.coords.longitude };
+    setCoords(geolocation);
+  };
 
   const error = () => {
     toast({
@@ -110,16 +110,16 @@ const Search = () => {
       title: "Error",
       description: "Hmm, we couldn't retrieve your location",
       isClosable: true,
-    })
-    console.log(navigator.standalone)
-  }
+    });
+    console.log(navigator.standalone);
+  };
 
   const options = {
-    timeout: 27000
-  }
-  const handleCurrentLocation =  async () => {
-    navigator.geolocation.getCurrentPosition(success,error, options)
-  }
+    timeout: 27000,
+  };
+  const handleCurrentLocation = async () => {
+    navigator.geolocation.getCurrentPosition(success, error, options);
+  };
 
   const handleSearch = () => {
     setSearch(searchText);
@@ -138,7 +138,7 @@ const Search = () => {
         <Popover isOpen={isOpen.toString()} initialFocusRef={searchBar}>
           <PopoverAnchor>
             <Input
-              placeholder="Search by locale (i.e. City, State, Country, etc.)"
+              placeholder="Search by locality"
               borderColor={color[colorMode]}
               pr="7rem"
               ref={searchBar}
@@ -150,7 +150,7 @@ const Search = () => {
 
           <PopoverContent
             bg={bg[colorMode]}
-            display={searchText.length >= 3? "flex" : "none"}
+            display={searchText.length >= 3 ? "flex" : "none"}
             mt="-1.5"
             w="100%"
             borderColor={color[colorMode]}
@@ -187,7 +187,7 @@ const Search = () => {
         <InputRightElement width="7rem" ref={suggestContainer}>
           <ButtonGroup isAttached w="7rem">
             <IconButton
-                borderColor={color[colorMode]}
+              borderColor={color[colorMode]}
               icon={currentLocation.icon}
               variant="outline"
               _hover={{ bg: `${bg[colorMode]}` }}
@@ -196,7 +196,7 @@ const Search = () => {
               onClick={handleCurrentLocation}
             />
             <CButton
-                borderColor={color[colorMode]}
+              borderColor={color[colorMode]}
               _hover={{ bg: `${bg[colorMode]}` }}
               color={color[colorMode]}
               isLoading={isLoading || isFetching}
