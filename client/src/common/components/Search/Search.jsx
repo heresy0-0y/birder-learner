@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { MdLocationSearching, MdMyLocation } from "react-icons/md";
-import { getUserPosition } from "../../services/getUserPosition";
 import {
   Input,
   InputGroup,
@@ -49,11 +48,7 @@ const Search = () => {
 
   const isFetching = useSelector(selectIsFetching);
 
-  const {
-    data: location,
-    isSuccess,
-    isLoading,
-  } = useGetCoordsQuery(searchRequest, {
+  const { data: location, isLoading } = useGetCoordsQuery(searchRequest, {
     skip: skipSearch,
   });
 
@@ -102,6 +97,7 @@ const Search = () => {
 
   const success = (pos) => {
     const geolocation = { lat: pos.coords.latitude, lon: pos.coords.longitude };
+    setCurrentLocation({ icon: <MdMyLocation /> });
     setCoords(geolocation);
   };
 
