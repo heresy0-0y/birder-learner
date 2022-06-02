@@ -38,9 +38,7 @@ const Search = () => {
   const suggestContainer = useRef(null);
   const [searchText, setText] = useState("");
   const [searchRequest, setSearch] = useState("");
-  const [currentLocation, setCurrentLocation] = useState({
-    icon: <MdLocationSearching />,
-  });
+  const [currentLocation, setCurrentLocation] = useState(false);
   const [coords, setCoords] = useState();
   const searchBar = useRef(null);
   const router = useRouter();
@@ -60,7 +58,9 @@ const Search = () => {
   const color = { light: "#002A64", dark: "#C8FFBA" };
   const highlight = { light: "#acc1df88", dark: "#acc1df88" };
   const placeholder = { light: "gray.600", dark: "gray.400" };
-
+  const blah = (o) => {
+    setCurrentLocation(o);
+  };
   useEffect(() => {
     if (location?.features) {
       const locationProps = location.features[0].properties;
@@ -73,13 +73,24 @@ const Search = () => {
       const queryOptions = {
         coords: { lat: coords.lat, lng: coords.lon },
         distance: distance,
+        fromNavigator: coords.fromNavigator,
       };
 
       dispatch(setLocation(queryOptions));
       router.push(`/search/${JSON.stringify(queryOptions)}`);
+      blah(queryOptions.fromNavigator);
     }
   }, [coords]);
-
+  useEffect(() => {
+    const query = router.query;
+    if (query.location) {
+      const pathCoords = JSON.parse(query.location);
+      console.log(pathCoords);
+      if (pathCoords.fromNavigator) {
+        setCurrentLocation(true);
+      }
+    }
+  }, [router]);
   const handleSuggestSelect = (e) => {
     searchBar.current.focus();
     setText(e.target.textContent);
@@ -96,8 +107,11 @@ const Search = () => {
   };
 
   const success = (pos) => {
-    const geolocation = { lat: pos.coords.latitude, lon: pos.coords.longitude };
-    setCurrentLocation({ icon: <MdMyLocation /> });
+    const geolocation = {
+      lat: pos.coords.latitude,
+      lon: pos.coords.longitude,
+      fromNavigator: true,
+    };
     setCoords(geolocation);
   };
 
@@ -114,8 +128,10 @@ const Search = () => {
   const options = {
     timeout: 27000,
   };
-  const handleCurrentLocation = async () => {
+  const handleCurrentLocation = (e) => {
+    e.preventDefault();
     navigator.geolocation.getCurrentPosition(success, error, options);
+    setCurrentLocation(true);
   };
 
   const handleSearch = () => {
@@ -186,12 +202,14 @@ const Search = () => {
           <ButtonGroup isAttached w="7rem">
             <IconButton
               borderColor={color[colorMode]}
-              icon={currentLocation.icon}
+              icon={
+                currentLocation ? <MdMyLocation /> : <MdLocationSearching />
+              }
               variant="outline"
               _hover={{ bg: `${bg[colorMode]}` }}
               color={color[colorMode]}
               borderRight="none"
-              onClick={handleCurrentLocation}
+              onClick={(e) => handleCurrentLocation(e)}
             />
             <CButton
               borderColor={color[colorMode]}
