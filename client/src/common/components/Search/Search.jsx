@@ -64,6 +64,7 @@ const Search = () => {
   const bg = { light: "#ACC1DF", dark: "#13315A" };
   const color = { light: "#002A64", dark: "#C8FFBA" };
   const highlight = { light: "#acc1df88", dark: "#acc1df88" };
+  const placeholder = { light: "gray.600", dark: "gray.400" };
 
   useEffect(() => {
     if (location?.features) {
@@ -139,6 +140,7 @@ const Search = () => {
           <PopoverAnchor>
             <Input
               placeholder="Search by locality"
+              _placeholder={{ color: placeholder[colorMode] }}
               borderColor={color[colorMode]}
               pr="7rem"
               ref={searchBar}
