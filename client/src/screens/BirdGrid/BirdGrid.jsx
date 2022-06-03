@@ -127,7 +127,9 @@ const BirdGrid = () => {
             // maxW="100%"
             priority={index < 10 ? "true" : "false"}
             name={bird.scientificName}
-            url={bird.media[0].identifier}
+            url={
+              bird.media.find((item) => item.type === "StillImage").identifier
+            }
             key={bird.key}
             sizes={sizes}
           ></Bird>

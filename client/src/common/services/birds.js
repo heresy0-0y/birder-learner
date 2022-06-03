@@ -15,12 +15,12 @@ export const birdsInitApi = createApi({
     getBirdsByIPCountryCode: builder.query({
       async queryFn(_arg, _queryApi, _extraOptions, fetchWithBQ) {
         const countryFromIP = await fetchLocation();
-        if (countryFromIP.error) throw countryFromIP.error;
+        if (countryFromIP?.error) throw countryFromIP.error;
         const countryCode = countryFromIP;
         const result = await fetchWithBQ(
           `occurrence/search?&mediaType=StillImage&taxonKey=212&limit=40&basisOfRecord=HUMAN_OBSERVATION&datasetKey=50c9509d-22c7-4a22-a47d-8c48425ef4a7&country=${countryCode}`
         );
-        if (result.error) throw response.error;
+        if (result.error) throw result.error;
         return result.data ? { data: result.data } : { error: result.error };
       },
     }),
