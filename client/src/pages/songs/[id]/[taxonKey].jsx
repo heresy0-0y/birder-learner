@@ -7,7 +7,7 @@ import {
   getRunningOperationPromises,
 } from "../../../common/services/birds";
 
-export default function Songs(context) {
+export default function Songs() {
   return <BirdFocus></BirdFocus>;
 }
 

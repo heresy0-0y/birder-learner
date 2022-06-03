@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import dynamic from 'next/dynamic'
+import dynamic from "next/dynamic";
 import {
   Box,
   Flex,
@@ -22,11 +22,13 @@ import {
   setCredentials,
 } from "../../../store/features/authSlice";
 
-
 const Nav = () => {
-  const Search = dynamic(() => import("../../../common/components/Search/Search"), {
-    ssr: true,
-  });
+  const Search = dynamic(
+    () => import("../../../common/components/Search/Search"),
+    {
+      ssr: true,
+    }
+  );
   const [localUser, setUser] = useState({ user: null, token: null });
   const dispatch = useDispatch();
 
@@ -159,7 +161,7 @@ const Nav = () => {
                 display={currentPath.includes("search") ? "inherit" : "none"}
               >
                 <Spacer />
-                <Center w="70%">
+                <Center w="100%">
                   <Search />
                 </Center>
                 <Spacer />

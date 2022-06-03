@@ -64,10 +64,10 @@ const BirdGrid = () => {
   useEffect(() => {
     if (!location?.coords) {
       setSkip(true);
-    } else if (typeof location?.coords?.lat === 'number'){
+    } else if (typeof location?.coords?.lat === "number") {
       setSkip(false);
     }
-  }, [location?.coords]);
+  }, [location]);
 
   useEffect(() => {
     if (isFetching) {
