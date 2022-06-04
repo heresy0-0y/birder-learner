@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 
   return {
     paths: result.data?.results.map((p) => {
-      return { params: { "user.username": p } };
+      return { params: { "user.username": `${p}` } };
     }),
     fallback: true,
   };
