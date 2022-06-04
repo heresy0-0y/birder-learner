@@ -14,9 +14,9 @@ export async function getStaticPaths() {
   const result = await store.dispatch(getUsers.initiate());
   console.log(result);
   return {
-    paths: result.data?.results.map((user) => ({
-      params: { "user.username": user },
-    })),
+    paths: result.data?.results.map((user) => {
+      `${user}/favorites`;
+    }),
     fallback: true,
   };
 }
