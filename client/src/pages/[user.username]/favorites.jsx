@@ -11,12 +11,12 @@ const Favorites = () => <BirdGrid></BirdGrid>;
 export default Favorites;
 export async function getStaticPaths() {
   const store = makeStore();
-  store.dispatch(getUsers.initiate()).then((result) => {
-    return {
-      paths: result.data.map((p) => `/${p}/favorites`),
-      fallback: true,
-    };
-  });
+  const result = await store.dispatch(getUsers.initiate());
+
+  return {
+    paths: result.data.map((p) => `/${p}/favorites`),
+    fallback: true,
+  };
 }
 export const getStaticProps = wrapper.getStaticProps((store) => async () => {
   store.dispatch(getFavorites.initiate());
