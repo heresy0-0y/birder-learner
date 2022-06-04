@@ -12,7 +12,7 @@ export default Favorites;
 export async function getStaticPaths() {
   const store = makeStore();
   const result = await store.dispatch(getUsers.initiate());
-
+  console.log(result);
   return {
     paths: result.data?.results.map((user) => ({
       params: { "user.username": user },
