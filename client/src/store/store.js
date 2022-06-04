@@ -1,4 +1,4 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { birdsInitApi } from "../common/services/birds.js";
 import { createWrapper } from "next-redux-wrapper";

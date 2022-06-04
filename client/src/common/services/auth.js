@@ -13,7 +13,7 @@ export const authApi = createApi({
       return headers;
     },
   }),
-  keepUnusedDataFor: 31536000,
+  keepUnusedDataFor: 315360,
   extractRehydrationInfo(action, { reducerPath }) {
     if (action.type === HYDRATE) {
       return action.payload[reducerPath];
