@@ -4,7 +4,7 @@ const KEY = process.env.GEOAPIFY_API_KEY;
 
 export default async function handler(req, res) {
   const method = req.method;
-  const url = req.url.slice(6);
+  const url = req.url.replace(/^\/api?\?/, "");
   const body = req.body;
   const reqConfig = {};
   reqConfig.url = `${BASE_URL}${url}&apiKey=${KEY}`;
@@ -13,8 +13,6 @@ export default async function handler(req, res) {
   if (method === "POST") {
     reqConfig.method = "POST";
     reqConfig.data = body;
-  } else {
-    reqConfig.method = "GET";
   }
 
   try {
