@@ -79,11 +79,7 @@ const Waveform = ({ loading, setLoading, url }) => {
     <>
       <Center>
         <Box mt="3%" w="95%" align="center">
-          <Skeleton isLoaded={!loading}>
-            <Box>
-              <div minHeight="10%" id="waveform" ref={waveform} />
-            </Box>
-          </Skeleton>
+          <div minHeight="10%" id="waveform" ref={waveform} />
 
           <Button
             m="4"
