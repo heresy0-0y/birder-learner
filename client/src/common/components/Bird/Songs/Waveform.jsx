@@ -14,7 +14,7 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 
-const Waveform = ({ loading, setLoading, url }) => {
+const Waveform = ({ url }) => {
   const { colorMode } = useColorMode();
   const bg = { light: "#ACC1DF", dark: "#13315A" };
 
