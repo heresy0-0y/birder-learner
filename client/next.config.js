@@ -3,6 +3,23 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 module.exports = withBundleAnalyzer({
+  async headers() {
+    return [
+      {
+        source: "/api",
+        headers: [
+          {
+            key: "cache-control",
+            value: "s-maxage=600",
+          },
+          {
+            key: "Access-Control-Allow-Origin",
+            value: "*",
+          },
+        ],
+      },
+    ];
+  },
   compress: true,
   swcMinify: true,
   compiler: {
