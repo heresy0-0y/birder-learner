@@ -7,14 +7,13 @@ export default async function handler(req, res) {
   const url = req.url.slice(6);
   const body = req.body;
   const reqConfig = {};
+  reqConfig.url = `${BASE_URL}${url}&apiKey=${KEY}`;
 
   if (method === "POST") {
     reqConfig.method = "POST";
     reqConfig.data = body;
-    reqConfig.url = BASE_URL + url + `&apiKey=${KEY}`;
   } else {
     reqConfig.method = "GET";
-    reqConfig.url = BASE_URL + url + `&apiKey=${KEY}`;
   }
 
   try {
