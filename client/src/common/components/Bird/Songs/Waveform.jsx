@@ -40,19 +40,15 @@ const Waveform = ({ url }) => {
     if (url !== undefined) {
       waveform.current.load(`https://corsanyblah.herokuapp.com/${url}`);
     }
-    setLoading(true);
     waveform.current.on("ready", function () {
       waveform.current.setVolume(volume);
-      setLoading(false);
       waveform.current.pause();
       return () => waveform.current.destroy();
     });
   }, [url]);
 
   useEffect(() => {
-    waveform.current.on("ready", function () {
-      setLoading(false);
-    });
+    waveform.current.on("ready", function () {});
     waveform.current.on("finish", function () {
       setPlay(false);
     });
