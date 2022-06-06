@@ -38,7 +38,7 @@ const Waveform = ({ url }) => {
       hideScrollbar: true,
     });
     if (url !== undefined) {
-      waveform.current.load(`https://corsanyblah.herokuapp.com/${url}`);
+      waveform.current.load(`api?endpoint=${url}`);
     }
     waveform.current.on("ready", function () {
       waveform.current.setVolume(volume);
