@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = `https://api.geoapify.com/v1/`;
+const BASE_URL = `https://api.geoapify.com/v1`;
 const KEY = process.env.GEOAPIFY_API_KEY;
 
 export default async function handler(req, res) {

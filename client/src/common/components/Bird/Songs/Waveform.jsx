@@ -74,7 +74,7 @@ const Waveform = ({ url }) => {
     <>
       <Center>
         <Box mt="3%" w="95%" align="center">
-          <div minHeight="10%" id="waveform" ref={waveform} />
+          <div id="waveform" ref={waveform} />
 
           <Button
             m="4"
