@@ -98,11 +98,7 @@ const Songs = ({ taxonKey }) => {
     <>
       <Flex minW="100%" h="100%" direction="column" align="center">
         <Box h="300" w="100%">
-          <Waveform
-            url={selectedTrack}
-            setLoading={setLoading}
-            loading={loading}
-          />
+          <Waveform url={selectedTrack} />
         </Box>
         <Skeleton isLoaded={!isLoading} w="100%">
           <Playlist
