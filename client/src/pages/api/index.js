@@ -18,10 +18,11 @@ export default async function handler(req, res) {
 
   try {
     const response = await axios(reqConfig);
-    res.status(200).send(response.data);
+    const data = await response.data;
+    res.status(200).send(data);
     console.log(response);
   } catch (error) {
-    res.status(500).send(error);
     console.log(error.toJSON());
+    res.status(500).send(error);
   }
 }
