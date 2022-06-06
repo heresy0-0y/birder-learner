@@ -14,14 +14,13 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 
-const Waveform = ({ url }) => {
+const Waveform = ({ loading, setLoading, url }) => {
   const { colorMode } = useColorMode();
   const bg = { light: "#ACC1DF", dark: "#13315A" };
 
   const waveform = useRef(null);
   const [play, setPlay] = useState(false);
   const [volume, setVolume] = useState(0.5);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setPlay(false);

@@ -13,6 +13,7 @@ const Songs = ({ taxonKey }) => {
   const { data, isLoading } = useGetSongsByBirdQuery(taxonKey);
   const [skipFinal, setFinalSkip] = useState(true);
   const [skip, setSkip] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [preTracks, setPreTracks] = useState();
   const [tracks, setTracks] = useState();
   const [songs, setSongs] = useState();
@@ -98,7 +99,11 @@ const Songs = ({ taxonKey }) => {
     <>
       <Flex minW="100%" h="100%" direction="column" align="center">
         <Box h="300" w="100%">
-          <Waveform url={selectedTrack} />
+          <Waveform
+            url={selectedTrack}
+            setLoading={setLoading}
+            loading={loading}
+          />
         </Box>
         <Skeleton isLoaded={!isLoading} w="100%">
           <Playlist
