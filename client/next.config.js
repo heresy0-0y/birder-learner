@@ -23,7 +23,7 @@ module.exports = withBundleAnalyzer({
   compress: true,
   swcMinify: true,
   compiler: {
-    removeConsole: true,
+    // removeConsole: true,
   },
   images: {
     // loader: "cloudinary",

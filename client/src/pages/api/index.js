@@ -8,9 +8,9 @@ const filter = (raw, unallowed) => {
     }, {});
 };
 
-const handler = async () => {
+const handler = async (req, res) => {
   const { endpoint } = req.query;
-
+  console.log(endpoint);
   if (endpoint == null || endpoint == "") {
     const err = {
       error: "Missing endpoint param",
@@ -19,7 +19,7 @@ const handler = async () => {
     return;
   }
 
-  if (!isNan(parseInt(endpoint)) || typeof endpoint !== "string") {
+  if (!isNaN(parseInt(endpoint)) || typeof endpoint !== "string") {
     const err = {
       error: "Endpoint param must be a string",
     };
@@ -44,3 +44,4 @@ const handler = async () => {
     res.status(500).send(err);
   }
 };
+export default handler;
