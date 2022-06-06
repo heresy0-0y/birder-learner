@@ -9,6 +9,8 @@ module.exports = withBundleAnalyzer({
     removeConsole: true,
   },
   images: {
+    loader: "cloudinary",
+    path: "heresy00y.mo.cloudinary.net/birds",
     domains: [
       "inaturalist-open-data.s3.amazonaws.com",
       "www.gbif.org",

@@ -34,7 +34,7 @@ const Waveform = ({ url }) => {
       responsive: true,
       barRadius: 2,
       normalize: true,
-      partialRender: true,
+
       cursorColor: "seafoam-green",
       hideScrollbar: true,
     });
@@ -82,7 +82,7 @@ const Waveform = ({ url }) => {
         <Box mt="3%" w="95%" align="center">
           <Skeleton isLoaded={!loading}>
             <Box>
-              <div id="waveform" ref={waveform} />
+              <div minHeight="10%" id="waveform" ref={waveform} />
             </Box>
           </Skeleton>
 
