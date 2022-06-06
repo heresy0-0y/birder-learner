@@ -4,7 +4,10 @@ const KEY = process.env.GEOAPIFY_API_KEY;
 
 export default async function handler(req, res) {
   const method = req.method;
-  const url = req.url.replace(/^\/api?\?/, "");
+  const url = req.url
+    .replace(/^\/api?\?/, "")
+    .replace(/%2F/g, "/")
+    .replace(/%3F/g, "?");
   const body = req.body;
   const reqConfig = {};
   reqConfig.url = `${BASE_URL}${url}&apiKey=${KEY}`;
