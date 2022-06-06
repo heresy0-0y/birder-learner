@@ -44,6 +44,7 @@ const Waveform = ({ url }) => {
     setLoading(true);
     waveform.current.on("ready", function () {
       waveform.current.setVolume(volume);
+      setLoading(false);
       waveform.current.pause();
       return () => waveform.current.destroy();
     });
@@ -80,7 +81,9 @@ const Waveform = ({ url }) => {
       <Center>
         <Box mt="3%" w="95%" align="center">
           <Skeleton isLoaded={!loading}>
-            <div id="waveform" ref={waveform} />
+            <Box>
+              <div id="waveform" ref={waveform} />
+            </Box>
           </Skeleton>
 
           <Button
