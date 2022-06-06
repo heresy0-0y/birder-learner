@@ -50,7 +50,7 @@ const Waveform = ({ url }) => {
   }, [url]);
 
   useEffect(() => {
-    waveform.current.on("waveform-ready", function () {
+    waveform.current.on("ready", function () {
       setLoading(false);
     });
     waveform.current.on("finish", function () {
@@ -79,7 +79,7 @@ const Waveform = ({ url }) => {
     <>
       <Center>
         <Box mt="3%" w="95%" align="center">
-          <Skeleton isLoaded={loading}>
+          <Skeleton isLoaded={!loading}>
             <div id="waveform" ref={waveform} />
           </Skeleton>
 
