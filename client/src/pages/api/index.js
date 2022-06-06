@@ -19,6 +19,7 @@ export default async function handler(req, res) {
   try {
     const response = await axios(reqConfig);
     res.status(200).send(response.data);
+    console.log(response);
   } catch (error) {
     res.status(500).send(error);
     console.log(error);
